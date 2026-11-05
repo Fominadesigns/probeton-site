@@ -989,10 +989,11 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   document.querySelectorAll("#hsel button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#hsel button").forEach(x=>x.setAttribute("aria-pressed",x===b));$("pprice").textContent=b.dataset.p+NB+"₴"});
   setModel(0,false);
   // висота картки не стрибає: міряємо всі моделі й ставимо найбільшу (і заново при зміні ширини)
-  const show=pave.closest(".show");
-  const lockH=()=>{const m0=mi,c0=ci;show.style.minHeight="";let mx=0;
-    M.forEach((m,k)=>{setModel(k,false);mx=Math.max(mx,show.offsetHeight)});
-    setModel(m0,false);setColor(c0,false);show.style.minHeight=mx+"px"};
+  // фіксуємо висоту частини з описом (а не всієї картки) — тоді й на телефоні фото двору завжди однакової висоти
+  const info=pave.closest(".show").querySelector(".info");
+  const lockH=()=>{const m0=mi,c0=ci;info.style.minHeight="";let mx=0;
+    M.forEach((m,k)=>{setModel(k,false);mx=Math.max(mx,info.offsetHeight)});
+    setModel(m0,false);setColor(c0,false);info.style.minHeight=mx+"px"};
   document.fonts.ready.then(lockH);let lt=0;addEventListener("resize",()=>{clearTimeout(lt);lt=setTimeout(lockH,200)});
   }
 
