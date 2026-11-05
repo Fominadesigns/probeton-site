@@ -83,7 +83,7 @@ a{color:inherit}
    щоб будівельник було видно в просвіті між текстом і карткою прорахунку */
 .hero{color:#fff;background:
   linear-gradient(90deg,rgb(13,14,16) 0%,rgb(13,14,16) 18%,rgba(13,14,16,.88) 30%,rgba(13,14,16,.45) 45%,rgba(13,14,16,0) 59%),
-  url(../img/fon-heroi.webp) 62% 30%/max(92%,calc((100svh - 40px) * 1.78)) auto no-repeat rgb(13,14,16)}
+  url(../img/fon-heroi-2.webp) 0% 40%/max(103%,calc((100svh - 60px) * 2.36)) auto no-repeat rgb(13,14,16)}
 .hero .lead br.d{display:none}
 @media (min-width:1041px){.hero .lead br.d{display:inline}.hero .lead{max-width:none}}
 /* головні слова по черзі отримують помаранчеву плашку: бетон → бруківка → техніка */
@@ -413,7 +413,7 @@ footer .in{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-betwe
   .stat:nth-child(2){border-right:0}
   .stat:nth-child(3){padding-left:0}
   .stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
-  .hero{background:linear-gradient(180deg,rgba(13,14,16,.55) 0%,rgba(13,14,16,.86) 34%,rgba(13,14,16,.96) 60%),url(../img/fon-heroi.webp) 68% 0/auto 520px no-repeat var(--asphalt)}
+  .hero{background:linear-gradient(180deg,rgba(13,14,16,.55) 0%,rgba(13,14,16,.86) 34%,rgba(13,14,16,.96) 60%),url(../img/fon-heroi-2.webp) 46% 0/auto 520px no-repeat var(--asphalt)}
   .band-head{grid-template-columns:1fr}
   .gscale{grid-template-columns:repeat(4,1fr)}
   .gout{grid-template-columns:1fr}
@@ -506,7 +506,7 @@ footer .in{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-betwe
 .tech-cta{display:flex;flex-wrap:wrap;gap:14px 18px;align-items:center}
 .mgr{display:inline-flex;align-items:center;gap:14px;padding:8px 22px 8px 8px;border-radius:999px;background:#1F2124;border:1px solid rgba(255,255,255,.16);color:#fff;position:relative;z-index:3;text-decoration:none;max-width:100%;transition:border-color .25s,background .25s}
 .mgr:hover{border-color:var(--signal);background:#2A221E}
-.mgr-ph{flex:none;width:64px;height:64px;border-radius:50%;background:url(../img/team-pavlo-color.webp) 50% 13%/200% auto no-repeat var(--teal-deep);box-shadow:0 0 0 3px var(--signal)}
+.mgr-ph{flex:none;width:64px;height:64px;border-radius:50%;background:url(../img/team-pavlo-color.webp) 50% 21%/205% auto no-repeat var(--teal-deep);box-shadow:0 0 0 3px var(--signal)}
 .mgr span{display:grid;gap:2px;min-width:0}
 .mgr small{font:700 11px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--teal-lt)}
 .mgr b{font:800 clamp(18px,1.6vw,22px)/1.1 var(--display);letter-spacing:-.01em;white-space:nowrap}
@@ -604,7 +604,15 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 }
 
 /* ---------- зворотний дзвінок ---------- */
-.cb-fab{position:fixed;right:calc(24px + env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:58;width:64px;height:64px;border:0;background:var(--signal);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 14px 30px -12px rgba(244,99,34,.8);transition:transform .2s,background .2s}
+/* кнопка «нагору»: під кнопкою дзвінка, рамка заповнюється в міру прокрутки сторінки */
+.totop{position:fixed;right:calc(28px + env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:58;width:56px;height:56px;border:0;padding:3px;cursor:pointer;
+  background:conic-gradient(var(--signal) calc(var(--p,0) * 1turn),var(--line) 0);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .25s,transform .25s,visibility .25s}
+.totop.on{opacity:1;visibility:visible;transform:none}
+.totop span{display:grid;place-items:center;width:100%;height:100%;background:var(--slab);color:var(--asphalt);transition:background .2s,color .2s}
+.totop:hover span{background:var(--asphalt);color:#fff}
+.totop svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:680px){.totop{right:18px;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:48px;height:48px}}
+.cb-fab{position:fixed;right:calc(24px + env(safe-area-inset-right,0px));bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:58;width:64px;height:64px;border:0;background:var(--signal);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 14px 30px -12px rgba(244,99,34,.8);transition:transform .2s,background .2s}
 .cb-fab svg{width:28px;height:28px}
 .cb-fab:hover{transform:translateY(-3px);background:#ff7438}
 .cb-fab::before,.cb-fab::after{content:"";position:absolute;inset:0;border:2px solid var(--signal);animation:ring 2.4s ease-out infinite}
@@ -620,7 +628,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 .cb-in .btn{width:100%}
 .cb-note{font-size:14px;color:var(--mut-d)}
 .cb-note a{color:#fff;font-weight:600}
-@media (max-width:680px){.cb-fab{bottom:calc(84px + env(safe-area-inset-bottom,0px));right:14px;width:56px;height:56px}}
+@media (max-width:680px){.cb-fab{bottom:calc(142px + env(safe-area-inset-bottom,0px));right:14px;width:56px;height:56px}}
 
 /* ---------- багатосторінковість: шапка сторінки, крихти, активний пункт меню ---------- */
 .top nav a[aria-current="page"]{color:var(--asphalt);box-shadow:inset 0 -2px 0 var(--signal)}
@@ -895,6 +903,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 <footer><div class="in"><span>© ПроБетон, Київ</span><nav class="fnav" aria-label="Сторінки сайту"><a href="../">Головна</a><a href="../beton/">Бетон</a><a href="../bruk/">Бруківка</a><a href="../zbv/">ЗБВ</a><a href="../tekhnika/">Спецтехніка</a><a href="../pro-nas/">Про нас</a><a href="../kontakty/">Контакти</a></nav><span>Концепт редизайну, 2026</span></div></footer>
 
 <!-- Зворотний дзвінок у зазначений час -->
+<button class="totop" id="toTop" type="button" aria-label="Нагору сторінки"><span><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></span></button>
 <button class="cb-fab" id="cbOpen" type="button" aria-label="Замовити зворотний дзвінок"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></button>
 <div class="cb" id="cb" hidden>
   <form class="cb-box" id="cbForm" role="dialog" aria-modal="true" aria-labelledby="cbT" novalidate>
@@ -981,11 +990,11 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   const M=[
     {n:"Лайнстоун 20",lb:"Хіт продажів",d:"Комплекти бруківки різних розмірів в одній палеті. Сім кольорів, дві висоти.",bs:"50%",h:true,
       c:[["терра","ls-terra"],["порто","ls-porto"],["палермо","ls-palermo"],["платина","ls-platyna"],["гранат","ls-granat"],["еверест","ls-everest"],["нуар","ls-nuar"]]},
-    {n:"Подвійна «Т» 80",lb:"Подвійна Т",d:"Чотири кольори з прайсу. Вишня й сахара — без фаски.",bs:"13.3%",
+    {n:"Подвійна «Т» 80",lb:"Подвійна Т",d:"Чотири кольори з прайсу. Вишня й сахара — без фаски.",bs:"26.6%",
       c:[["сірий","pt-siryi",855],["вишня","pt-vyshnia",951],["перлина","pt-perlyna",1134],["сахара","pt-sakhara",1149]]},
-    {n:"Старе місто 40",lb:"Старе місто",d:"Викладка з каменів різного розміру. Чотири кольори з прайсу.",bs:"61%",
+    {n:"Старе місто 40",lb:"Старе місто",d:"Викладка з каменів різного розміру. Чотири кольори з прайсу.",bs:"57%",
       c:[["сірий","sm-siryi",612],["графіт","sm-hrafit",687],["малібу","sm-malibu",762],["еспресо","sm-espreso",801]]},
-    {n:"Бруківка 200×100×40",lb:"Класика",d:"Прямокутна бруківка 200×100×40 мм.",bs:"13%",
+    {n:"Бруківка 200×100×40",lb:"Класика",d:"Прямокутна бруківка 200×100×40 мм.",bs:"26%",
       c:[["сірий","bruk-siryi",612]]}
   ];
   if($("pave")){
@@ -1174,6 +1183,12 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
     const ws=[...hw.querySelectorAll(".w")];let wi=0;
     setInterval(()=>{if(document.hidden)return;ws[wi].classList.remove("on");wi=(wi+1)%ws.length;ws[wi].classList.add("on")},2600);
   }
+
+  /* ---- кнопка «нагору» з прогресом прокрутки ---- */
+  const tt=$("toTop");
+  if(tt){let raf=0;const upd=()=>{raf=0;const max=document.documentElement.scrollHeight-innerHeight;tt.style.setProperty("--p",max>0?(scrollY/max).toFixed(3):0);tt.classList.toggle("on",scrollY>600)};
+    addEventListener("scroll",()=>{if(!raf)raf=requestAnimationFrame(upd)},{passive:true});upd();
+    tt.onclick=()=>scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"})}
 
   /* ---- мобільне меню ---- */
   const bg=document.querySelector(".burger");

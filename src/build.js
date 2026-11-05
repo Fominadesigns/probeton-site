@@ -24,7 +24,7 @@ const PAGE_OF = { beton: "beton/", bruk: "bruk/", katalog: "bruk/", zbv: "zbv/",
 const PAGES = [
   { dir: "", title: "ПроБетон — бетон, бруківка Ковальська, ЗБВ і спецтехніка в Києві",
     desc: "Бетон В7,5–В35, тротуарна плитка Ковальська, ЗБВ і спецтехніка з доставкою по Києву та області.",
-    parts: ["hero", "ticker", "stats", "partners", "cats", "akcii", "perevagy", "flow", "faq", "kontakty"] },
+    parts: ["hero", "ticker", "stats", "partners", "cats", "bruk", "akcii", "perevagy", "flow", "faq", "kontakty"] },
   { dir: "beton/", crumb: "Бетон", title: "Бетон В7,5–В35 з доставкою по Києву — ПроБетон",
     desc: "Бетон усіх марок від В7,5 до В35: доставка міксером і подача бетононасосом по Києву та Київській області.",
     eyebrow: "Бетон", h1: "Бетон В7,5–В35 з доставкою",
