@@ -106,6 +106,8 @@ let n = 0;
 for (const p of PAGES) {
   const pre = p.dir ? "../" : "";
   let parts = p.parts.map(k => S[k]);
+  // два блоки з фото поспіль виглядають важко: контакти після «Як ми працюємо» — на суцільному тлі
+  p.parts.forEach((k, i) => { if (k === "kontakty" && p.parts[i - 1] === "flow") parts[i] = parts[i].replace('class="band dark" id="kontakty"', 'class="band dark plain" id="kontakty"'); });
   // перший розділ після шапки сторінки — з повним відступом зверху
   if (p.dir) parts[0] = parts[0].replace(' style="padding-top:0"', "");
   let main = (p.dir ? phead(p, pre) + "\n\n" : "") + parts.join("\n\n");
