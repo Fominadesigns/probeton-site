@@ -71,7 +71,7 @@ function header(pre, cur) {
       <a class="tel" href="tel:+380973151520">097 315 15 20</a>
       <a class="btn btn-or" href="#calc">Прорахувати</a>
     </div>
-    <button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mnav"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mnav"><svg class="b" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   </div>
 </header>`;
 }

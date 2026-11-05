@@ -298,7 +298,15 @@ a{color:inherit}
 @media (max-width:1040px){.adv{grid-template-columns:1fr 1fr}}
 @media (max-width:640px){.adv{grid-template-columns:1fr}.advc{gap:16px}}
 
-/* як ми працюємо — кроки з перемиканням */
+/* як ми працюємо — кроки з перемиканням; на телефоні замість кнопок кроків — стрілки */
+.stp-nav{display:none;align-items:center;gap:10px}
+.stp-arr{flex:none;width:52px;height:52px;border:0;background:var(--signal);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .3s ease}
+.stp-arr:active{background:#ff7438}
+.stp-arr svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.stp-cap{flex:1;display:grid;gap:4px;text-align:center;color:#fff;min-width:0}
+.stp-cap b{font-size:18px;letter-spacing:.06em}
+.stp-cap span{font-size:13px;color:#D7D9DC}
+@media (max-width:1040px){.stp-tabs{display:none!important}.stp-nav{display:flex}}
 .stp{display:grid;gap:18px}
 .stp-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .stp-tab{display:flex;align-items:center;gap:16px;padding:20px;text-align:left;cursor:pointer;color:#fff;font:inherit;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:background .25s,border-color .25s,transform .25s;position:relative;overflow:hidden;min-width:0}
@@ -654,7 +662,10 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 .burger svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2}
 @media (max-width:1040px){
   .burger{display:grid}
-  .top.open nav{display:flex;flex-direction:column;gap:0;position:absolute;left:0;right:0;top:100%;background:var(--slab);border-bottom:1px solid var(--line);padding:8px var(--pad-r) 16px var(--pad);box-shadow:0 30px 40px -30px rgba(0,0,0,.4)}
+  /* відкрите меню — на весь екран під шапкою, поверх кнопок дзвінка й нижньої панелі */
+  .top.open{z-index:90;backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--slab)}
+  .top.open nav{display:flex;flex-direction:column;gap:0;position:fixed;left:0;right:0;top:var(--hh,73px);bottom:0;overflow:auto;background:var(--slab);padding:8px var(--pad-r) calc(24px + env(safe-area-inset-bottom,0px)) var(--pad)}
+  .burger .x,.top.open .burger .b{display:none}.top.open .burger .x{display:block}
   .top.open nav a{padding:15px 0;border-bottom:1px solid var(--line);font:700 19px/1 var(--display);color:var(--asphalt)}
   .top.open nav a[aria-current="page"]{box-shadow:none;color:var(--signal)}
 }
@@ -765,7 +776,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
       <a class="tel" href="tel:+380973151520">097 315 15 20</a>
       <a class="btn btn-or" href="#calc">Прорахувати</a>
     </div>
-    <button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mnav"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mnav"><svg class="b" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   </div>
 </header>
 
@@ -928,6 +939,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
         <button class="stp-tab" role="tab" aria-selected="false" data-i="2"><i class="stp-ic"><svg viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 9h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></i><span><small>Крок 03</small><b>Доставка</b></span></button>
         <button class="stp-tab" role="tab" aria-selected="false" data-i="3"><i class="stp-ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></i><span><small>Крок 04</small><b>Монтаж</b></span></button>
       </div>
+      <div class="stp-nav"><button type="button" class="stp-arr" data-d="-1" aria-label="Попередній крок"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="stp-cap"><b class="num" id="stpCount">01 / 04</b><span>Гортайте стрілками всі кроки</span></div><button type="button" class="stp-arr" data-d="1" aria-label="Наступний крок"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button></div>
       <div class="stp-panel" role="tabpanel" aria-live="polite">
         <div class="stp-side"><b class="stp-n num" id="stpN">01</b><i class="stp-ic big" id="stpIc"></i><small>Головне</small><span id="stpK">5 хвилин на дзвінок</span></div>
         <div class="stp-body"><h3 id="stpT">Заявка</h3><p id="stpP"></p><ul class="stp-ok" id="stpOk"></ul></div>
@@ -1316,8 +1328,10 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 
   /* ---- мобільне меню ---- */
   const bg=document.querySelector(".burger");
-  if(bg){bg.onclick=()=>{const o=document.querySelector(".top").classList.toggle("open");bg.setAttribute("aria-expanded",o)};
-    document.querySelectorAll(".top nav a").forEach(a=>a.addEventListener("click",()=>{document.querySelector(".top").classList.remove("open");bg.setAttribute("aria-expanded",false)}))}
+  if(bg){const tp=document.querySelector(".top");const setM=o=>{tp.classList.toggle("open",o);bg.setAttribute("aria-expanded",o);bg.setAttribute("aria-label",o?"Закрити меню":"Меню");document.documentElement.style.overflow=o?"hidden":""};
+    bg.onclick=()=>setM(!tp.classList.contains("open"));
+    document.querySelectorAll(".top nav a").forEach(a=>a.addEventListener("click",()=>setM(false)));
+    addEventListener("keydown",e=>{if(e.key==="Escape"&&tp.classList.contains("open"))setM(false)})}
 
   /* ---- перший екран = висота вікна мінус шапка ---- */
   const top=document.querySelector(".top");
@@ -1385,6 +1399,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   const show=(i,anim)=>{
     cur=i;tabs.forEach((t,j)=>{const on=j===i;t.classList.toggle("on",on);t.setAttribute("aria-selected",on);t.classList.remove("run")});
     // слово в заголовку підсвічується разом з активним кроком
+    const sc=document.getElementById("stpCount");if(sc)sc.textContent=String(i+1).padStart(2,"0")+" / "+String(S.length).padStart(2,"0");
     const sw=document.getElementById("stpWords");if(sw)[...sw.querySelectorAll(".w")].forEach((w,j)=>w.classList.toggle("on",j===i));
     if(auto){void tabs[i].offsetWidth;tabs[i].classList.add("run")}
     if(!anim){fill(i);return}
@@ -1392,6 +1407,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   };
   const tick=()=>{clearTimeout(timer);if(auto)timer=setTimeout(()=>{show((cur+1)%S.length,true);tick()},DUR)};
   tabs.forEach((t,i)=>t.addEventListener("click",()=>{auto=false;clearTimeout(timer);show(i,true)}));
+  box.querySelectorAll(".stp-arr").forEach(b=>b.addEventListener("click",()=>{auto=false;clearTimeout(timer);show((cur+ +b.dataset.d+S.length)%S.length,true)}));
   show(0,false);
   // автоперемикання — лише коли блок на екрані
   new IntersectionObserver(es=>es.forEach(e=>{if(!auto)return;if(e.isIntersecting){show(cur,false);tick()}else clearTimeout(timer)}),{threshold:.35}).observe(box);
