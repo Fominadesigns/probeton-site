@@ -3,7 +3,7 @@
 <meta name="description" content="Бетон В7,5–В35, тротуарна плитка Ковальська, ЗБВ і спецтехніка з доставкою по Києву та області.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@500;700;800;900&family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Geologica:wght@500;700;800;900&family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
 /* Layout: світлий «бетонний» сайт зі смугами-розділами на всю ширину; темні смуги — для техніки й контактів; помаранчевий — лише дії */
 :root{
@@ -20,7 +20,8 @@
   --teal-lt:#3DB7C2;    /* той самий відтінок для темного тла */
   --teal-deep:#00495A;
   --mark:#F6C21A;       /* розмітка */
-  --display:"Geologica","Arial Black",system-ui,sans-serif;
+  /* заголовки — широкий Dela Gothic One (один накреслення, уже жирне); Geologica — запасний для знаків, яких у Dela немає */
+  --display:"Dela Gothic One","Geologica","Arial Black",system-ui,sans-serif;
   --body:"Onest","Segoe UI",system-ui,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
   /* бічні поля: на телефоні 16px, на ширших екранах ростуть разом з вікном */
@@ -36,6 +37,8 @@ img{max-width:100%}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--slab)}
 .in{max-width:calc(1360px + 2 * var(--pad));margin:0 auto;padding-left:var(--pad);padding-right:var(--pad-r)}
 h1,h2,h3,h4{font-family:var(--display);margin:0;line-height:1.05;text-wrap:balance}
+/* у Dela лише одна товщина — не даємо браузеру домальовувати «жирний» */
+html{font-synthesis-weight:none}
 h2{font-size:clamp(32px,5vw,60px);font-weight:900;letter-spacing:-.03em}
 h3{font-size:20px;font-weight:700;letter-spacing:-.01em}
 p{margin:0}
@@ -719,7 +722,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 }
 
 /* карта на сторінці контактів */
-.mapw{border:1px solid var(--line);background:var(--slab);aspect-ratio:21/8;min-height:320px}
+.mapw{border:1px solid var(--line);background:var(--slab);height:clamp(320px,36vw,520px)}
 .mapw iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(.6) contrast(1.05)}
 
 /* прямі кути всюди — як у логотипі, плитці й похилих плашках */
