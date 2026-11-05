@@ -198,7 +198,7 @@ a{color:inherit}
 .hsel[hidden]{display:none}
 .pave img.fade{opacity:0}
 .pave .lab{position:absolute;left:20px;bottom:20px;z-index:1;background:rgba(20,21,23,.82);color:#fff;border-radius:999px;padding:10px 16px;font:700 13px/1 var(--mono);backdrop-filter:blur(6px)}
-.show .info{padding:clamp(24px,3vw,44px);display:grid;gap:18px;align-content:center;min-width:0}
+.show .info{padding:clamp(24px,3vw,44px);display:grid;gap:18px;align-content:start;min-width:0}
 .show h3{font-size:clamp(30px,3.4vw,44px);font-weight:900;letter-spacing:-.03em}
 .show .info > p{color:var(--mut)}
 .sws{display:flex;flex-wrap:wrap;gap:10px}
@@ -810,7 +810,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
         <div class="msel" id="msel" role="group" aria-label="Модель бруківки"></div>
         <span class="lbl" id="mlbl" style="font:700 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)">Хіт продажів</span>
         <h3 id="mname">Лайнстоун 20</h3>
-        <p id="mtext">Комплекти бруківки різних розмірів в одній палеті. Сім кольорів, дві висоти.</p>
+        <p id="mtext">Комплекти бруківки різних розмірів в одній палеті.<br>Сім кольорів, дві висоти.</p>
         <div class="sws" id="sws"></div>
         <div class="cname">Колір: <b id="cname">терра</b></div>
         <div class="hsel" id="hsel" role="group" aria-label="Висота"><button type="button" aria-pressed="true" data-p="813" id="h-std">стандарт</button><button type="button" aria-pressed="false" data-p="870" id="h-60">h60</button></div>
@@ -988,13 +988,13 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
      c: [колір, файл, ціна]; ціна null — береться з перемикача висоти (лише Лайнстоун).
      bs — ширина одного фрагмента викладки (../img/dvir) у відсотках ширини вікна «двору»: так плитка має реальний масштаб двору. */
   const M=[
-    {n:"Лайнстоун 20",lb:"Хіт продажів",d:"Комплекти бруківки різних розмірів в одній палеті. Сім кольорів, дві висоти.",bs:"50%",h:true,
+    {n:"Лайнстоун 20",lb:"Хіт продажів",d:"Комплекти бруківки різних розмірів в одній палеті.|Сім кольорів, дві висоти.",bs:"50%",h:true,
       c:[["терра","ls-terra"],["порто","ls-porto"],["палермо","ls-palermo"],["платина","ls-platyna"],["гранат","ls-granat"],["еверест","ls-everest"],["нуар","ls-nuar"]]},
-    {n:"Подвійна «Т» 80",lb:"Подвійна Т",d:"Чотири кольори з прайсу. Вишня й сахара — без фаски.",bs:"26.6%",
+    {n:"Подвійна «Т» 80",lb:"Подвійна Т",d:"Чотири кольори з прайсу.|Вишня й сахара — без фаски.",bs:"26.6%",
       c:[["сірий","pt-siryi",855],["вишня","pt-vyshnia",951],["перлина","pt-perlyna",1134],["сахара","pt-sakhara",1149]]},
-    {n:"Старе місто 40",lb:"Старе місто",d:"Викладка з каменів різного розміру. Чотири кольори з прайсу.",bs:"57%",
+    {n:"Старе місто 40",lb:"Старе місто",d:"Викладка з каменів різного розміру.|Чотири кольори з прайсу.",bs:"57%",
       c:[["сірий","sm-siryi",612],["графіт","sm-hrafit",687],["малібу","sm-malibu",762],["еспресо","sm-espreso",801]]},
-    {n:"Бруківка 200×100×40",lb:"Класика",d:"Прямокутна бруківка 200×100×40 мм.",bs:"26%",
+    {n:"Бруківка 200×100×40",lb:"Класика",d:"Прямокутна бруківка|розміром 200×100×40 мм.",bs:"26%",
       c:[["сірий","bruk-siryi",612]]}
   ];
   if($("pave")){
@@ -1013,7 +1013,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   function setModel(k,anim){
     mi=k;const m=M[k];
     [...$("msel").children].forEach((x,j)=>x.setAttribute("aria-pressed",j===k));
-    $("mlbl").textContent=m.lb;$("mname").textContent=m.n;$("mtext").textContent=m.d;tidy($("mtext").parentNode);
+    $("mlbl").textContent=m.lb;$("mname").textContent=m.n;$("mtext").innerHTML=m.d.split("|").join("<br>");tidy($("mtext").parentNode);
     $("hsel").hidden=!m.h;
     $("sws").innerHTML="";
     m.c.forEach((c,i)=>{const b=document.createElement("button");b.type="button";b.className="sw";b.style.backgroundImage="url(../img/"+c[1]+".webp)";b.title=c[0];b.setAttribute("aria-label",c[0]);b.onclick=()=>setColor(i,true);$("sws").appendChild(b)});
