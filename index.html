@@ -257,7 +257,8 @@ a{color:inherit}
 .lines .v.soc{display:flex}
 
 /* ---------- про нас ---------- */
-.about{display:grid;grid-template-columns:1fr;gap:clamp(36px,4.5vw,64px);align-items:start}
+.about > *{min-width:0}
+.about{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(36px,4.5vw,64px);align-items:start}
 .story{display:grid;grid-template-columns:1.15fr 1fr;gap:14px clamp(24px,5vw,80px);font-size:18px;align-items:start}
 .story p:first-child{grid-row:span 2}
 .story p{color:var(--mut)}
@@ -408,6 +409,19 @@ footer .in{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-betwe
 .photo .flow li:hover{background:var(--signal);border-color:var(--signal);transform:translateY(-4px)}
 .photo .flow li:hover::before{color:#fff}
 .photo .flow li:hover p{color:#FFE5D6}
+/* картка менеджера відділу продажу (як на старому сайті) */
+.tech-cta{display:flex;flex-wrap:wrap;gap:14px 18px;align-items:center}
+.mgr{display:inline-flex;align-items:center;gap:14px;padding:8px 22px 8px 8px;border-radius:999px;background:#1F2124;border:1px solid rgba(255,255,255,.16);color:#fff;position:relative;z-index:3;text-decoration:none;max-width:100%;transition:border-color .25s,background .25s}
+.mgr:hover{border-color:var(--signal);background:#2A221E}
+.mgr-ph{flex:none;width:64px;height:64px;border-radius:50%;background:url(img/team-pavlo-color.webp) 50% 13%/200% auto no-repeat var(--teal-deep);box-shadow:0 0 0 3px var(--signal)}
+.mgr span{display:grid;gap:2px;min-width:0}
+.mgr small{font:700 11px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--teal-lt)}
+.mgr b{font:800 clamp(18px,1.6vw,22px)/1.1 var(--display);letter-spacing:-.01em;white-space:nowrap}
+.mgr em{font-style:normal;font-size:13px;color:var(--mut-d);line-height:1.35}
+.mgr.big{margin-top:28px;border-radius:24px;padding:14px 24px 14px 14px}
+.mgr.big .mgr-ph{width:84px;height:84px}
+@media (max-width:680px){.mgr{border-radius:22px;padding-right:16px}.mgr em{display:none}}
+
 /* поки наведено на іншу картку, перша (помаранчева за замовчуванням) стає звичайною */
 .fleet:hover .mach.hl:not(:hover){background:var(--asphalt);color:#F2F1EC}
 .fleet:hover .mach.hl:not(:hover) p{color:var(--mut-d)}
@@ -589,7 +603,9 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 <section class="band dark" id="tekhnika">
   <div class="in">
     <img class="loader" src="img/navantazhuvach.png" alt="" aria-hidden="true" width="691" height="418">
-    <div class="band-head tech-head"><div><span class="eyebrow">Свій автопарк</span><h2>Спецтехніка <span class="slant"><span>на ваш об'єкт</span></span></h2><p class="lead">Оренда й подача техніки в будь-яку точку Києва та Київської області.</p><a class="btn btn-line" href="#kontakty">Замовити на дату</a></div></div>
+    <div class="band-head tech-head"><div><span class="eyebrow">Свій автопарк</span><h2>Спецтехніка <span class="slant"><span>на ваш об'єкт</span></span></h2><p class="lead">Оренда й подача техніки в будь-яку точку Києва та Київської області.</p>
+      <div class="tech-cta"><a class="btn btn-line" href="#kontakty">Замовити на дату</a>
+        <a class="mgr" href="tel:+380932504041"><i class="mgr-ph" aria-hidden="true"></i><span><small>Відділ продажу · Павло Яковенко</small><b>+380 93 250 40 41</b><em>Дзвоніть, щоб дізнатись умови для вашого об'єкта</em></span></a></div></div></div>
     <div class="fleet">
       <div class="mach hl">
         <svg viewBox="0 0 84 52" fill="none" stroke="#F46322" stroke-width="2.4" stroke-linejoin="round"><rect x="3" y="26" width="44" height="14" rx="2"/><path d="M47 40V28h16l14 10v2z"/><circle cx="16" cy="43" r="6" fill="currentColor"/><circle cx="64" cy="43" r="6" fill="currentColor"/><path d="M12 26 30 6h24l10 10"/><path d="M64 16v10"/></svg>
@@ -663,6 +679,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
     <div>
       <span class="eyebrow">Контакти</span>
       <h2 style="margin-top:18px">Дзвоніть — <span class="slant or"><span>прорахуємо</span></span> сьогодні</h2>
+      <a class="mgr big" href="tel:+380932504041"><i class="mgr-ph" aria-hidden="true"></i><span><small>Відділ продажу · Павло Яковенко</small><b>+380 93 250 40 41</b><em>Дзвоніть, щоб дізнатись умови для вашого об'єкта</em></span></a>
       <div class="lines">
         <div><span class="k">Телефон</span><div class="v tels"><a href="tel:+380973151520">+380 97 315 15 20</a><a href="tel:+380932504041">+380 93 250 40 41</a><a href="tel:+380733151520">+380 73 315 15 20</a></div></div>
         <div><span class="k">Офіс</span><div class="v">вулиця Сім'ї Кульженків, 14, Київ</div></div>
