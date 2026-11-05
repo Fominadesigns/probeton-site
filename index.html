@@ -103,7 +103,7 @@ a{color:inherit}
 .stats-band .stats{margin-top:0;border-top:0;border-bottom:1px solid var(--line)}
 .stats-band .stat{padding:clamp(28px,4vw,48px) 12px;text-align:center}
 .hero .in{display:grid;grid-template-columns:1.25fr .9fr;gap:clamp(24px,4vw,64px);align-items:start;position:relative;z-index:1}
-.hero h1{font-size:clamp(44px,8.4vw,118px);font-weight:900;letter-spacing:-.045em;line-height:.92;margin-top:22px}
+.hero h1{font-size:clamp(48px,9vw,118px);font-weight:900;letter-spacing:-.045em;line-height:.92;margin-top:22px}
 .hero h1 .o{color:var(--signal)}
 .hero h1 .s{display:block;font-size:max(18px,.34em);letter-spacing:-.02em;line-height:1.1;font-weight:700;color:var(--mut);margin-top:18px}
 .hero .lead{margin-top:26px}
@@ -217,11 +217,11 @@ a{color:inherit}
 .fl{border:1px solid var(--line);background:var(--slab);font:600 14px/1 var(--body);padding:11px 16px;border-radius:999px;cursor:pointer;color:var(--asphalt)}
 .fl[aria-pressed="true"]{background:var(--asphalt);border-color:var(--asphalt);color:#fff}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:14px}
-.card{background:var(--slab);border:1px solid var(--line);border-radius:20px;padding:14px 14px 18px;display:grid;gap:12px;align-content:start;transition:transform .2s,box-shadow .2s;min-width:0}
+.card{background:var(--slab);border:1px solid var(--line);border-radius:20px;padding:14px 14px 18px;display:grid;gap:12px;align-content:start;transition:transform .45s cubic-bezier(.22,.61,.36,1),box-shadow .45s ease;min-width:0}
 .card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -24px rgba(0,0,0,.35)}
 .card .ph{aspect-ratio:16/10;max-width:100%;border-radius:12px;position:relative;overflow:hidden}
 .card .ph{background:#fff}
-.card .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.card .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.22,.61,.36,1)}
 .card .ph.fit img{object-fit:contain;padding:10px}
 .card:hover .ph img{transform:scale(1.06)}
 .card .dims{font:500 12px/1 var(--mono);color:var(--mut)}
@@ -276,7 +276,7 @@ a{color:inherit}
 /* переваги */
 .partners-head .lead{max-width:60ch}
 .adv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.advc{display:flex;gap:22px;align-items:flex-start;background:var(--slab);border:1px solid var(--line);padding:clamp(24px,2.6vw,36px);transition:background .3s,border-color .3s,color .3s,transform .3s;min-width:0}
+.advc{display:flex;gap:22px;align-items:flex-start;background:var(--slab);border:1px solid var(--line);padding:clamp(24px,2.6vw,36px);transition:background .4s ease,border-color .4s ease,color .4s ease,transform .45s cubic-bezier(.22,.61,.36,1);min-width:0}
 .advc > div{display:grid;gap:12px;min-width:0;flex:1}
 .advc small{display:flex;align-items:center;gap:14px;font:700 14px/1 var(--mono);color:var(--mut)}
 .advc small::after{content:"";flex:1;height:1px;background:var(--line)}
@@ -445,7 +445,7 @@ footer .in{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-betwe
   .hero .calc{align-self:stretch;align-content:space-between}
   .hero .ctas{margin-top:auto!important;padding-top:clamp(16px,3vh,32px)}
   .hero .trust{display:none}
-  .hero h1{font-size:clamp(44px,min(6.4vw,8.4vh),104px);margin-top:clamp(10px,2vh,22px)}
+  .hero h1{font-size:clamp(48px,min(7.4vw,11.5vh),132px);margin-top:clamp(10px,2vh,22px)}
   .hero h1 .s{margin-top:clamp(8px,1.6vh,18px)}
   .hero .lead{margin-top:clamp(12px,2.2vh,26px);font-size:clamp(16px,2.1vh,20px)}
   .hero .ctas{margin-top:clamp(16px,3vh,32px)}
@@ -490,7 +490,7 @@ footer .in{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-betwe
   background:linear-gradient(118deg,transparent 0 34%,var(--teal) 34% 46%,transparent 46% 51%,var(--signal) 51% 60%,transparent 60% 64%,rgba(255,255,255,.06) 64% 67%,transparent 67%);opacity:.9}
 .loader{scale:-1 1}
 /* наведення: картка стає помаранчевою, як перша, іконка — біла */
-.mach,.flow li{transition:background .3s ease,border-color .3s ease,color .3s ease,transform .3s ease}
+.mach,.flow li{transition:background .4s ease,border-color .4s ease,color .4s ease,transform .45s cubic-bezier(.22,.61,.36,1)}
 .hex{transition:background .3s ease}
 .hex svg *{transition:stroke .3s ease,fill .3s ease}
 .mach:hover{background:var(--signal);color:#fff}
@@ -531,30 +531,31 @@ footer .in{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-betwe
 
 /* ---------- анімації (вмикаються скриптом, без нього все видно одразу) ---------- */
 @keyframes rise{from{opacity:0;translate:0 34px}}
-@keyframes drive{from{translate:var(--from,180px) 0;opacity:0}}
+@keyframes drive{from{translate:var(--from,360px) 0;opacity:0}30%{opacity:1}}
 @keyframes idle{0%,100%{translate:0 0}50%{translate:0 -2px}}
-html.anim .hero .eyebrow{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
-html.anim .hero h1{animation:rise .9s cubic-bezier(.2,.7,.2,1) .08s both}
-html.anim .hero .lead{animation:rise .9s cubic-bezier(.2,.7,.2,1) .2s both}
-html.anim .hero .ctas,html.anim .hero .trust{animation:rise .9s cubic-bezier(.2,.7,.2,1) .3s both}
-html.anim .hero .calc{animation:rise 1s cubic-bezier(.2,.7,.2,1) .25s both}
-html.anim .rv{opacity:0;translate:0 30px;transition:opacity .7s ease var(--d,0ms),translate .8s cubic-bezier(.2,.7,.2,1) var(--d,0ms)}
+html.anim .hero .eyebrow{animation:rise 1.1s cubic-bezier(.22,.61,.36,1) both}
+html.anim .hero h1{animation:rise 1.2s cubic-bezier(.22,.61,.36,1) .1s both}
+html.anim .hero .lead{animation:rise 1.2s cubic-bezier(.22,.61,.36,1) .25s both}
+html.anim .hero .ctas,html.anim .hero .trust{animation:rise 1.2s cubic-bezier(.22,.61,.36,1) .4s both}
+html.anim .hero .calc{animation:rise 1.3s cubic-bezier(.22,.61,.36,1) .3s both}
+/* поява при прокрутці; transform/кольори/тінь — щоб наведення лишалося плавним (раніше цей рядок їх перебивав і картки «смикались») */
+html.anim .rv{opacity:0;translate:0 24px;transition:opacity 1s ease var(--d,0ms),translate 1.1s cubic-bezier(.22,.61,.36,1) var(--d,0ms),transform .45s cubic-bezier(.22,.61,.36,1),background-color .4s ease,border-color .4s ease,color .4s ease,box-shadow .45s ease}
 html.anim .rv.seen{opacity:1;translate:none}
 html.anim .mixer-art img{opacity:0}
-html.anim .mixer-art.seen img{opacity:1;animation:drive 1.3s cubic-bezier(.16,.8,.24,1) both,idle 1.6s ease-in-out 1.4s infinite}
+html.anim .mixer-art.seen img{opacity:1;animation:drive 3s cubic-bezier(.25,.8,.3,1) both,idle 2.4s ease-in-out 3.1s infinite}
 html.anim #beton .stripes i{transform:skewX(-22deg) scaleY(0);transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
 html.anim #beton.seen .stripes i{transform:skewX(-22deg) scaleY(1)}
 html.anim #beton.seen .stripes i:nth-child(2){transition-delay:.12s}
 html.anim #beton.seen .stripes i:nth-child(3){transition-delay:.24s}
 html.anim .loader{opacity:0}
-html.anim .loader.seen{opacity:1;--from:240px;animation:drive 1.4s cubic-bezier(.16,.8,.24,1) both}
+html.anim .loader.seen{opacity:1;--from:420px;animation:drive 3.2s cubic-bezier(.25,.8,.3,1) both}
 html.anim #tekhnika::before{clip-path:inset(0 0 0 100%);transition:clip-path 1.1s cubic-bezier(.2,.7,.2,1)}
 html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 .slant{transition:transform .3s}
 
 /* ---------- акції ---------- */
 .promo{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.pcard{background:var(--slab);border:1px solid var(--line);display:flex;flex-direction:column;min-width:0;position:relative;transition:transform .25s,box-shadow .25s}
+.pcard{background:var(--slab);border:1px solid var(--line);display:flex;flex-direction:column;min-width:0;position:relative;transition:transform .45s cubic-bezier(.22,.61,.36,1),box-shadow .45s ease}
 .pcard:hover{transform:translateY(-4px);box-shadow:0 20px 40px -24px rgba(0,0,0,.35)}
 .pcard .ph{aspect-ratio:4/3;background:#fff;overflow:hidden}
 .pcard .ph img{width:100%;height:100%;object-fit:cover}
@@ -657,7 +658,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 
 /* ---------- категорії на головній ---------- */
 .catg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.catc{position:relative;display:grid;gap:12px;align-content:start;background:var(--slab);border:1px solid var(--line);padding:clamp(24px,2.6vw,36px);text-decoration:none;min-height:250px;transition:background .3s,border-color .3s,color .3s,transform .3s}
+.catc{position:relative;display:grid;gap:12px;align-content:start;background:var(--slab);border:1px solid var(--line);padding:clamp(24px,2.6vw,36px);text-decoration:none;min-height:250px;transition:background .4s ease,border-color .4s ease,color .4s ease,transform .45s cubic-bezier(.22,.61,.36,1)}
 .catc .advi{margin-bottom:18px}
 .catc .arr{position:absolute;right:28px;top:26px;font-size:22px;line-height:1;color:var(--mut);transition:transform .3s,color .3s}
 .catc h3{font:800 clamp(21px,2vw,27px)/1.1 var(--display);letter-spacing:-.02em}
@@ -766,7 +767,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   <div class="in">
     <div>
       <span class="eyebrow">Дилер заводу Ковальська · Київ і область</span>
-      <h1 id="heroWords"><span class="w on">Бетон.</span> <span class="w">Бруківка.</span> <span class="w">Техніка.</span><span class="s">Все для будмайданчика<br>від одного постачальника</span></h1>
+      <h1 id="heroWords"><span class="w on">Бетон.</span> <span class="w">Бруківка.</span> <span class="w">Техніка.</span></h1>
       <p class="lead">Бетон від В7,5 до В35, тротуарна плитка,<br class="d"> кільця й плити перекриття. Привеземо своєю технікою,<br class="d"> подамо насосом і покладемо плитку під ключ.</p>
       <div class="ctas">
         <a class="btn btn-or" href="#calc">Прорахувати замовлення <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -799,6 +800,34 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   <span>Бетон В7,5–В35</span><span>Лайнстоун</span><span>Старе місто</span><span>Подвійна Т</span><span>Бордюри</span><span>Кільця</span><span>Плити перекриття</span><span>Бетононасос</span><span>Кран-маніпулятор</span>
   <span>Бетон В7,5–В35</span><span>Лайнстоун</span><span>Старе місто</span><span>Подвійна Т</span><span>Бордюри</span><span>Кільця</span><span>Плити перекриття</span><span>Бетононасос</span><span>Кран-маніпулятор</span>
 </div></div>
+
+<!-- БЕТОН -->
+<section class="band" id="beton">  <div class="in">
+    <div class="band-head"><div><span class="eyebrow">Бетон</span><h2>Який бетон? <span class="slant"><span>Якісний</span></span></h2><p class="lead">Сім марок — від стяжки до перекриття. Привеземо міксером і подамо насосом.</p></div>
+      <div class="mixer-art" aria-hidden="true"><img src="img/betonozmishuvach.webp" alt="" width="1200" height="740"></div></div>
+    <div class="beton">
+      <div class="grades">
+        <span class="lbl" style="font:700 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)">Оберіть марку</span>
+        <div class="gscale" id="gscale"></div>
+        <div class="gout">
+          <div class="big num" id="gbig">В25</div>
+          <div><h3 id="gname"></h3><p id="gtext"></p><small>Яку марку брати під ваш проєкт — підкаже менеджер</small></div>
+        </div>
+        <a class="btn btn-or" href="#calc" style="justify-self:start" id="gcta">Прорахувати В25</a>
+      </div>
+      <div class="side">
+        <div class="feat or">
+          <svg viewBox="0 0 54 36" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"><rect x="2" y="16" width="30" height="12" rx="2"/><path d="M32 28V18h10l9 7v3z"/><circle cx="12" cy="30" r="4" fill="#F46322"/><circle cx="42" cy="30" r="4" fill="#F46322"/><path d="M8 16V6h18l8 10"/></svg>
+          <h3>Подача бетононасосом</h3><p>Туди, куди міксер не під'їде: за паркан, на поверх, у котлован.</p>
+        </div>
+        <div class="feat sl">
+          <svg viewBox="0 0 54 36" fill="none" stroke="#F46322" stroke-width="2.2" stroke-linejoin="round"><ellipse cx="18" cy="17" rx="14" ry="9"/><path d="M32 28V14h10l9 8v6z"/><circle cx="12" cy="30" r="4" fill="#F4F4F1"/><circle cx="42" cy="30" r="4" fill="#F4F4F1"/><path d="M4 26h28"/></svg>
+          <h3>Доставка міксером</h3><p>У будь-яку точку Києва та Київської області. Співпрацюємо з заводами Києва й області понад п'ять років.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="stats-band" aria-label="ПроБетон у цифрах">
   <div class="stats">
