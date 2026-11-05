@@ -38,7 +38,7 @@ body{margin:0;background:var(--concrete);color:var(--asphalt);font:400 17px/1.6 
 img{max-width:100%}
 [hidden]{display:none!important}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--slab)}
-.in{max-width:1240px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad-r)}
+.in{max-width:1360px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad-r)}
 h1,h2,h3,h4{font-family:var(--display);margin:0;line-height:1.05;text-wrap:balance}
 h2{font-size:clamp(32px,5vw,60px);font-weight:900;letter-spacing:-.03em}
 h3{font-size:20px;font-weight:700;letter-spacing:-.01em}
@@ -75,11 +75,19 @@ a{color:inherit}
 
 /* ---------- перший екран ---------- */
 .hero{padding-block:clamp(40px,7vw,96px);position:relative;overflow:hidden}
-/* фото з probeton.com.ua; зліва — щільне затемнення під текст, внизу — під цифри */
+/* фото з probeton.com.ua; затемнена лише ліва частина під текстом. Фото збільшене й зсунуте праворуч,
+   щоб будівельник було видно в просвіті між текстом і карткою прорахунку */
 .hero{color:#fff;background:
-  linear-gradient(90deg,rgba(13,14,16,.94) 0%,rgba(13,14,16,.82) 38%,rgba(13,14,16,.45) 68%,rgba(13,14,16,.6) 100%),
-  linear-gradient(0deg,rgba(13,14,16,.95) 0%,rgba(13,14,16,0) 38%),
-  url(../img/fon-heroi.webp) 62% 30%/cover no-repeat var(--asphalt)}
+  linear-gradient(90deg,rgb(13,14,16) 0%,rgb(13,14,16) 20%,rgba(13,14,16,.86) 28%,rgba(13,14,16,.4) 42%,rgba(13,14,16,0) 54%),
+  url(../img/fon-heroi.webp) right 30%/max(80%,calc((100svh - 40px) * 1.78)) auto no-repeat rgb(13,14,16)}
+/* головні слова по черзі отримують помаранчеву плашку: бетон → бруківка → техніка */
+.hero h1{isolation:isolate}
+.hero h1 .w{display:block;position:relative;width:fit-content;padding:.02em .22em .1em;margin-left:-.22em}
+.hero h1 .w::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--signal);transform:skewX(-10deg) scaleX(0);transform-origin:left center;transition:transform .55s cubic-bezier(.7,0,.2,1)}
+.hero h1 .w::after{content:"";position:absolute;left:18%;right:-6%;bottom:-.12em;height:.1em;z-index:-1;background:var(--teal);transform:skewX(-10deg) scaleX(0);transform-origin:left center;transition:transform .45s cubic-bezier(.7,0,.2,1)}
+.hero h1 .w.on::before{transform:skewX(-10deg) scaleX(1)}
+.hero h1 .w.on::after{transform:skewX(-10deg) scaleX(1);transition-delay:.25s}
+@media (prefers-reduced-motion:reduce){.hero h1 .w::before,.hero h1 .w::after{transition:none}}
 .hero .eyebrow::before{background:repeating-linear-gradient(-45deg,var(--mark) 0 4px,transparent 4px 8px)}
 .hero h1{text-shadow:0 6px 40px rgba(0,0,0,.35)}
 .hero h1 span.s{color:#E3E5E8}
@@ -174,10 +182,11 @@ a{color:inherit}
 /* ---------- бруківка ---------- */
 .show{display:grid;grid-template-columns:1.3fr 1fr;border-radius:28px;overflow:hidden;background:var(--slab);border:1px solid var(--line);margin-bottom:24px}
 .pave{min-height:460px;position:relative;background:#2A2B2D;overflow:hidden}
-.pave img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(calc(1.04 * var(--z,1)));transition:opacity .35s ease,transform 6s ease}
-.pave:hover img{transform:scale(calc(1.1 * var(--z,1)))}
-.msel{display:flex;flex-wrap:wrap;gap:8px}
-.msel button{border:1px solid var(--line);background:var(--concrete);font:700 14px/1 var(--body);padding:11px 16px;cursor:pointer;color:var(--asphalt);transition:background .2s,color .2s,border-color .2s}
+/* двір: справжній фрагмент викладки з каталогу, повторений у реальному масштабі (--bs — ширина одного фрагмента) */
+.pave .tex{position:absolute;inset:0;background-repeat:repeat;background-position:center;background-size:var(--bs,50%) auto;transition:opacity .35s ease}
+.pave .tex.fade{opacity:0}
+.msel{display:flex;flex-wrap:wrap;gap:6px}
+.msel button{border:1px solid var(--line);background:var(--concrete);font:700 13px/1 var(--body);padding:9px 12px;cursor:pointer;color:var(--asphalt);white-space:nowrap;transition:background .2s,color .2s,border-color .2s}
 .msel button:hover{border-color:var(--signal)}
 .msel button[aria-pressed="true"]{background:var(--signal);border-color:var(--signal);color:#fff}
 .hsel[hidden]{display:none}
@@ -424,8 +433,13 @@ footer .in{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-betwe
 /* ---------- перший екран — рівно на висоту вікна (десктоп) ---------- */
 @media (min-width:1041px){
   .hero{min-height:calc(100svh - var(--hh,73px));display:flex;flex-direction:column;padding-block:clamp(20px,5vh,64px)}
-  .hero > .in{flex:1;align-items:center;width:100%}
-  .hero h1{font-size:clamp(44px,min(8.2vw,10.2vh),118px);margin-top:clamp(10px,2vh,22px)}
+  /* ліва колонка на висоту картки: напис «Дилер…» — урівень з верхом картки, кнопки — урівень з низом */
+  .hero > .in{flex:1;align-items:center;align-content:center;width:100%}
+  .hero > .in > div:first-child{align-self:stretch;display:flex;flex-direction:column;align-items:flex-start}
+  .hero .calc{align-self:stretch;align-content:space-between}
+  .hero .ctas{margin-top:auto!important;padding-top:clamp(16px,3vh,32px)}
+  .hero .trust{display:none}
+  .hero h1{font-size:clamp(44px,min(6.4vw,8.4vh),104px);margin-top:clamp(10px,2vh,22px)}
   .hero h1 .s{margin-top:clamp(8px,1.6vh,18px)}
   .hero .lead{margin-top:clamp(12px,2.2vh,26px);font-size:clamp(16px,2.1vh,20px)}
   .hero .ctas{margin-top:clamp(16px,3vh,32px)}
@@ -935,29 +949,29 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 
   /* ---- «Побачите двір»: моделі, кольори й ціни — з каталогу й прайсу probeton.com.ua ----
      c: [колір, файл, ціна]; ціна null — береться з перемикача висоти (лише Лайнстоун).
-     z — наближення фото, щоб сховати рвані краї викладки на фото з каталогу. */
+     bs — ширина одного фрагмента викладки (../img/dvir) у відсотках ширини вікна «двору»: так плитка має реальний масштаб двору. */
   const M=[
-    {n:"Лайнстоун 20",lb:"Хіт продажів",d:"Комплекти бруківки різних розмірів в одній палеті. Сім кольорів, дві висоти.",z:1,h:true,
+    {n:"Лайнстоун 20",lb:"Хіт продажів",d:"Комплекти бруківки різних розмірів в одній палеті. Сім кольорів, дві висоти.",bs:"50%",h:true,
       c:[["терра","ls-terra"],["порто","ls-porto"],["палермо","ls-palermo"],["платина","ls-platyna"],["гранат","ls-granat"],["еверест","ls-everest"],["нуар","ls-nuar"]]},
-    {n:"Подвійна «Т» 80",lb:"Подвійна Т",d:"Чотири кольори з прайсу. Вишня й сахара — без фаски.",z:1.32,
+    {n:"Подвійна «Т» 80",lb:"Подвійна Т",d:"Чотири кольори з прайсу. Вишня й сахара — без фаски.",bs:"13.3%",
       c:[["сірий","pt-siryi",855],["вишня","pt-vyshnia",951],["перлина","pt-perlyna",1134],["сахара","pt-sakhara",1149]]},
-    {n:"Старе місто 40",lb:"Старе місто",d:"Викладка з каменів різного розміру. Чотири кольори з прайсу.",z:1.22,
+    {n:"Старе місто 40",lb:"Старе місто",d:"Викладка з каменів різного розміру. Чотири кольори з прайсу.",bs:"61%",
       c:[["сірий","sm-siryi",612],["графіт","sm-hrafit",687],["малібу","sm-malibu",762],["еспресо","sm-espreso",801]]},
-    {n:"Бруківка 200×100×40",lb:"Класика",d:"Прямокутна бруківка 200×100×40 мм.",z:1.3,
+    {n:"Бруківка 200×100×40",lb:"Класика",d:"Прямокутна бруківка 200×100×40 мм.",bs:"13%",
       c:[["сірий","bruk-siryi",612]]}
   ];
   if($("pave")){
   const pimg=$("pimg"),pave=$("pave");let mi=0,ci=0;
-  M.forEach(m=>m.c.forEach(c=>{const i=new Image();i.src="../img/"+c[1]+".webp"}));
+  M.forEach(m=>m.c.forEach(c=>{const i=new Image();i.src="../img/dvir/"+c[1]+".webp"}));
   const hPrice=()=>document.querySelector("#hsel [aria-pressed='true']").dataset.p;
   function setColor(i,anim){
     const m=M[mi],c=m.c[i];ci=i;
-    const go=()=>{pave.style.setProperty("--z",m.z);pimg.src="../img/"+c[1]+".webp";pimg.alt=m.n+", колір "+c[0];pimg.classList.remove("fade")};
+    const go=()=>{pave.style.setProperty("--bs",m.bs);pimg.style.backgroundImage="url(../img/dvir/"+c[1]+".webp)";pimg.classList.remove("fade")};
     if(anim){pimg.classList.add("fade");setTimeout(go,180)}else go();
     $("cname").textContent=c[0];$("plab").textContent=m.lb.replace("Хіт продажів","Лайнстоун")+" · "+c[0];
     $("pprice").textContent=(m.h?hPrice():c[2])+NB+"₴";
     [...$("sws").children].forEach((x,j)=>x.setAttribute("aria-pressed",j===i));
-    pave.setAttribute("aria-label","Візуалізація укладеної плитки "+m.n);
+    pave.setAttribute("aria-label","Візуалізація укладеної плитки "+m.n+", колір "+c[0]);
   }
   function setModel(k,anim){
     mi=k;const m=M[k];
@@ -1125,6 +1139,13 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   // один раз за візит пропонуємо дзвінок самі — через 45 секунд на сайті
   setTimeout(()=>{let shown=false;try{shown=sessionStorage.getItem("cbShown")}catch(e){}
     if(!shown&&cb.hidden){openCb();try{sessionStorage.setItem("cbShown","1")}catch(e){}}},45000);
+
+  /* ---- перший екран: плашка переходить бетон → бруківка → техніка ---- */
+  const hw=$("heroWords");
+  if(hw&&!matchMedia("(prefers-reduced-motion:reduce)").matches){
+    const ws=[...hw.querySelectorAll(".w")];let wi=0;
+    setInterval(()=>{if(document.hidden)return;ws[wi].classList.remove("on");wi=(wi+1)%ws.length;ws[wi].classList.add("on")},2600);
+  }
 
   /* ---- мобільне меню ---- */
   const bg=document.querySelector(".burger");
