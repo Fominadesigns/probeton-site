@@ -1004,6 +1004,12 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   M.forEach((m,k)=>{const b=document.createElement("button");b.type="button";b.textContent=m.lb==="Хіт продажів"?"Лайнстоун":m.lb;b.onclick=()=>setModel(k,true);$("msel").appendChild(b)});
   document.querySelectorAll("#hsel button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#hsel button").forEach(x=>x.setAttribute("aria-pressed",x===b));$("pprice").textContent=b.dataset.p+NB+"₴"});
   setModel(0,false);
+  // висота картки не стрибає: міряємо всі моделі й ставимо найбільшу (і заново при зміні ширини)
+  const show=pave.closest(".show");
+  const lockH=()=>{const m0=mi,c0=ci;show.style.minHeight="";let mx=0;
+    M.forEach((m,k)=>{setModel(k,false);mx=Math.max(mx,show.offsetHeight)});
+    setModel(m0,false);setColor(c0,false);show.style.minHeight=mx+"px"};
+  document.fonts.ready.then(lockH);let lt=0;addEventListener("resize",()=>{clearTimeout(lt);lt=setTimeout(lockH,200)});
   }
 
   /* ---- каталог: позиції й ціни з прайсу probeton.com.ua ---- */
