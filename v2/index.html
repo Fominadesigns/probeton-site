@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ПроБетон — бетон, бруківка, техніка</title>
+<meta name="description" content="Бетон В7,5–В35, бруківка Ковальська, ЗБВ і спецтехніка з доставкою по Києву та області.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Сітка: дві колонки по 50%, комірки з тонкими лініями; темна рамка зліва, як у референсі */
+:root{
+  --paper:#FFFFFF;
+  --ink:#232323;
+  --fog:#DCDCDC;      /* сіра комірка */
+  --rule:#8E8E8E;     /* тонкі лінії сітки */
+  --accent:#F46322;   /* помаранчевий з логотипу */
+  --teal:#067A87;
+  --sans:"Inter Tight","Helvetica Neue",Arial,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --hdr:60px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:var(--hdr)}
+body{margin:0;background:var(--ink);color:var(--ink);font:400 17px/1.45 var(--sans);letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.frame{margin-left:max(22px,env(safe-area-inset-left,0px));background:var(--paper);min-width:0}
+.mono{font:500 12px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- шапка ---------- */
+.hdr{position:sticky;top:0;z-index:50;display:grid;grid-template-columns:60px 1fr 1fr;height:var(--hdr);background:var(--paper);border-bottom:1px solid var(--rule)}
+.hdr .logo{background:var(--ink);display:grid;place-items:center}
+.hdr .logo img{width:40px;height:auto;filter:brightness(0) invert(1)}
+.hdr .clock{display:flex;align-items:center;gap:8px;padding-left:80px;font-size:15px;border-right:1px solid var(--rule)}
+.hdr .clock small{font:500 11px/1 var(--mono);letter-spacing:.06em;color:#6b6b6b}
+.hdr .right{display:grid;grid-template-columns:1fr auto}
+.hdr nav{display:flex;align-items:center;gap:18px;padding-left:24px;font-size:16px;font-weight:500}
+.hdr nav a{position:relative}
+.hdr nav a::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.hdr nav a:hover::after{transform:scaleX(1)}
+.hdr .cta{background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:60px;padding:0 20px;font-size:16px;font-weight:500;min-width:200px;transition:background .3s}
+.hdr .cta:hover{background:var(--accent)}
+.arr{width:18px;height:18px;flex:none;transition:transform .3s}
+a:hover .arr{transform:translateX(4px)}
+
+/* ---------- прокручувані цифри (табло) ---------- */
+.odo{display:inline-flex;overflow:hidden;line-height:1;height:1em;vertical-align:baseline}
+.odo .d{display:inline-block;height:1em;overflow:hidden}
+.odo .d > span{display:flex;flex-direction:column;transition:transform 1.4s cubic-bezier(.2,.8,.2,1)}
+.odo .d > span > i{font-style:normal;height:1em;line-height:1;display:block}
+
+/* ---------- сітка ---------- */
+.row{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--rule)}
+.cell{position:relative;min-width:0;border-right:1px solid var(--rule);overflow:hidden}
+.cell:last-child{border-right:0}
+.half{display:grid;grid-template-columns:1fr 1fr}
+.half > .cell:last-child{border-right:0}
+.dark{background:var(--ink);color:#fff}
+.fog{background:var(--fog)}
+.acc{background:var(--accent);color:#fff}
+.tealc{background:var(--teal);color:#fff}
+.pad{padding:clamp(18px,1.6vw,24px)}
+.big{font-weight:500;letter-spacing:-.055em;line-height:.86;margin:0}
+.hero-word{font-size:clamp(64px,10.6vw,176px)}
+.lead{font-size:clamp(20px,1.75vw,27px);line-height:1.08;letter-spacing:-.035em;font-weight:500;margin:0}
+.body{font-size:16px;line-height:1.35;letter-spacing:-.02em;max-width:34ch;margin:0}
+.btn{display:inline-flex;align-items:center;justify-content:space-between;gap:40px;font:500 13px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:12px 14px;border:1px solid currentColor;transition:background .3s,color .3s}
+.btn.solid{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn.solid:hover{background:var(--accent);border-color:var(--accent)}
+.btn.ghost:hover{background:#fff;color:var(--ink)}
+.tags{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.tags li{display:flex;align-items:center;gap:10px;font:500 13px/1.3 var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.tags li::before{content:"";width:8px;height:8px;background:var(--accent);flex:none}
+
+/* напівтонові картинки */
+.dither{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+/* поява рядків заголовка */
+.ln{display:block;overflow:hidden;padding:.16em 0 .04em;margin-top:-.16em}
+.ln > span{display:block}
+html.anim .rv .ln > span{transform:translateY(105%);transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+html.anim .rv.seen .ln > span{transform:none}
+html.anim .rv.seen .ln:nth-child(2) > span{transition-delay:.08s}
+html.anim .rv.seen .ln:nth-child(3) > span{transition-delay:.16s}
+html.anim .fade{opacity:0;translate:0 18px;transition:opacity .8s ease .15s,translate .9s cubic-bezier(.2,.8,.2,1) .15s}
+html.anim .fade.seen{opacity:1;translate:none}
+
+/* ---------- 1. перший екран ---------- */
+.hero{grid-template-rows:auto}
+.hero .tl{height:clamp(320px,42vw,520px);display:flex;align-items:flex-end;padding:0 0 clamp(14px,2vw,34px) 0}
+.hero .tl .big{margin-left:-.06em}
+.hero .tr{height:clamp(320px,42vw,520px)}
+.hero .bl{min-height:clamp(320px,36vw,480px)}
+.hero .br .cell{min-height:clamp(320px,36vw,480px);display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.dealer{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font:500 12px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.dealer b{font:600 28px/1 var(--sans);letter-spacing:-.04em;text-transform:none}
+
+/* ---------- 2. гасло ---------- */
+.slogan .cell{min-height:clamp(260px,28vw,400px)}
+.slogan .up{font-size:clamp(56px,8.6vw,132px);text-transform:uppercase}
+.slogan .fogword{display:flex;align-items:flex-start;padding:clamp(40px,7vw,100px) clamp(18px,1.6vw,24px) 0}
+.slogan .fogword .big{font-size:clamp(70px,10vw,150px)}
+
+/* ---------- 3. цифри ---------- */
+.stats .cell{min-height:clamp(220px,25vw,380px)}
+.stat{display:flex;flex-direction:column;justify-content:space-between}
+.stat .n{font-size:clamp(56px,7.4vw,112px);font-weight:500;letter-spacing:-.06em;line-height:.9;display:flex;align-items:flex-start;flex-wrap:wrap}
+.stat .n small{font-size:.38em;letter-spacing:-.02em;margin:.12em 0 0 .12em}
+.stat p{margin:0;font-size:16px;font-weight:500;letter-spacing:-.03em}
+.empty{background:var(--paper)}
+
+/* ---------- 4. що ми робимо ---------- */
+.work{align-items:stretch}
+.work .sticky-wrap{overflow:visible}
+.work .sticky{position:sticky;top:var(--hdr);height:calc(100vh - var(--hdr));display:flex;flex-direction:column;justify-content:space-between;padding:clamp(18px,1.6vw,24px)}
+.work .sticky .big{font-size:clamp(56px,7.4vw,118px);text-transform:uppercase}
+.work .sticky .big .r{display:block;text-align:right}
+.work .sticky .foot{display:grid;gap:26px;margin-left:auto;width:min(100%,360px)}
+.svc{display:grid;grid-template-columns:56px 1fr 1fr;gap:0 clamp(16px,2vw,28px);padding:clamp(22px,2.6vw,40px) clamp(18px,1.6vw,24px);border-bottom:1px solid #3a3a3a;min-height:440px;align-content:space-between}
+.svc:last-child{border-bottom:0}
+.svc .num{font:500 13px/1 var(--mono);color:#8a8a8a;padding-top:10px}
+.svc h3{font-size:clamp(30px,2.8vw,44px);font-weight:500;letter-spacing:-.05em;line-height:1;margin:0}
+.svc .txt{font-size:16px;line-height:1.3;letter-spacing:-.02em;margin:0;color:#e9e9e9}
+.svc .art{grid-column:2;align-self:end;width:min(100%,180px);aspect-ratio:1;margin-top:40px}
+.svc .tags{grid-column:3;align-self:end;margin-top:40px}
+.svc .art svg{width:100%;height:100%;overflow:visible}
+.spin{transform-origin:50% 50%;animation:spin 24s linear infinite}
+.spin.rev{animation-direction:reverse;animation-duration:38s}
+@keyframes spin{to{transform:rotate(360deg)}}
+.orbit{transform-origin:50% 50%;animation:spin 6s linear infinite}
+
+/* ---------- 5. каталог ---------- */
+.cat-head .cell{min-height:clamp(220px,22vw,320px);display:flex;align-items:flex-end}
+.cat-head .big{font-size:clamp(70px,10vw,150px)}
+.cat{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--rule)}
+.cat .cell{border-bottom:1px solid var(--rule);display:flex;flex-direction:column}
+.cat .cell:nth-child(4n){border-right:0}
+.cat .ph{aspect-ratio:1;background:#fff;overflow:hidden;border-bottom:1px solid var(--rule)}
+.cat .ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);transition:filter .5s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.cat .ph.fit img{object-fit:contain;padding:12%}
+.cat .cell:hover .ph img{filter:none;transform:scale(1.04)}
+.cat .meta{padding:14px clamp(14px,1.4vw,20px) 18px;display:grid;gap:4px}
+.cat .meta b{font-size:19px;font-weight:500;letter-spacing:-.03em}
+.cat .meta span{font:500 12px/1.4 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:#6b6b6b}
+.cat .meta em{font-style:normal;font:500 15px/1 var(--mono);margin-top:8px}
+.cat .cell:hover{background:var(--accent);color:#fff}
+.cat .cell:hover .meta span{color:#ffe1d3}
+.note{padding:12px clamp(18px,1.6vw,24px);font:500 12px/1.5 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:#6b6b6b;border-bottom:1px solid var(--rule)}
+
+/* ---------- 6. команда ---------- */
+.team-head .cell{min-height:clamp(300px,30vw,420px)}
+.team-head .tl{display:flex;align-items:flex-start;padding-top:clamp(20px,2vw,30px)}
+.team-head .tl .big{font-size:clamp(90px,12vw,190px);margin-left:-.05em}
+.team-head .tr{display:flex;align-items:flex-end}
+.team-head .tr .lead{font-size:clamp(30px,3.2vw,48px);line-height:1;letter-spacing:-.05em}
+.people{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--rule)}
+.person{margin:0;position:relative;border-right:1px solid var(--rule);display:flex;flex-direction:column}
+.person:last-child{border-right:0}
+.person .ph{aspect-ratio:4/5;overflow:hidden;position:relative;background:var(--fog)}
+.person .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;transition:opacity .5s,transform .8s cubic-bezier(.2,.8,.2,1)}
+.person .ph img.c{opacity:0}
+.person:hover .ph img.c{opacity:1}
+.person:hover .ph img{transform:scale(1.03)}
+.person figcaption{padding:16px clamp(16px,1.6vw,24px) 22px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-top:1px solid var(--rule)}
+.person b{display:block;font-size:22px;font-weight:500;letter-spacing:-.04em}
+.person span{font:500 12px/1.4 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:#6b6b6b}
+.person .no{font:500 12px/1 var(--mono);color:#8a8a8a}
+
+/* ---------- 7. контакти й підвал ---------- */
+.contact .cell{min-height:clamp(320px,30vw,420px)}
+.contact .tl .lead{font-size:clamp(34px,3.4vw,52px);line-height:.98;letter-spacing:-.05em}
+.links{display:grid;align-content:start;gap:12px;font-size:17px;font-weight:500}
+.links a:hover{color:var(--accent)}
+.tel{display:grid;gap:6px}
+.tel a{font:500 clamp(18px,1.6vw,22px)/1.2 var(--sans);letter-spacing:-.02em}
+.tel a:hover{color:var(--accent)}
+.mgr{display:flex;align-items:center;gap:14px;margin-top:22px}
+.mgr i{width:58px;height:58px;border-radius:50%;flex:none;background:url(../img/team-pavlo-color.webp) 50% 13%/200% auto no-repeat var(--fog);border:1px solid var(--rule)}
+.mgr b{display:block;font-size:17px;font-weight:500;letter-spacing:-.03em}
+.mgr small{display:block;font:500 11px/1.4 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:#6b6b6b}
+.subrow{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--rule)}
+.subrow > a{padding:16px clamp(18px,1.6vw,24px);font-size:16px;font-weight:500;display:flex;justify-content:space-between;align-items:center;border-right:1px solid var(--rule);transition:background .3s,color .3s}
+.subrow > a:last-child{border-right:0}
+.subrow > a:hover{background:var(--ink);color:#fff}
+.foot .cell{min-height:clamp(340px,32vw,460px)}
+.foot .dark{display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding-top:clamp(28px,4vw,60px)}
+.foot .dark img{width:min(70%,360px);filter:brightness(0) invert(1)}
+.foot .dark .copy{align-self:stretch;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:18px clamp(18px,1.6vw,24px);font:500 12px/1.4 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:#bdbdbd}
+.foot .acc{display:flex;flex-direction:column;justify-content:space-between;transition:background .4s}
+.foot .acc:hover{background:#ff7438}
+.foot .acc .lead{font-size:clamp(34px,3.4vw,52px);line-height:.98;letter-spacing:-.05em}
+.foot .acc .bot{display:flex;justify-content:space-between;align-items:flex-end;font-size:17px;font-weight:500}
+.foot .acc svg{width:clamp(80px,9vw,120px);height:auto;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.foot .acc:hover svg{transform:translate(8px,-8px)}
+
+/* ---------- мобільна ---------- */
+@media (max-width:860px){
+  .frame{margin-left:max(10px,env(safe-area-inset-left,0px))}
+  .hdr{grid-template-columns:56px 1fr auto}
+  .hdr .clock{padding-left:16px;border-right:0}
+  .hdr .right{grid-template-columns:auto}
+  .hdr nav{display:none}
+  .hdr .cta{min-width:0;gap:16px}
+  .row,.subrow{grid-template-columns:1fr}
+  .row > .cell,.row > .half{border-right:0;border-bottom:1px solid var(--rule)}
+  .row > :last-child{border-bottom:0}
+  .half > .cell{border-bottom:0}
+  .hero .tl{height:auto;min-height:220px;padding-top:40px}
+  .hero .tr{height:300px}
+  .hero .bl{min-height:260px}
+  .work .sticky{position:static;height:auto;gap:40px}
+  .svc{grid-template-columns:40px 1fr;min-height:0;gap:14px}
+  .svc .txt{grid-column:2}
+  .svc .art{grid-column:2;width:120px;margin-top:10px}
+  .svc .tags{grid-column:2;margin-top:6px}
+  .cat{grid-template-columns:1fr 1fr}
+  .cat .cell:nth-child(2n){border-right:0}
+  .people{grid-template-columns:1fr}
+  .person{border-right:0;border-bottom:1px solid var(--rule)}
+  .stats .empty{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  html.anim .rv .ln > span,html.anim .fade{transform:none;opacity:1;translate:none}
+}
+</style>
+</head>
+<body>
+<div class="frame">
+
+<header class="hdr">
+  <a class="logo" href="#top" aria-label="ПроБетон — на початок"><img src="../img/logo.png" alt="ProBeton" width="531" height="319"></a>
+  <div class="clock"><span id="clock" class="odo">--:--</span> <small>КИЇВ</small></div>
+  <div class="right">
+    <nav aria-label="Розділи"><a href="#work">Послуги</a><a href="#cat">Каталог</a><a href="#team">Команда</a><a href="#contact">Контакти</a></nav>
+    <a class="cta" href="#contact">Прорахувати <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- 1. ПЕРШИЙ ЕКРАН -->
+<section class="row hero">
+  <div class="cell tl rv"><h1 class="big hero-word"><span class="ln"><span>ПроБетон</span></span></h1></div>
+  <div class="cell tr fog"><canvas class="dither" data-src="../img/fon-heroi.webp" data-ink="#232323" data-pos="0.62"></canvas></div>
+</section>
+<section class="row hero">
+  <div class="cell bl fog"><canvas class="dither" data-src="../img/betonozmishuvach.webp" data-ink="#232323" data-fit="contain" data-pos="0.5"></canvas></div>
+  <div class="half br">
+    <div class="cell dark pad fade">
+      <p class="lead">Бетон від В7,5 до В35, бруківка Ковальська, залізобетонні вироби й своя спецтехніка для об'єктів Києва та області.</p>
+      <a class="btn ghost" href="#contact">Прорахувати замовлення <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="cell acc pad fade">
+      <p class="lead">Привеземо своєю технікою, подамо насосом і покладемо плитку під ключ.</p>
+      <div class="dealer"><b>Ковальська</b><span>офіційний<br>дилер заводу</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. ГАСЛО -->
+<section class="row slogan">
+  <div class="cell dark pad rv"><h2 class="big up"><span class="ln"><span>Який</span></span><span class="ln"><span>бетон?</span></span></h2></div>
+  <div class="cell fog fogword rv"><p class="big"><span class="ln"><span>Якісний.</span></span></p></div>
+</section>
+
+<!-- 3. ЦИФРИ -->
+<section class="row stats">
+  <div class="cell empty"></div>
+  <div class="half">
+    <div class="cell dark pad stat"><div class="n"><span class="odo" data-to="7300"></span><small>+</small></div><p>об'єктів отримали від нас бетонну продукцію</p></div>
+    <div class="cell empty"></div>
+  </div>
+</section>
+<section class="row stats">
+  <div class="cell acc pad stat"><div class="n"><span class="odo" data-to="60000" data-sep="1"></span><small>м³</small></div><p>бетону залито</p></div>
+  <div class="half">
+    <div class="cell pad stat"><div class="n"><span class="odo" data-to="100"></span><small>тис. м²</small></div><p>плитки укладено</p></div>
+    <div class="cell fog pad stat"><div class="n"><span class="odo" data-to="5"></span><small>+</small></div><p>років на ринку, співпраця із заводами Києва й області</p></div>
+  </div>
+</section>
+
+<!-- 4. ЩО МИ РОБИМО -->
+<section class="row work" id="work">
+  <div class="cell fog sticky-wrap">
+    <div class="sticky rv">
+      <h2 class="big"><span class="ln"><span>Усе для</span></span><span class="ln"><span class="r">будмай-</span></span><span class="ln"><span>данчика</span></span></h2>
+      <div class="foot">
+        <p class="body">Ми стартували з кількох автобетонозмішувачів і співпраці із заводом Ковальська. Зараз у нас свій автопарк, дилерські пропозиції заводів-виробників і менеджери, які ведуть замовлення від заявки до отримання.</p>
+        <a class="btn solid" href="#contact">Поговорити з менеджером <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="cell dark">
+    <article class="svc">
+      <span class="num">01</span><h3>Бетон</h3><p class="txt">Сім марок — від стяжки до перекриття. Доставка міксером у будь-яку точку Києва та області, подача бетононасосом туди, куди міксер не під'їде.</p>
+      <div class="art"><svg viewBox="0 0 200 200" fill="none" stroke="#fff" stroke-width="1"><g class="spin"><circle cx="100" cy="100" r="90" stroke-dasharray="2 5"/></g><g class="spin rev"><circle cx="100" cy="100" r="64" stroke-dasharray="1 3"/></g><circle cx="100" cy="100" r="30"/><circle cx="100" cy="100" r="3" fill="#fff"/></svg></div>
+      <ul class="tags"><li>В7,5 · В10 · В15 · В20</li><li>В25 · В30 · В35</li><li>Доставка міксером</li><li>Подача бетононасосом</li></ul>
+    </article>
+    <article class="svc">
+      <span class="num">02</span><h3>Бруківка<br>Ковальська</h3><p class="txt">Лінійна й класична плитка, бордюри, дорожні борти й водовідвідні лотки. Від продажу й доставки до готового укладеного двору.</p>
+      <div class="art"><svg viewBox="0 0 200 200" fill="none" stroke="#fff" stroke-width="1"><g class="spin"><rect x="40" y="40" width="120" height="120"/><rect x="62" y="62" width="76" height="76" stroke-dasharray="3 4"/></g><g class="spin rev"><rect x="28" y="28" width="144" height="144" stroke-dasharray="1 6"/></g></svg></div>
+      <ul class="tags"><li>Лайнстоун</li><li>Старе місто</li><li>Подвійна «Т»</li><li>Укладання під ключ</li></ul>
+    </article>
+    <article class="svc">
+      <span class="num">03</span><h3>Залізобетонні<br>вироби</h3><p class="txt">Кільця для колодязів і септиків, плити перекриття, балки. Привеземо й подамо краном-маніпулятором на об'єкт.</p>
+      <div class="art"><svg viewBox="0 0 200 200" fill="none" stroke="#fff" stroke-width="1"><ellipse cx="100" cy="56" rx="60" ry="16"/><path d="M40 56v88c0 9 27 16 60 16s60-7 60-16V56"/><g class="orbit"><circle cx="100" cy="100" r="78" stroke-dasharray="1 4"/><circle cx="178" cy="100" r="3" fill="#fff"/></g></svg></div>
+      <ul class="tags"><li>Кільця</li><li>Плити перекриття</li><li>Балки</li><li>Доставка краном</li></ul>
+    </article>
+    <article class="svc">
+      <span class="num">04</span><h3>Спецтехніка</h3><p class="txt">Свій автопарк. Оренда й подача техніки в будь-яку точку Києва та Київської області.</p>
+      <div class="art"><svg viewBox="0 0 200 200" fill="none" stroke="#fff" stroke-width="1"><g class="spin"><circle cx="100" cy="100" r="88"/><g stroke-dasharray="1 3"><path d="M100 12v176M12 100h176M38 38l124 124M162 38 38 162"/></g></g><circle cx="100" cy="100" r="22"/></svg></div>
+      <ul class="tags"><li>Бетононасос</li><li>Кран-маніпулятор</li><li>Самоскид</li><li>Екскаватор і гідромолот</li></ul>
+    </article>
+  </div>
+</section>
+
+<!-- 5. КАТАЛОГ -->
+<section class="row cat-head" id="cat">
+  <div class="cell rv pad"><h2 class="big"><span class="ln"><span>Каталог</span></span></h2></div>
+  <div class="cell dark pad" style="display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;gap:24px">
+    <p class="lead">Ціни з чинного прайсу ПроБетон. Від 100 м² — безкоштовна доставка.</p>
+    <a class="btn ghost" href="#contact">Прорахувати мій двір <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+<section class="cat" id="grid"></section>
+<div class="note">Одиницю виміру ціни (м² чи шт.) уточнюйте в менеджера · умови безкоштовної доставки — теж</div>
+
+<!-- 6. КОМАНДА -->
+<section class="row team-head" id="team">
+  <div class="cell tl rv"><h2 class="big"><span class="ln"><span>Команда</span></span></h2></div>
+  <div class="cell tr pad rv"><p class="lead"><span class="ln"><span>Люди, з якими</span></span><span class="ln"><span>ви говорите.</span></span></p></div>
+</section>
+<section class="people">
+  <figure class="person fade"><div class="ph"><img src="../img/team-oleksandr.webp" alt="Олександр Кулаков" loading="lazy"><img class="c" src="../img/team-oleksandr-color.webp" alt="" loading="lazy"></div><figcaption><div><b>Олександр Кулаков</b><span>Директор компанії</span></div><span class="no">01</span></figcaption></figure>
+  <figure class="person fade"><div class="ph"><img src="../img/team-pavlo.webp" alt="Павло Яковенко" loading="lazy"><img class="c" src="../img/team-pavlo-color.webp" alt="" loading="lazy"></div><figcaption><div><b>Павло Яковенко</b><span>Керівник відділу продажу</span></div><span class="no">02</span></figcaption></figure>
+  <figure class="person fade"><div class="ph"><img src="../img/team-serhii.webp" alt="Сергій Кочнов" loading="lazy"><img class="c" src="../img/team-serhii-color.webp" alt="" loading="lazy"></div><figcaption><div><b>Сергій Кочнов</b><span>Керівник транспортного відділу</span></div><span class="no">03</span></figcaption></figure>
+</section>
+
+<!-- 7. КОНТАКТИ -->
+<div style="height:40px;border-bottom:1px solid var(--rule);position:relative;overflow:hidden" class="fog"><canvas class="dither" data-src="../img/fon-krany.webp" data-ink="#232323" data-pos="0.5"></canvas></div>
+<section class="row contact" id="contact">
+  <div class="cell pad tl"><p class="lead">Прорахуємо<br>ваш об'єкт<br>сьогодні</p></div>
+  <div class="half">
+    <div class="cell pad">
+      <nav class="links" aria-label="Розділи"><a href="#work">Послуги</a><a href="#cat">Каталог</a><a href="#team">Команда</a><a href="https://t.me/Probeton0973151520" target="_blank" rel="noopener">Telegram</a><a href="https://www.instagram.com/pro_beton_kyiv/" target="_blank" rel="noopener">Instagram</a></nav>
+    </div>
+    <div class="cell pad">
+      <div class="tel"><a href="tel:+380973151520">+380 97 315 15 20</a><a href="tel:+380932504041">+380 93 250 40 41</a><a href="tel:+380733151520">+380 73 315 15 20</a></div>
+      <a class="mgr" href="tel:+380932504041"><i aria-hidden="true"></i><span><b>Павло Яковенко</b><small>Відділ продажу · 093 250 40 41</small></span></a>
+    </div>
+  </div>
+</section>
+<div class="subrow">
+  <a href="mailto:probeton.com.ua@gmail.com">probeton.com.ua@gmail.com <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18 18 6M8 6h10v10"/></svg></a>
+  <a href="https://www.google.com/maps/search/?api=1&query=вулиця+Сім'ї+Кульженків+14+Київ" target="_blank" rel="noopener">вул. Сім'ї Кульженків, 14, Київ <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18 18 6M8 6h10v10"/></svg></a>
+</div>
+<section class="row foot">
+  <div class="cell dark">
+    <img src="../img/logo.png" alt="ProBeton" width="531" height="319">
+    <div class="copy"><span>© ПроБетон, Київ</span><span>Концепт редизайну · варіант 2</span></div>
+  </div>
+  <a class="cell acc pad" href="tel:+380973151520">
+    <p class="lead">Залиште<br>заявку</p>
+    <div class="bot"><span>Подзвонити: 097 315 15 20</span><svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 116 116 4M20 4h96v96"/></svg></div>
+  </a>
+</section>
+</main>
+</div>
+
+<script>
+(function(){
+  const NB=" ";
+  /* ---- типографіка: короткі слова до наступного, тире до попереднього, число до слова ---- */
+  const short="і|й|а|в|у|з|о|та|на|до|за|по|від|під|над|для|про|при|без|із|зі|що|як|не|ні|чи|це|або|але|ми|є";
+  const re1=new RegExp("(^|[\\s(«])("+short+")\\s","gi"),re2=/\s([—–])/g,re3=/(\d)\s(?=[^\d\s—–·])/g;
+  function tidy(root){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>/SCRIPT|STYLE/.test(n.parentNode.nodeName)?2:1});
+    let n;while((n=w.nextNode())){let t=n.nodeValue,o=t;t=t.replace(re1,(m,a,b)=>a+b+NB).replace(re1,(m,a,b)=>a+b+NB).replace(re2,NB+"$1").replace(re3,"$1"+NB);if(t!==o)n.nodeValue=t}}
+
+  /* ---- табло: кожна цифра — стовпчик 0–9, що прокручується ---- */
+  function odo(el,str){
+    el.innerHTML="";
+    [...str].forEach(ch=>{
+      if(!/\d/.test(ch)){const s=document.createElement("span");s.textContent=ch===" "?NB:ch;el.appendChild(s);return}
+      const d=document.createElement("span");d.className="d";
+      const col=document.createElement("span");
+      for(let i=0;i<10;i++){const x=document.createElement("i");x.textContent=i;col.appendChild(x)}
+      d.appendChild(col);el.appendChild(d);d.dataset.v=ch;
+    });
+  }
+  function roll(el,str,delay){
+    const ds=el.querySelectorAll(".d");let k=0;
+    [...str].forEach(ch=>{if(!/\d/.test(ch))return;const d=ds[k++];if(!d)return;
+      d.firstChild.style.transitionDelay=(delay+k*60)+"ms";d.firstChild.style.transform="translateY(-"+ch+"em)"});
+  }
+
+  /* годинник Києва */
+  const clk=document.getElementById("clock");
+  const fmt=()=>new Intl.DateTimeFormat("uk-UA",{timeZone:"Europe/Kyiv",hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date());
+  let last="";odo(clk,fmt());
+  const tick=()=>{const t=fmt();if(t!==last){if(clk.querySelectorAll(".d").length!==t.replace(/\D/g,"").length)odo(clk,t);roll(clk,t,0);last=t}};
+  requestAnimationFrame(()=>requestAnimationFrame(tick));setInterval(tick,5000);
+
+  /* лічильники */
+  const fmtN=(n,sep)=>sep?String(n).replace(/\B(?=(\d{3})+(?!\d))/g," "):String(n);
+  document.querySelectorAll(".odo[data-to]").forEach(el=>{const s=fmtN(+el.dataset.to,el.dataset.sep);el.dataset.s=s;odo(el,s)});
+
+  /* ---- каталог: позиції й ціни з прайсу probeton.com.ua ---- */
+  const P=[
+    ["Лайнстоун 20","терра · порто · палермо","від 813 ₴","ls-palermo.webp"],
+    ["Лайнстоун 20 h60","висота 60 мм","від 870 ₴","ls-porto.webp"],
+    ["Подвійна «Т» 80","сірий","855 ₴","pt-siryi.webp"],
+    ["Подвійна «Т» 80","перлина","1134 ₴","pt-perlyna.webp"],
+    ["Старе місто 40","сірий","612 ₴","sm-siryi.webp"],
+    ["Старе місто 40","малібу","762 ₴","sm-malibu.webp"],
+    ["Бордюр парковий","1000×80×200 · вишня","348 ₴","bordyur-vyshnia.webp",1],
+    ["Лоток водовідвідний","сірий","240 ₴","lotok.webp",1]
+  ];
+  const grid=document.getElementById("grid");
+  grid.innerHTML=P.map((p,i)=>'<a class="cell fade" href="#contact"><div class="ph'+(p[4]?" fit":"")+'"><img src="../img/'+p[3]+'" alt="'+p[0]+', '+p[1]+'" loading="lazy"></div><div class="meta"><span>'+String(i+1).padStart(2,"0")+" · "+p[1]+'</span><b>'+p[0]+'</b><em>'+p[2]+'</em></div></a>').join("");
+  tidy(document.body);
+
+  /* ---- напівтонові картинки (растр Байєра), «проявляються» при появі ---- */
+  const B=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];
+  function dither(cv,prog){
+    const img=cv._img;if(!img)return;
+    const r=cv.getBoundingClientRect(),dpr=Math.min(2,devicePixelRatio||1);
+    const W=Math.max(1,Math.round(r.width)),H=Math.max(1,Math.round(r.height));
+    if(cv.width!==W*dpr){cv.width=W*dpr;cv.height=H*dpr}
+    const x=cv.getContext("2d");x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);
+    const cell=3,cw=Math.ceil(W/cell),ch=Math.ceil(H/cell);
+    if(!cv._lum||cv._lw!==cw||cv._lh!==ch){
+      const s=document.createElement("canvas");s.width=cw;s.height=ch;const sx=s.getContext("2d");
+      sx.fillStyle="#fff";sx.fillRect(0,0,cw,ch);
+      const iw=img.naturalWidth,ih=img.naturalHeight,fit=cv.dataset.fit==="contain";
+      const sc=fit?Math.min(cw/iw,ch/ih)*.92:Math.max(cw/iw,ch/ih),dw=iw*sc,dh=ih*sc,pos=+cv.dataset.pos||.5;
+      sx.drawImage(img,(cw-dw)*pos,(ch-dh)/2,dw,dh);
+      const d=sx.getImageData(0,0,cw,ch).data;cv._lum=new Float32Array(cw*ch);
+      for(let i=0;i<cw*ch;i++){const a=d[i*4+3]/255;let l=(0.299*d[i*4]+0.587*d[i*4+1]+0.114*d[i*4+2])/255;l=Math.min(1,Math.max(0,(l-.5)*1.55+.56));cv._lum[i]=(1-a)+a*l}
+      cv._lw=cw;cv._lh=ch;
+    }
+    x.fillStyle=cv.dataset.ink||"#232323";
+    const bias=(1-prog)*1.1;
+    for(let j=0;j<ch;j++)for(let i=0;i<cw;i++){
+      const l=cv._lum[j*cw+i]+bias,t=(B[(j&3)*4+(i&3)]+.5)/16;
+      if(l<t)x.fillRect(i*cell,j*cell,cell-1,cell-1);
+    }
+  }
+  const canv=[...document.querySelectorAll("canvas.dither")];
+  canv.forEach(cv=>{const im=new Image();im.onload=()=>{cv._img=im;cv._p=cv._p||0;dither(cv,cv._p)};im.src=cv.dataset.src});
+  function develop(cv){if(cv._run)return;cv._run=1;const t0=performance.now();
+    const st=now=>{const k=Math.min(1,(now-t0)/1400);cv._p=1-Math.pow(1-k,3);dither(cv,cv._p);if(k<1)requestAnimationFrame(st)};requestAnimationFrame(st)}
+  let rt;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>canv.forEach(cv=>{cv._lum=null;dither(cv,cv._p||1)}),150)});
+
+  /* ---- анімації при прокрутці ---- */
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduce||!("IntersectionObserver" in window)){
+    document.querySelectorAll(".odo[data-to]").forEach(el=>roll(el,el.dataset.s,0));
+    canv.forEach(cv=>{cv._p=1;dither(cv,1)});return;
+  }
+  document.documentElement.classList.add("anim");
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const t=e.target;io.unobserve(t);
+    t.classList.add("seen");
+    if(t.matches(".odo"))roll(t,t.dataset.s,150);
+    if(t.matches("canvas.dither"))develop(t);
+  }),{threshold:.2});
+  document.querySelectorAll(".rv,.fade,.odo[data-to],canvas.dither").forEach(el=>io.observe(el));
+})();
+</script>
+</body>
+</html>
