@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ПроБетон — бетон і бруківка</title>
+<title>ПроБетон — бетон, бруківка Ковальська, ЗБВ і спецтехніка в Києві</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Бетон В7,5–В35, тротуарна плитка Ковальська, ЗБВ і спецтехніка з доставкою по Києву та області.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -602,6 +602,114 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 .cb-note a{color:#fff;font-weight:600}
 @media (max-width:680px){.cb-fab{bottom:calc(84px + env(safe-area-inset-bottom,0px));right:14px;width:56px;height:56px}}
 
+/* ---------- багатосторінковість: шапка сторінки, крихти, активний пункт меню ---------- */
+.top nav a[aria-current="page"]{color:var(--asphalt);box-shadow:inset 0 -2px 0 var(--signal)}
+.phead{background:var(--slab);border-bottom:1px solid var(--line);padding-block:clamp(36px,5vw,72px) clamp(40px,5vw,76px);position:relative;overflow:hidden}
+.phead .in{display:grid;gap:18px;justify-items:start;position:relative;z-index:1}
+.phead h1{font-size:clamp(40px,6.4vw,88px);font-weight:900;letter-spacing:-.04em;line-height:.95}
+.phead::after{content:"";position:absolute;right:-60px;top:0;bottom:0;width:min(38vw,520px);background:repeating-linear-gradient(-45deg,rgba(244,99,34,.10) 0 18px,transparent 18px 44px);pointer-events:none}
+.crumbs{display:flex;flex-wrap:wrap;gap:8px;font:500 13px/1 var(--mono);color:var(--mut)}
+.crumbs a{text-decoration:none}.crumbs a:hover{color:var(--signal)}
+.crumbs [aria-current]{color:var(--asphalt)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* мобільне меню */
+.burger{display:none;margin-left:auto;width:46px;height:46px;border:1px solid var(--line);background:var(--slab);cursor:pointer;place-items:center;color:var(--asphalt)}
+.burger svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2}
+@media (max-width:1040px){
+  .burger{display:grid}
+  .top.open nav{display:flex;flex-direction:column;gap:0;position:absolute;left:0;right:0;top:100%;background:var(--slab);border-bottom:1px solid var(--line);padding:8px var(--pad-r) 16px var(--pad);box-shadow:0 30px 40px -30px rgba(0,0,0,.4)}
+  .top.open nav a{padding:15px 0;border-bottom:1px solid var(--line);font:700 19px/1 var(--display);color:var(--asphalt)}
+  .top.open nav a[aria-current="page"]{box-shadow:none;color:var(--signal)}
+}
+
+/* футер із посиланнями на сторінки */
+.fnav{display:flex;flex-wrap:wrap;gap:10px 22px}
+.fnav a{text-decoration:none;color:#C9CCD0}.fnav a:hover{color:#fff}
+
+/* ---------- категорії на головній ---------- */
+.catg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.catc{position:relative;display:grid;gap:12px;align-content:start;background:var(--slab);border:1px solid var(--line);padding:clamp(24px,2.6vw,36px);text-decoration:none;min-height:250px;transition:background .3s,border-color .3s,color .3s,transform .3s}
+.catc .advi{margin-bottom:18px}
+.catc .arr{position:absolute;right:28px;top:26px;font-size:22px;line-height:1;color:var(--mut);transition:transform .3s,color .3s}
+.catc h3{font:800 clamp(21px,2vw,27px)/1.1 var(--display);letter-spacing:-.02em}
+.catc p{color:var(--mut);font-size:16px;line-height:1.5}
+.catc em{justify-self:start;margin-top:auto;font:700 13px/1 var(--mono);font-style:normal;background:var(--concrete);padding:9px 12px}
+.catc:hover{background:var(--signal);border-color:var(--signal);color:#fff;transform:translateY(-4px)}
+.catc:hover p{color:#FFE5D6}.catc:hover .arr{color:#fff;transform:translate(3px,-3px)}
+.catc:hover em{background:rgba(255,255,255,.18)}.catc:hover .advi{background:#fff;color:var(--signal)}
+.catc.hot{background:var(--asphalt);border-color:var(--asphalt);color:#fff}
+.catc.hot p{color:var(--mut-d)}.catc.hot .arr{color:var(--mark)}.catc.hot em{background:var(--signal);color:#fff}
+.catc.hot .advi{background:rgba(255,255,255,.1);color:var(--mark)}
+@media (max-width:1040px){.catg{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.catg{grid-template-columns:1fr}.catc{min-height:0}}
+
+/* ---------- каталог з фільтрами ---------- */
+.kat-l{display:grid;grid-template-columns:290px minmax(0,1fr);gap:clamp(24px,3vw,44px);align-items:start}
+.kf{position:sticky;top:calc(var(--hh,73px) + 20px);display:grid;gap:0;max-height:calc(100vh - var(--hh,73px) - 40px);overflow:auto;padding-right:6px;scrollbar-width:thin}
+.kf-h{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.kf-h h2{font-size:28px;letter-spacing:-.02em}
+.kf-h h2 span{font-size:16px;color:var(--signal)}
+.kf-reset{border:0;background:none;font:600 14px/1 var(--body);text-decoration:underline;text-underline-offset:4px;cursor:pointer;color:var(--asphalt)}
+.kf-reset:hover{color:var(--signal)}
+.kfg{padding-block:22px;border-bottom:1px solid var(--line);display:grid;gap:14px}
+.kfg h3{font:700 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase}
+.kcat{display:grid;gap:4px}
+.kchk{display:flex;align-items:center;gap:12px;padding:8px 0;cursor:pointer;font-size:15px}
+.kchk input{width:19px;height:19px;accent-color:var(--signal);margin:0;flex:none}
+.kchk span{flex:1}
+.kchk em{font-style:normal;font-size:13px;color:var(--mut)}
+.kprice{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
+.kin{width:100%;min-width:0;border:1px solid var(--line);background:var(--slab);padding:12px;font:500 15px/1 var(--mono);color:var(--asphalt)}
+.krange{position:relative;height:28px}
+.krail,.kfill{position:absolute;top:12px;height:4px;left:0;right:0;background:var(--line)}
+.kfill{background:var(--signal)}
+.krange input{position:absolute;inset:0;width:100%;margin:0;background:none;pointer-events:none;-webkit-appearance:none;appearance:none}
+.krange input::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:var(--asphalt);border:3px solid var(--signal);cursor:pointer;pointer-events:auto}
+.krange input::-moz-range-thumb{width:16px;height:16px;background:var(--asphalt);border:3px solid var(--signal);cursor:pointer;pointer-events:auto}
+.kcol{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.ksw{aspect-ratio:1;border:0;background-size:280%;background-position:center;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15);transition:transform .15s,box-shadow .15s}
+.ksw:hover{transform:scale(1.08)}
+.ksw[aria-pressed="true"]{box-shadow:0 0 0 2px var(--concrete),0 0 0 4px var(--signal)}
+.kf-done,.kf-open{display:none}
+.kbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.kfound{margin-right:auto;color:var(--mut)}.kfound b{color:var(--asphalt);font-family:var(--mono)}
+.ksort select{border:1px solid var(--line);background:var(--slab);font:500 15px/1 var(--body);padding:13px 40px 13px 16px;color:var(--asphalt);cursor:pointer}
+.kview{display:flex;border:1px solid var(--line);background:var(--slab)}
+.kview button{width:46px;height:44px;border:0;background:none;display:grid;place-items:center;cursor:pointer;color:var(--mut)}
+.kview button[aria-pressed="true"]{background:var(--asphalt);color:#fff}
+.kview svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2}
+.kgrid{grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr))}
+.kc{padding:0;gap:0}
+.kc .ph{border-radius:0;aspect-ratio:4/3}
+.kbadge{position:absolute;left:12px;top:12px;background:var(--signal);color:#fff;font:700 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:8px 10px}
+.kb{display:grid;gap:10px;padding:16px 18px 18px;align-content:start}
+.kmeta{font-size:14px;color:var(--mut);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.kmeta b{color:var(--asphalt);text-transform:capitalize}
+.kdots{display:flex;gap:4px}
+.kdots i{width:16px;height:16px;background-size:300%;background-position:center;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.kgo{padding:11px 16px;font-size:14px}
+.kgrid.list{grid-template-columns:1fr}
+.kgrid.list .kc{grid-template-columns:240px minmax(0,1fr)}
+.kgrid.list .kc .ph{aspect-ratio:auto;height:100%;min-height:170px}
+.kgrid.list .kb{align-content:center}
+.kempty{grid-column:1/-1;background:var(--slab);border:1px dashed var(--line);padding:40px;display:grid;gap:12px;justify-items:start}
+.kempty b{font:800 24px/1.1 var(--display)}
+@media (max-width:1040px){
+  .kat-l{grid-template-columns:1fr}
+  .kf{position:fixed;inset:0;z-index:70;max-height:none;background:var(--concrete);padding:20px var(--pad-r) 96px var(--pad);transform:translateX(-100%);transition:transform .3s ease;visibility:hidden}
+  .kf.open{transform:none;visibility:visible}
+  .kf-done{display:flex;position:sticky;bottom:0;margin-top:20px}
+  .kf-open{display:inline-flex;padding:12px 18px;font-size:15px}
+  .kfound{width:100%;order:3}
+  .kgrid.list .kc{grid-template-columns:120px minmax(0,1fr)}
+  .kgrid.list .kc .ph{min-height:120px}
+}
+
+/* карта на сторінці контактів */
+.mapw{border:1px solid var(--line);background:var(--slab);aspect-ratio:21/8;min-height:320px}
+.mapw iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(.6) contrast(1.05)}
+
 /* прямі кути всюди — як у логотипі, плитці й похилих плашках */
 *,*::before,*::after{border-radius:0!important}
 
@@ -609,17 +717,19 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   html.anim .rv,html.anim .mixer-art img,html.anim .loader{opacity:1;translate:none}
   html.anim #beton .stripes i{transform:skewX(-22deg)}html.anim #tekhnika::before{clip-path:none}}
 </style>
-
+</head>
+<body>
 <header class="top">
   <div class="in">
-    <a class="logo" href="#top"><img src="img/logo.png" alt="ProBeton" width="80" height="48"></a>
-    <nav aria-label="Розділи">
-      <a href="#beton">Бетон</a><a href="#bruk">Бруківка</a><a href="#zbv">ЗБВ</a><a href="#tekhnika">Спецтехніка</a><a href="#about">Про нас</a><a href="#kontakty">Контакти</a>
+    <a class="logo" href="./"><img src="img/logo.png" alt="ProBeton — на головну" width="80" height="48"></a>
+    <nav aria-label="Розділи" id="mnav">
+      <a href="beton/">Бетон</a><a href="bruk/">Бруківка</a><a href="zbv/">ЗБВ</a><a href="tekhnika/">Спецтехніка</a><a href="pro-nas/">Про нас</a><a href="kontakty/">Контакти</a>
     </nav>
     <div class="r">
       <a class="tel" href="tel:+380973151520">097 315 15 20</a>
       <a class="btn btn-or" href="#calc">Прорахувати</a>
     </div>
+    <button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mnav"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
 </header>
 
@@ -632,7 +742,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
       <p class="lead">Бетон від В7,5 до В35, тротуарна плитка, кільця й плити перекриття. Привеземо своєю технікою, подамо насосом і покладемо плитку під ключ.</p>
       <div class="ctas">
         <a class="btn btn-or" href="#calc">Прорахувати замовлення <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-line" href="#bruk">Каталог плитки</a>
+        <a class="btn btn-line" href="bruk/">Каталог плитки</a>
       </div>
       <div class="trust"><span>Сертифікати якості на продукцію</span><span>Свій автопарк</span><span>Передзвонимо за 5 хвилин</span></div>
     </div>
@@ -682,30 +792,17 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   </div></div>
 </section>
 
-<!-- БЕТОН -->
-<section class="band" id="beton">  <div class="in">
-    <div class="band-head"><div><span class="eyebrow">Бетон</span><h2>Який бетон? <span class="slant"><span>Якісний</span></span></h2><p class="lead">Сім марок — від стяжки до перекриття. Привеземо міксером і подамо насосом.</p></div>
-      <div class="mixer-art" aria-hidden="true"><img src="img/betonozmishuvach.webp" alt="" width="1200" height="740"></div></div>
-    <div class="beton">
-      <div class="grades">
-        <span class="lbl" style="font:700 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)">Оберіть марку</span>
-        <div class="gscale" id="gscale"></div>
-        <div class="gout">
-          <div class="big num" id="gbig">В25</div>
-          <div><h3 id="gname"></h3><p id="gtext"></p><small>Яку марку брати під ваш проєкт — підкаже менеджер</small></div>
-        </div>
-        <a class="btn btn-or" href="#calc" style="justify-self:start" id="gcta">Прорахувати В25</a>
-      </div>
-      <div class="side">
-        <div class="feat or">
-          <svg viewBox="0 0 54 36" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"><rect x="2" y="16" width="30" height="12" rx="2"/><path d="M32 28V18h10l9 7v3z"/><circle cx="12" cy="30" r="4" fill="#F46322"/><circle cx="42" cy="30" r="4" fill="#F46322"/><path d="M8 16V6h18l8 10"/></svg>
-          <h3>Подача бетононасосом</h3><p>Туди, куди міксер не під'їде: за паркан, на поверх, у котлован.</p>
-        </div>
-        <div class="feat sl">
-          <svg viewBox="0 0 54 36" fill="none" stroke="#F46322" stroke-width="2.2" stroke-linejoin="round"><ellipse cx="18" cy="17" rx="14" ry="9"/><path d="M32 28V14h10l9 8v6z"/><circle cx="12" cy="30" r="4" fill="#F4F4F1"/><circle cx="42" cy="30" r="4" fill="#F4F4F1"/><path d="M4 26h28"/></svg>
-          <h3>Доставка міксером</h3><p>У будь-яку точку Києва та Київської області. Співпрацюємо з заводами Києва й області понад п'ять років.</p>
-        </div>
-      </div>
+<!-- КАТЕГОРІЇ (головна) -->
+<section class="band cats" id="cats">
+  <div class="in">
+    <div class="band-head"><div><span class="eyebrow">Каталог</span><h2>Один клік <span class="slant"><span>до товару</span></span></h2></div><a class="btn btn-line" href="bruk/">Увесь каталог</a></div>
+    <div class="catg">
+      <a class="catc" href="beton/"><i class="advi"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg></i><span class="arr" aria-hidden="true">↗</span><h3>Бетон</h3><p>Марки В7,5–В35, доставка міксером і подача насосом</p><em>7 марок</em></a>
+      <a class="catc" href="bruk/"><i class="advi"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg></i><span class="arr" aria-hidden="true">↗</span><h3>Тротуарна плитка</h3><p>Лайнстоун, Подвійна «Т», Старе місто, бруківка</p><em data-cnt="Лайнстоун|Подвійна Т|Старе місто|Бруківка"></em></a>
+      <a class="catc" href="bruk/#cat=Бордюри%20й%20борти,Лотки"><i class="advi"><svg viewBox="0 0 24 24"><path d="M3 17h18M5 17V9h14v8M8 9V6h8v3"/></svg></i><span class="arr" aria-hidden="true">↗</span><h3>Бордюри й лотки</h3><p>Бордюри паркові, борти дорожні, водовідвідні лотки</p><em data-cnt="Бордюри й борти|Лотки"></em></a>
+      <a class="catc" href="zbv/"><i class="advi"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/></svg></i><span class="arr" aria-hidden="true">↗</span><h3>Залізобетонні вироби</h3><p>Кільця, плити перекриття, балки — з доставкою краном</p><em>3 види</em></a>
+      <a class="catc" href="tekhnika/"><i class="advi"><svg viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 9h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></i><span class="arr" aria-hidden="true">↗</span><h3>Спецтехніка</h3><p>Бетононасос, кран-маніпулятор, самоскид, екскаватор</p><em>Свій автопарк</em></a>
+      <a class="catc hot" href="#kontakty"><i class="advi"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></i><span class="arr" aria-hidden="true">↗</span><h3>Не знайшли потрібне?</h3><p>Подзвоніть або залиште заявку — менеджер передзвонить за 5 хвилин і підбере</p><em>097 315 15 20</em></a>
     </div>
   </div>
 </section>
@@ -713,35 +810,43 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 <!-- АКЦІЇ -->
 <section class="band" id="akcii" style="padding-top:0">
   <div class="in">
-    <div class="band-head"><div><span class="eyebrow">Акційні пропозиції</span><h2>Вигідно <span class="slant or"><span>цього тижня</span></span></h2></div><a class="btn btn-line" href="#bruk">Увесь каталог</a></div>
+    <div class="band-head"><div><span class="eyebrow">Акційні пропозиції</span><h2>Вигідно <span class="slant or"><span>цього тижня</span></span></h2></div><a class="btn btn-line" href="bruk/">Увесь каталог</a></div>
     <div class="promo" id="promo"></div>
     <p class="foot-note">Ціни — з чинного прайсу ПроБетон. Акційні знижки й терміни внесемо, щойно їх надасть менеджер.</p>
   </div>
 </section>
 
-<!-- БРУКІВКА -->
-<section class="band" id="bruk" style="padding-top:0">
+<!-- ПЕРЕВАГИ -->
+<section class="band" id="perevagy">
   <div class="in">
-    <div class="band-head"><div><span class="eyebrow">Бруківка Ковальська</span><h2>Оберіть колір — <span class="slant"><span>побачите двір</span></span></h2></div><a class="btn btn-line" href="#calc">Укладання під ключ</a></div>
+    <div class="partners-head"><span class="eyebrow">Переваги</span><h2>Чому обирають <span class="slant or"><span>ПроБетон</span></span></h2><p class="lead">Шість причин, чому забудовники й&nbsp;приватні замовники працюють з&nbsp;нами.</p></div>
+    <div class="adv">
+      <article class="advc"><i class="advi"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 13l2 2 4-4"/></svg></i><div><small class="num">01</small><h3>Сертифікати якості</h3><p>На всю продукцію, яку ми доставляємо, є&nbsp;сертифікати якості.</p></div></article>
+      <article class="advc"><i class="advi"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg></i><div><small class="num">02</small><h3>Бетон В7,5–В35</h3><p>Сім марок — від стяжки до&nbsp;перекриття. Підкажемо, яку брати під ваш проєкт.</p></div></article>
+      <article class="advc"><i class="advi"><svg viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 9h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></i><div><small class="num">03</small><h3>Свій автопарк</h3><p>Міксери, бетононасос, кран-маніпулятор і&nbsp;самоскид — не залежимо від чужої техніки.</p></div></article>
+      <article class="advc"><i class="advi"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg></i><div><small class="num">04</small><h3>Дилер Ковальської</h3><p>Тротуарна плитка й&nbsp;бордюри заводу Ковальська — з&nbsp;доставкою на&nbsp;об'єкт.</p></div></article>
+      <article class="advc"><i class="advi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></i><div><small class="num">05</small><h3>Передзвонимо за&nbsp;5&nbsp;хвилин</h3><p>Прорахуємо замовлення разом із&nbsp;доставкою й&nbsp;технікою під ваш об'єкт.</p></div></article>
+      <article class="advc"><i class="advi"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v10H3z"/><path d="M9 21v-6h6v6"/></svg></i><div><small class="num">06</small><h3>Під ключ</h3><p>Подамо бетон насосом, привеземо краном, покладемо бруківку.</p></div></article>
+    </div>
+  </div>
+</section>
 
-    <div class="show">
-      <div class="pave" id="pave" role="img" aria-label="Візуалізація укладеної плитки Лайнстоун"><img id="pimg" src="img/ls-terra.webp" alt="Лайнстоун 20, колір терра"><span class="lab" id="plab">Лайнстоун · терра</span></div>
-      <div class="info">
-        <div class="msel" id="msel" role="group" aria-label="Модель бруківки"></div>
-        <span class="lbl" id="mlbl" style="font:700 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)">Хіт продажів</span>
-        <h3 id="mname">Лайнстоун 20</h3>
-        <p id="mtext">Комплекти бруківки різних розмірів в одній палеті. Сім кольорів, дві висоти.</p>
-        <div class="sws" id="sws"></div>
-        <div class="cname">Колір: <b id="cname">терра</b></div>
-        <div class="hsel" id="hsel" role="group" aria-label="Висота"><button type="button" aria-pressed="true" data-p="813" id="h-std">стандарт</button><button type="button" aria-pressed="false" data-p="870" id="h-60">h60</button></div>
-        <div class="price"><b class="num" id="pprice">813 ₴</b><span>ціна з прайсу<br>одиниця — уточнюється</span></div>
-        <a class="btn btn-or" href="#calc" style="justify-self:start">Прорахувати мій двір</a>
+<!-- ЯК ПРАЦЮЄМО -->
+<section class="band photo" id="flow">
+  <div class="in">
+    <div class="band-head"><div><span class="eyebrow">Як ми працюємо</span><h2>Від дзвінка до <span class="slant or"><span>готового двору</span></span></h2></div></div>
+    <div class="stp" id="stp">
+      <div class="stp-tabs" role="tablist" aria-label="Кроки роботи">
+        <button class="stp-tab on" role="tab" aria-selected="true" data-i="0"><i class="stp-ic"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></i><span><small>Крок 01</small><b>Заявка</b></span></button>
+        <button class="stp-tab" role="tab" aria-selected="false" data-i="1"><i class="stp-ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg></i><span><small>Крок 02</small><b>Прорахунок</b></span></button>
+        <button class="stp-tab" role="tab" aria-selected="false" data-i="2"><i class="stp-ic"><svg viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 9h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></i><span><small>Крок 03</small><b>Доставка</b></span></button>
+        <button class="stp-tab" role="tab" aria-selected="false" data-i="3"><i class="stp-ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></i><span><small>Крок 04</small><b>Монтаж</b></span></button>
+      </div>
+      <div class="stp-panel" role="tabpanel" aria-live="polite">
+        <div class="stp-side"><b class="stp-n num" id="stpN">01</b><i class="stp-ic big" id="stpIc"></i><small>Головне</small><span id="stpK">5 хвилин на дзвінок</span></div>
+        <div class="stp-body"><h3 id="stpT">Заявка</h3><p id="stpP"></p><ul class="stp-ok" id="stpOk"></ul></div>
       </div>
     </div>
-
-    <div class="filters" id="filters" role="group" aria-label="Категорії"></div>
-    <div class="grid" id="grid"></div>
-    <p class="foot-note">Від 100 м² — безкоштовна доставка (умови акції уточнюйте в менеджера). Ціни — з чинного прайсу ПроБетон.</p>
   </div>
 </section>
 
@@ -792,122 +897,6 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   </div>
 </section>
 
-<!-- ЗБВ -->
-<section class="band" id="zbv" style="padding-top:0">
-  <div class="in">
-    <div class="band-head"><div><span class="eyebrow">Залізобетонні вироби</span><h2>Кільця, плити, балки — з&nbsp;доставкою <span class="slant or"><span>краном</span></span></h2></div></div>
-    <div class="zbv">
-      <div class="zb">
-        <svg viewBox="0 0 200 120" fill="none" stroke="#141517" stroke-width="2"><ellipse cx="100" cy="30" rx="60" ry="16" fill="#CFD0CB"/><ellipse cx="100" cy="30" rx="46" ry="11" fill="#E4E5E1"/><path d="M40 30v60c0 9 27 16 60 16s60-7 60-16V30" fill="#BDBEB9"/><path d="M40 60c0 9 27 16 60 16s60-7 60-16" stroke-dasharray="4 4"/></svg>
-        <h3>Бетонні кільця</h3><p>Для колодязів і септиків. Розміри й ціну — у менеджера.</p>
-      </div>
-      <div class="zb">
-        <svg viewBox="0 0 200 120" fill="none" stroke="#141517" stroke-width="2"><path d="M20 70 140 40l40 14-120 32z" fill="#CFD0CB"/><path d="M20 70v14l40 16V86z" fill="#9FA19C"/><path d="M60 86v14l120-32V54z" fill="#BDBEB9"/><g fill="#E4E5E1"><ellipse cx="74" cy="92" rx="5" ry="3"/><ellipse cx="96" cy="86" rx="5" ry="3"/><ellipse cx="118" cy="80" rx="5" ry="3"/><ellipse cx="140" cy="74" rx="5" ry="3"/><ellipse cx="162" cy="68" rx="5" ry="3"/></g></svg>
-        <h3>Плити перекриття</h3><p>Привеземо й подамо краном-маніпулятором на об'єкт.</p>
-      </div>
-      <div class="zb">
-        <svg viewBox="0 0 200 120" fill="none" stroke="#141517" stroke-width="2"><path d="M14 64 170 34l16 6L30 70z" fill="#CFD0CB"/><path d="M14 64v12l16 6V70z" fill="#9FA19C"/><path d="M30 70v12l156-36v-6z" fill="#BDBEB9"/><path d="M24 86 180 56l10 4L34 90z" fill="#CFD0CB" opacity=".6"/></svg>
-        <h3>Балки</h3><p>Під ваш проєкт. Зателефонуйте — прорахуємо з доставкою.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ТЕХНІКА -->
-<section class="band dark" id="tekhnika">
-  <div class="in">
-    <img class="loader" src="img/navantazhuvach.png" alt="" aria-hidden="true" width="691" height="418">
-    <div class="band-head tech-head"><div><span class="eyebrow">Свій автопарк</span><h2>Спецтехніка <span class="slant"><span>на ваш об'єкт</span></span></h2><p class="lead">Оренда й подача техніки в будь-яку точку Києва та Київської області.</p>
-      <div class="tech-cta"><a class="btn btn-line" href="#kontakty">Замовити на дату</a>
-        <a class="mgr" href="tel:+380932504041"><i class="mgr-ph" aria-hidden="true"></i><span><small>Відділ продажу · Павло Яковенко</small><b>+380 93 250 40 41</b><em>Дзвоніть, щоб дізнатись умови для вашого об'єкта</em></span></a></div></div></div>
-    <div class="fleet">
-      <div class="mach hl">
-        <svg viewBox="0 0 84 52" fill="none" stroke="#F46322" stroke-width="2.4" stroke-linejoin="round"><rect x="3" y="26" width="44" height="14" rx="2"/><path d="M47 40V28h16l14 10v2z"/><circle cx="16" cy="43" r="6" fill="currentColor"/><circle cx="64" cy="43" r="6" fill="currentColor"/><path d="M12 26 30 6h24l10 10"/><path d="M64 16v10"/></svg>
-        <h3>Бетононасос</h3><p>Подача бетону в найменш доступні місця, висока продуктивність.</p><a href="#calc">Прорахувати →</a>
-      </div>
-      <div class="mach">
-        <svg viewBox="0 0 84 52" fill="none" stroke="#F46322" stroke-width="2.4" stroke-linejoin="round"><rect x="3" y="28" width="42" height="12" rx="2"/><path d="M45 40V28h16l14 10v2z"/><circle cx="16" cy="43" r="6"/><circle cx="62" cy="43" r="6"/><path d="M22 28 40 6h18M58 6v12"/><path d="M54 18h8v5h-8z"/></svg>
-        <h3>Кран-маніпулятор</h3><p>Швидка доставка й точне вивантаження: кільця, плити, піддони плитки.</p><a href="#kontakty">Замовити →</a>
-      </div>
-      <div class="mach">
-        <svg viewBox="0 0 84 52" fill="none" stroke="#F46322" stroke-width="2.4" stroke-linejoin="round"><path d="M3 36 10 14h34l4 22z"/><path d="M48 40V22h13l14 12v6z"/><circle cx="16" cy="43" r="6"/><circle cx="62" cy="43" r="6"/></svg>
-        <h3>Самоскид</h3><p>Велика вантажопідйомність для будівництва й перевезень.</p><a href="#kontakty">Замовити →</a>
-      </div>
-      <div class="mach">
-        <svg viewBox="0 0 84 52" fill="none" stroke="#F46322" stroke-width="2.4" stroke-linejoin="round"><rect x="6" y="34" width="38" height="10" rx="5"/><path d="M14 34V22h20v12"/><path d="M34 22 56 8l14 18"/><path d="M70 26v14l-4 4"/></svg>
-        <h3>Екскаватор і гідромолот</h3><p>Земляні роботи й демонтаж: швидко та з точністю.</p><a href="#kontakty">Замовити →</a>
-      </div>
-      <div class="mach">
-        <svg viewBox="0 0 84 52" fill="none" stroke="#F46322" stroke-width="2.4" stroke-linejoin="round"><path d="M6 40h72"/><path d="M10 40V28h18v12M32 40V22h18v18M54 40V30h18v10"/></svg>
-        <h3>Доставка ЗБВ</h3><p>Кільця, балки, плити перекриття — пунктуально й з гарантією якості.</p><a href="#zbv">Що возимо →</a>
-      </div>
-      <div class="mach">
-        <svg viewBox="0 0 84 52" fill="none" stroke="#F46322" stroke-width="2.4" stroke-linejoin="round"><path d="M4 44h76"/><path d="M8 36h16v8H8zM26 36h22v8H26zM50 36h12v8H50zM64 36h16v8H64zM8 28h24v8H8zM34 28h14v8H34zM50 28h22v8H50z"/></svg>
-        <h3>Укладання плитки</h3><p>Від продажу й доставки до готової бруківки на вашому об'єкті.</p><a href="#bruk">Обрати плитку →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ПЕРЕВАГИ -->
-<section class="band" id="perevagy">
-  <div class="in">
-    <div class="partners-head"><span class="eyebrow">Переваги</span><h2>Чому обирають <span class="slant or"><span>ПроБетон</span></span></h2><p class="lead">Шість причин, чому забудовники й&nbsp;приватні замовники працюють з&nbsp;нами.</p></div>
-    <div class="adv">
-      <article class="advc"><i class="advi"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 13l2 2 4-4"/></svg></i><div><small class="num">01</small><h3>Сертифікати якості</h3><p>На всю продукцію, яку ми доставляємо, є&nbsp;сертифікати якості.</p></div></article>
-      <article class="advc"><i class="advi"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg></i><div><small class="num">02</small><h3>Бетон В7,5–В35</h3><p>Сім марок — від стяжки до&nbsp;перекриття. Підкажемо, яку брати під ваш проєкт.</p></div></article>
-      <article class="advc"><i class="advi"><svg viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 9h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></i><div><small class="num">03</small><h3>Свій автопарк</h3><p>Міксери, бетононасос, кран-маніпулятор і&nbsp;самоскид — не залежимо від чужої техніки.</p></div></article>
-      <article class="advc"><i class="advi"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg></i><div><small class="num">04</small><h3>Дилер Ковальської</h3><p>Тротуарна плитка й&nbsp;бордюри заводу Ковальська — з&nbsp;доставкою на&nbsp;об'єкт.</p></div></article>
-      <article class="advc"><i class="advi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></i><div><small class="num">05</small><h3>Передзвонимо за&nbsp;5&nbsp;хвилин</h3><p>Прорахуємо замовлення разом із&nbsp;доставкою й&nbsp;технікою під ваш об'єкт.</p></div></article>
-      <article class="advc"><i class="advi"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v10H3z"/><path d="M9 21v-6h6v6"/></svg></i><div><small class="num">06</small><h3>Під ключ</h3><p>Подамо бетон насосом, привеземо краном, покладемо бруківку.</p></div></article>
-    </div>
-  </div>
-</section>
-
-<!-- ЯК ПРАЦЮЄМО -->
-<section class="band photo" id="flow">
-  <div class="in">
-    <div class="band-head"><div><span class="eyebrow">Як ми працюємо</span><h2>Від дзвінка до <span class="slant or"><span>готового двору</span></span></h2></div></div>
-    <div class="stp" id="stp">
-      <div class="stp-tabs" role="tablist" aria-label="Кроки роботи">
-        <button class="stp-tab on" role="tab" aria-selected="true" data-i="0"><i class="stp-ic"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></i><span><small>Крок 01</small><b>Заявка</b></span></button>
-        <button class="stp-tab" role="tab" aria-selected="false" data-i="1"><i class="stp-ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg></i><span><small>Крок 02</small><b>Прорахунок</b></span></button>
-        <button class="stp-tab" role="tab" aria-selected="false" data-i="2"><i class="stp-ic"><svg viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 9h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></i><span><small>Крок 03</small><b>Доставка</b></span></button>
-        <button class="stp-tab" role="tab" aria-selected="false" data-i="3"><i class="stp-ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></i><span><small>Крок 04</small><b>Монтаж</b></span></button>
-      </div>
-      <div class="stp-panel" role="tabpanel" aria-live="polite">
-        <div class="stp-side"><b class="stp-n num" id="stpN">01</b><i class="stp-ic big" id="stpIc"></i><small>Головне</small><span id="stpK">5 хвилин на дзвінок</span></div>
-        <div class="stp-body"><h3 id="stpT">Заявка</h3><p id="stpP"></p><ul class="stp-ok" id="stpOk"></ul></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ПРО НАС -->
-<section class="band" id="about">
-  <div class="in">
-    <div class="band-head"><div><span class="eyebrow">Про нас</span><h2>Починали з&nbsp;<span class="slant"><span>кількох міксерів</span></span></h2></div></div>
-    <div class="about">
-      <div class="story">
-        <p>Ми стартували як маленька компанія, що мала лише декілька автобетонозмішувачів, і зі співпраці із заводом Ковальська.</p>
-        <p>Зараз у нас свій автопарк спецтехніки, дилерські пропозиції від заводів-виробників і команда менеджерів, яка контролює весь процес — від замовлення до отримання продукції.</p>
-        <p>На всю продукцію, яку ми доставляємо, є сертифікати якості.</p>
-      </div>
-      <div class="team">
-        <figure class="person" tabindex="0"><img src="img/team-oleksandr.webp" alt="Олександр Кулаков" loading="lazy"><img class="c" src="img/team-oleksandr-color.webp" alt="" loading="lazy"><figcaption><b>Олександр Кулаков</b><span>Директор компанії</span></figcaption></figure>
-        <figure class="person" tabindex="0"><img src="img/team-pavlo.webp" alt="Павло Яковенко" loading="lazy"><img class="c" src="img/team-pavlo-color.webp" alt="" loading="lazy"><figcaption><b>Павло Яковенко</b><span>Керівник відділу продажу</span></figcaption></figure>
-        <figure class="person" tabindex="0"><img src="img/team-serhii.webp" alt="Сергій Кочнов" loading="lazy"><img class="c" src="img/team-serhii-color.webp" alt="" loading="lazy"><figcaption><b>Сергій Кочнов</b><span>Керівник транспортного відділу</span></figcaption></figure>
-      </div>
-    </div>
-    <div class="objs">
-      <div class="obj"><span><b>Фото об'єкта</b>Район · матеріал · м²</span></div>
-      <div class="obj"><span><b>Фото об'єкта</b>Район · матеріал · м²</span></div>
-      <div class="obj"><span><b>Фото об'єкта</b>Район · матеріал · м²</span></div>
-      <div class="obj"><span><b>Фото об'єкта</b>Район · матеріал · м²</span></div>
-    </div>
-  </div>
-</section>
-
 <!-- КОНТАКТИ -->
 <section class="band dark" id="kontakty">
   <div class="in contact">
@@ -940,7 +929,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 </section>
 </main>
 
-<footer><div class="in"><span>© ПроБетон, Київ</span><span>Бетон · Бруківка · ЗБВ · Спецтехніка</span><span>Концепт редизайну, 2026</span></div></footer>
+<footer><div class="in"><span>© ПроБетон, Київ</span><nav class="fnav" aria-label="Сторінки сайту"><a href="./">Головна</a><a href="beton/">Бетон</a><a href="bruk/">Бруківка</a><a href="zbv/">ЗБВ</a><a href="tekhnika/">Спецтехніка</a><a href="pro-nas/">Про нас</a><a href="kontakty/">Контакти</a></nav><span>Концепт редизайну, 2026</span></div></footer>
 
 <!-- Зворотний дзвінок у зазначений час -->
 <button class="cb-fab" id="cbOpen" type="button" aria-label="Замовити зворотний дзвінок"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></button>
@@ -982,7 +971,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
     beton:{label:"Марка бетону",items:["В7,5","В10","В15","В20","В25","В30","В35"],def:4,unit:"м³",max:60,val:12,extra:"Потрібен бетононасос",short:"насос"},
     bruk:{label:"Модель плитки",items:["Лайнстоун","Старе місто","Подвійна Т","Сіті","Фалка"],def:0,unit:"м²",max:500,val:120,extra:"Потрібне укладання",short:"укладання"}
   };
-  let mode="beton",pick=4;
+  var mode="beton",pick=4;
   function drawCalc(){
     const k=K[mode];$("l-kind").textContent=k.label;$("kinds").innerHTML="";
     k.items.forEach((t,i)=>{const b=document.createElement("button");b.type="button";b.className="chip";b.textContent=t;b.setAttribute("aria-pressed",i===pick);b.onclick=()=>{pick=i;drawCalc()};$("kinds").appendChild(b)});
@@ -990,12 +979,15 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   }
   function sum(){const k=K[mode],v=$("vol").value;$("volout").textContent=v+NB+k.unit;
     $("sum").textContent="Ваш запит: "+k.items[pick]+" · "+v+NB+k.unit+($("extra").checked?" · "+k.short:"");}
-  document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{mode=t.dataset.mode;pick=K[mode].def;
-    document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x===t));$("vol").value=K[mode].val;drawCalc();});
+  // кожен блок запускаємо, лише якщо він є на цій сторінці
+  if($("calc")){
+  document.querySelectorAll("#calc .tab").forEach(t=>t.onclick=()=>{mode=t.dataset.mode;pick=K[mode].def;
+    document.querySelectorAll("#calc .tab").forEach(x=>x.setAttribute("aria-selected",x===t));$("vol").value=K[mode].val;drawCalc();});
   $("vol").oninput=sum;$("extra").onchange=sum;
   $("calc").addEventListener("submit",e=>{e.preventDefault();$("ok").hidden=false});
-  $("form2").addEventListener("submit",e=>{e.preventDefault();$("ok2").hidden=false});
   drawCalc();
+  }
+  if($("form2"))$("form2").addEventListener("submit",e=>{e.preventDefault();$("ok2").hidden=false});
 
   /* ---- шкала марок ---- */
   const G=[
@@ -1007,12 +999,18 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
     ["В30","Високе навантаження","Монолітні каркаси, мостові конструкції, басейни."],
     ["В35","Спецоб'єкти","Конструкції з особливими вимогами до міцності."]
   ];
-  let gi=4;
+  var gi=4;
   function drawG(){$("gscale").innerHTML="";G.forEach((g,i)=>{const b=document.createElement("button");b.type="button";b.className="g";b.setAttribute("aria-pressed",i===gi);
       b.innerHTML='<i style="height:'+(10+i*7)+'px"></i>'+g[0];b.onclick=()=>{gi=i;drawG()};$("gscale").appendChild(b)});
     $("gbig").textContent=G[gi][0];$("gname").textContent=G[gi][1];$("gtext").textContent=G[gi][2];$("gcta").textContent="Прорахувати "+G[gi][0];}
-  $("gcta").addEventListener("click",()=>{document.querySelector('#t-beton').click();pick=gi;drawCalc()});
+  if($("gscale")){
+  $("gcta").addEventListener("click",e=>{
+    if($("calc")){document.querySelector('#t-beton').click();pick=gi;drawCalc();return}
+    // на сторінці «Бетон» — відкриваємо калькулятор бетону з вибраною маркою
+    if($("calc2")){e.preventDefault();$("k-conc").click();$("c-grade").value=G[gi][0];$("calc2").dispatchEvent(new Event("change"));$("calc2").scrollIntoView({behavior:"smooth"})}
+  });
   drawG();
+  }
 
   /* ---- «Побачите двір»: моделі, кольори й ціни — з каталогу й прайсу probeton.com.ua ----
      c: [колір, файл, ціна]; ціна null — береться з перемикача висоти (лише Лайнстоун).
@@ -1027,6 +1025,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
     {n:"Бруківка 200×100×40",lb:"Класика",d:"Прямокутна бруківка 200×100×40 мм.",z:1.3,
       c:[["сірий","bruk-siryi",612]]}
   ];
+  if($("pave")){
   const pimg=$("pimg"),pave=$("pave");let mi=0,ci=0;
   M.forEach(m=>m.c.forEach(c=>{const i=new Image();i.src="img/"+c[1]+".webp"}));
   const hPrice=()=>document.querySelector("#hsel [aria-pressed='true']").dataset.p;
@@ -1051,12 +1050,15 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   M.forEach((m,k)=>{const b=document.createElement("button");b.type="button";b.textContent=m.lb==="Хіт продажів"?"Лайнстоун":m.lb;b.onclick=()=>setModel(k,true);$("msel").appendChild(b)});
   document.querySelectorAll("#hsel button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#hsel button").forEach(x=>x.setAttribute("aria-pressed",x===b));$("pprice").textContent=b.dataset.p+NB+"₴"});
   setModel(0,false);
+  }
 
   /* ---- каталог: позиції й ціни з прайсу probeton.com.ua ---- */
   // назви, ціни й фото — з карток товарів на probeton.com.ua (29.10.2026)
-  const P=[
-    {cat:"Лайнстоун",name:"Лайнстоун 20",dims:"терра · порто · палермо · нуар…",price:813,from:true,img:"ls-palermo.webp"},
-    {cat:"Лайнстоун",name:"Лайнстоун 20 h60",dims:"висота 60 мм",price:870,from:true,img:"ls-porto.webp"},
+  // col — кольори, у яких є позиція; Лайнстоун продається в усіх семи
+  const LSC=["терра","порто","палермо","платина","гранат","еверест","нуар"];
+  var P=[
+    {cat:"Лайнстоун",name:"Лайнстоун 20",dims:"7 кольорів · стандарт",col:LSC,price:813,from:true,img:"ls-palermo.webp"},
+    {cat:"Лайнстоун",name:"Лайнстоун 20 h60",dims:"7 кольорів · висота 60 мм",col:LSC,price:870,from:true,img:"ls-porto.webp"},
     {cat:"Подвійна Т",name:"Подвійна «Т» 80",dims:"сірий",price:855,img:"pt-siryi.webp"},
     {cat:"Подвійна Т",name:"Подвійна «Т» 80 без фаски",dims:"вишня",price:951,img:"pt-vyshnia.webp"},
     {cat:"Подвійна Т",name:"Подвійна «Т» 80",dims:"перлина",price:1134,img:"pt-perlyna.webp"},
@@ -1071,31 +1073,88 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
     {cat:"Бордюри й борти",name:"Борт дорожній 1000×180×300",dims:"сірий",price:597,img:"bort.webp",fit:1},
     {cat:"Лотки",name:"Лоток водовідвідний",dims:"сірий",price:240,img:"lotok.webp",fit:1}
   ];
-  const cats=["Усі","Лайнстоун","Подвійна Т","Старе місто","Бруківка","Бордюри й борти","Лотки"];let cat="Усі";
-  function drawCat(){
-    $("filters").innerHTML="";cats.forEach(c=>{const b=document.createElement("button");b.type="button";b.className="fl";b.textContent=c;b.setAttribute("aria-pressed",c===cat);b.onclick=()=>{cat=c;drawCat()};$("filters").appendChild(b)});
-    $("grid").innerHTML="";P.filter(p=>cat==="Усі"||p.cat===cat).forEach(p=>{
-      const d=document.createElement("article");d.className="card";
-      d.innerHTML='<div class="ph'+(p.fit?' fit':'')+'"><img src="img/'+p.img+'" alt="'+p.name+', '+p.dims+'" loading="lazy"></div><span class="dims">'+p.dims+'</span><h4>'+p.name+'</h4>'+
-        '<div class="bot"><b class="num">'+(p.from?"від"+NB:"")+p.price+NB+'₴</b><a class="add" href="#calc" aria-label="Прорахувати '+p.name+'" style="display:grid;place-items:center;text-decoration:none">+</a></div>';
-      $("grid").appendChild(d)});
-    tidy($("grid"));
-  }
-  drawCat();
-
-  tidy(document.body);
-
-  /* ---- акції: товари з прайсу; old — стара ціна, з'явиться, коли менеджер дасть знижку ---- */
-  const PR=[
+  P.forEach((p,i)=>{p.i=i;p.col=p.col||[p.dims];p.n=parseFloat(String(p.price).replace(",","."))});
+  // акційні позиції — потрапляють і в блок «Вигідно цього тижня», і на картки каталогу з позначкою
+  var PR=[
     {name:"Лайнстоун 20 h60",sub:"висота 60 мм · 7 кольорів",price:"від 870",old:null,img:"ls-porto.webp"},
     {name:"Старе місто 40",sub:"сірий",price:"612",old:null,img:"sm-siryi.webp"},
     {name:"Бордюр парковий",sub:"500×60×200 · сірий",price:"116,4",old:null,img:"bordyur-siryi.webp",fit:1}
   ];
+  const isPromo=p=>PR.some(r=>r.img===p.img);
+
+  /* ---- головна: лічильники в картках категорій ---- */
+  document.querySelectorAll("[data-cnt]").forEach(el=>{const cs=el.dataset.cnt.split("|");const n=P.filter(p=>cs.includes(p.cat)).length;
+    el.textContent=n+NB+(n%10===1&&n%100!==11?"позиція":n%10>=2&&n%10<=4&&(n%100<10||n%100>=20)?"позиції":"позицій")});
+
+  /* ---- каталог з фільтрами (сторінка «Плитка й бруківка») ---- */
+  if($("kgrid")){
+    const CATS=["Лайнстоун","Подвійна Т","Старе місто","Бруківка","Бордюри й борти","Лотки"];
+    // фото для кружечка кольору — справжня плитка цього кольору з каталогу
+    const SW={терра:"ls-terra",порто:"ls-porto",палермо:"ls-palermo",платина:"ls-platyna",гранат:"ls-granat",еверест:"ls-everest",нуар:"ls-nuar",
+      сірий:"bruk-siryi",графіт:"sm-hrafit",вишня:"pt-vyshnia",перлина:"pt-perlyna",сахара:"pt-sakhara",малібу:"sm-malibu",еспресо:"sm-espreso"};
+    const COLS=Object.keys(SW).filter(c=>P.some(p=>p.col.includes(c)));
+    const lo=Math.floor(Math.min(...P.map(p=>p.n))),hi=Math.ceil(Math.max(...P.map(p=>p.n)));
+    const st={cat:[],col:[],min:lo,max:hi,sort:"pop",view:"grid"};
+    // стан фільтрів живе в адресі — посиланням на підбірку можна поділитися
+    const readHash=()=>{const h=new URLSearchParams(location.hash.slice(1));
+      st.cat=(h.get("cat")||"").split(",").filter(c=>CATS.includes(c));st.col=(h.get("c")||"").split(",").filter(c=>COLS.includes(c));
+      st.min=+h.get("min")||lo;st.max=+h.get("max")||hi;st.sort=h.get("sort")||"pop"};
+    const writeHash=()=>{const h=new URLSearchParams();if(st.cat.length)h.set("cat",st.cat.join(","));if(st.col.length)h.set("c",st.col.join(","));
+      if(st.min>lo)h.set("min",st.min);if(st.max<hi)h.set("max",st.max);if(st.sort!=="pop")h.set("sort",st.sort);
+      const s=h.toString();history.replaceState(null,"",s?"#"+s:location.pathname+location.search)};
+    const kcat=$("kcat"),kcol=$("kcol"),pmin=$("pmin"),pmax=$("pmax"),rmin=$("rmin"),rmax=$("rmax");
+    kcat.innerHTML=CATS.map(c=>'<label class="kchk"><input type="checkbox" value="'+c+'"><span>'+c+'</span><em class="num">'+P.filter(p=>p.cat===c).length+'</em></label>').join("");
+    kcol.innerHTML=COLS.map(c=>'<button type="button" class="ksw" data-c="'+c+'" title="'+c+'" aria-label="'+c+'" aria-pressed="false" style="background-image:url(img/'+SW[c]+'.webp)"></button>').join("");
+    [rmin,rmax].forEach(r=>{r.min=lo;r.max=hi;r.step=1});pmin.placeholder="від "+lo;pmax.placeholder="до "+hi;
+    function sync(){
+      kcat.querySelectorAll("input").forEach(i=>i.checked=st.cat.includes(i.value));
+      kcol.querySelectorAll(".ksw").forEach(b=>b.setAttribute("aria-pressed",st.col.includes(b.dataset.c)));
+      rmin.value=st.min;rmax.value=st.max;pmin.value=st.min>lo?st.min:"";pmax.value=st.max<hi?st.max:"";
+      const a=(st.min-lo)/(hi-lo)*100,b=(st.max-lo)/(hi-lo)*100;$("rfill").style.left=a+"%";$("rfill").style.right=(100-b)+"%";
+      $("ksort").value=st.sort;
+    }
+    function draw(){
+      let L=P.filter(p=>(!st.cat.length||st.cat.includes(p.cat))&&(!st.col.length||p.col.some(c=>st.col.includes(c)))&&p.n>=st.min&&p.n<=st.max);
+      if(st.sort==="asc")L.sort((a,b)=>a.n-b.n);else if(st.sort==="desc")L.sort((a,b)=>b.n-a.n);else if(st.sort==="az")L.sort((a,b)=>a.name.localeCompare(b.name,"uk"));
+      const n=L.length;$("kfound").innerHTML="Знайдено <b>"+n+"</b> "+(n%10===1&&n%100!==11?"товар":n%10>=2&&n%10<=4&&(n%100<10||n%100>=20)?"товари":"товарів");
+      const act=st.cat.length+st.col.length+(st.min>lo||st.max<hi?1:0);$("kfn").textContent=act?"("+act+")":"";
+      $("kgrid").innerHTML=L.map(p=>{const one=p.col.length===1;
+        return '<article class="card kc"><div class="ph'+(p.fit?' fit':'')+'"><img src="img/'+p.img+'" alt="'+p.name+', '+p.dims+'" loading="lazy">'+(isPromo(p)?'<span class="kbadge">Пропозиція тижня</span>':'')+'</div>'+
+        '<div class="kb"><span class="dims">'+p.cat+'</span><h4>'+p.name+'</h4><p class="kmeta">'+(one?'Колір: <b>'+p.dims+'</b>':'<span class="kdots">'+p.col.map(c=>'<i style="background-image:url(img/'+SW[c]+'.webp)" title="'+c+'"></i>').join("")+'</span>'+p.dims)+'</p>'+
+        '<div class="bot"><b class="num">'+(p.from?"від"+NB:"")+p.price+NB+'₴</b><a class="btn btn-or kgo" href="#calc2">Прорахувати</a></div></div></article>'}).join("")
+        ||'<div class="kempty"><b>Нічого не знайшли</b><p>Спробуйте прибрати частину фільтрів — або подзвоніть, підберемо самі.</p><button type="button" class="btn btn-line" data-reset>Скинути фільтри</button></div>';
+      tidy($("kgrid"));writeHash();
+    }
+    const upd=()=>{sync();draw()};
+    kcat.addEventListener("change",()=>{st.cat=[...kcat.querySelectorAll("input:checked")].map(i=>i.value);upd()});
+    kcol.addEventListener("click",e=>{const b=e.target.closest(".ksw");if(!b)return;const c=b.dataset.c;st.col=st.col.includes(c)?st.col.filter(x=>x!==c):[...st.col,c];upd()});
+    rmin.addEventListener("input",()=>{st.min=Math.min(+rmin.value,st.max);upd()});
+    rmax.addEventListener("input",()=>{st.max=Math.max(+rmax.value,st.min);upd()});
+    pmin.addEventListener("change",()=>{st.min=Math.max(lo,Math.min(+pmin.value||lo,st.max));upd()});
+    pmax.addEventListener("change",()=>{st.max=Math.min(hi,Math.max(+pmax.value||hi,st.min));upd()});
+    $("ksort").addEventListener("change",e=>{st.sort=e.target.value;upd()});
+    const reset=()=>{Object.assign(st,{cat:[],col:[],min:lo,max:hi,sort:"pop"});upd()};
+    document.addEventListener("click",e=>{if(e.target.closest("[data-reset]"))reset()});
+    document.querySelectorAll(".kview button").forEach(b=>b.onclick=()=>{st.view=b.dataset.v;$("kgrid").classList.toggle("list",st.view==="list");
+      document.querySelectorAll(".kview button").forEach(x=>x.setAttribute("aria-pressed",x===b))});
+    // на телефоні фільтри ховаються за кнопкою
+    $("kfOpen").onclick=()=>{const o=$("kf").classList.toggle("open");$("kfOpen").setAttribute("aria-expanded",o)};
+    $("kfDone").onclick=()=>{$("kf").classList.remove("open");$("kfOpen").setAttribute("aria-expanded",false);$("kgrid").scrollIntoView({behavior:"smooth",block:"start"})};
+    addEventListener("hashchange",()=>{readHash();sync();draw()});
+    readHash();upd();
+  }
+
+  tidy(document.body);
+
+  /* ---- акції: товари з прайсу; old — стара ціна, з'явиться, коли менеджер дасть знижку ---- */
+  if($("promo")){
   $("promo").innerHTML=PR.map(p=>'<article class="pcard"><span class="tag">Пропозиція тижня</span><div class="ph'+(p.fit?" fit":"")+'"><img src="img/'+p.img+'" alt="'+p.name+'" loading="lazy"></div><div class="bd"><span>'+p.sub+'</span><h4>'+p.name+'</h4><div class="pr"><b>'+p.price+NB+'₴</b>'+(p.old?'<s>'+p.old+NB+'₴</s>':'')+'</div></div><a class="btn btn-or go" href="#calc2">Прорахувати <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>').join("")
     +'<article class="pcard big"><h4>Від 100 м² — доставка безкоштовно</h4><p>Привеземо своєю технікою по Києву та області. Умови для вашої адреси уточнить менеджер.</p><a class="btn" href="#calc2">Порахувати площу</a></article>';
   tidy($("promo"));
+  }
 
   /* ---- калькулятор плитки й бетону: лише арифметика, ціни — з прайсу ---- */
+  if($("calc2")){
   const TM=P.filter(p=>p.cat!=="Лотки"&&!/Бордюр|Борт/.test(p.name)).map(p=>({label:p.name+" — "+p.dims,price:parseFloat(String(p.price).replace(",","."))}));
   $("t-model").innerHTML=TM.map((m,i)=>'<option value="'+i+'">'+m.label+'</option>').join("");
   const num=v=>Math.max(0,parseFloat(String(v).replace(",","."))||0);
@@ -1122,6 +1181,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   $("calc2").addEventListener("input",calc);$("calc2").addEventListener("change",calc);
   $("calc2").addEventListener("submit",e=>{e.preventDefault();$("f-msg").value=summary;$("kontakty").scrollIntoView({behavior:"smooth"});setTimeout(()=>$("f-name").focus({preventScroll:true}),700)});
   calc();
+  }
 
   /* ---- зворотний дзвінок: день і час, коли зручно ---- */
   const cb=$("cb"),pad=n=>String(n).padStart(2,"0");
@@ -1144,6 +1204,11 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   // один раз за візит пропонуємо дзвінок самі — через 45 секунд на сайті
   setTimeout(()=>{let shown=false;try{shown=sessionStorage.getItem("cbShown")}catch(e){}
     if(!shown&&cb.hidden){openCb();try{sessionStorage.setItem("cbShown","1")}catch(e){}}},45000);
+
+  /* ---- мобільне меню ---- */
+  const bg=document.querySelector(".burger");
+  if(bg){bg.onclick=()=>{const o=document.querySelector(".top").classList.toggle("open");bg.setAttribute("aria-expanded",o)};
+    document.querySelectorAll(".top nav a").forEach(a=>a.addEventListener("click",()=>{document.querySelector(".top").classList.remove("open");bg.setAttribute("aria-expanded",false)}))}
 
   /* ---- перший екран = висота вікна мінус шапка ---- */
   const top=document.querySelector(".top");
@@ -1170,7 +1235,8 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
     const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("seen");io.unobserve(e.target)}}),{threshold:.18,rootMargin:"0px 0px -6% 0px"});
     document.querySelectorAll(".rv,.mixer-art,.loader,#tekhnika,#beton").forEach(el=>io.observe(el));
     // нові картки каталогу після фільтра — одразу видимі
-    new MutationObserver(()=>document.querySelectorAll("#grid .card:not(.rv)").forEach(c=>c.classList.add("rv","seen"))).observe($("grid"),{childList:true});
+    document.querySelectorAll("#kgrid .card").forEach(c=>c.classList.add("seen"));
+    if($("kgrid"))new MutationObserver(()=>document.querySelectorAll("#kgrid .card:not(.rv)").forEach(c=>c.classList.add("rv","seen"))).observe($("kgrid"),{childList:true});
 
     // лічильники в цифрах першого екрана
     const runs=[];
@@ -1218,4 +1284,5 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 })();
 </script>
 
+</body>
 </html>
