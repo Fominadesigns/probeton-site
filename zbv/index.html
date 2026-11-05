@@ -230,7 +230,7 @@ a{color:inherit}
 .card .ph{background:#fff}
 .card .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.22,.61,.36,1)}
 .card .ph.fit img{object-fit:contain;padding:10px}
-.ph.tex{background-repeat:repeat;background-position:center;transition:background-size .8s cubic-bezier(.22,.61,.36,1)}
+.ph.tex{background-repeat:repeat;background-position:center;transition:opacity .25s ease}
 .card:hover .ph img{transform:scale(1.06)}
 .card .dims{font:500 12px/1 var(--mono);color:var(--mut)}
 .card h4{font:700 17px/1.25 var(--body)}
@@ -734,13 +734,31 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 .kb{display:grid;gap:10px;padding:16px 18px 18px;align-content:start}
 .kmeta{font-size:14px;color:var(--mut);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .kmeta b{color:var(--asphalt);text-transform:capitalize}
-.kdots{display:flex;gap:4px}
-.kdots i{width:16px;height:16px;background-size:300%;background-position:center;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.kdots{display:flex;flex-wrap:wrap;gap:6px;width:100%}
+/* квадратики кольорів у картці: натиск — фото плитки в картці міняє колір */
+.kdot{width:26px;height:26px;padding:0;border:0;cursor:pointer;background-size:300%;background-position:center;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15);transition:transform .25s ease,box-shadow .25s ease}
+.kdot:hover{transform:scale(1.1)}
+.kdot[aria-pressed="true"]{box-shadow:0 0 0 2px var(--slab),0 0 0 4px var(--signal)}
 .kgo{padding:11px 16px;font-size:14px}
 .kgrid.list{grid-template-columns:1fr}
 .kgrid.list .kc{grid-template-columns:240px minmax(0,1fr)}
 .kgrid.list .kc .ph{aspect-ratio:auto;height:100%;min-height:170px}
 .kgrid.list .kb{align-content:center}
+/* телефон: по дві картки в ряд, компактніше */
+@media (max-width:640px){
+  .kgrid:not(.list){grid-template-columns:1fr 1fr;gap:10px}
+  .kgrid:not(.list) .kb{padding:10px 10px 12px;gap:6px}
+  .kgrid:not(.list) .kc h4{font-size:14px;line-height:1.25}
+  .kgrid:not(.list) .kc .dims{font-size:11px}
+  .kgrid:not(.list) .kmeta{font-size:12px;gap:6px}
+  .kgrid:not(.list) .kdots{gap:4px}
+  .kgrid:not(.list) .kdot{width:16px;height:16px}
+  .kgrid:not(.list) .kdot[aria-pressed="true"]{box-shadow:0 0 0 1.5px var(--slab),0 0 0 3px var(--signal)}
+  .kgrid:not(.list) .kc .bot{flex-direction:column;align-items:stretch;gap:8px;padding-top:8px}
+  .kgrid:not(.list) .kc .bot b{font-size:17px}
+  .kgrid:not(.list) .kgo{padding:10px 8px;font-size:13px;width:100%}
+  .kgrid:not(.list) .kbadge{left:6px;top:6px;font-size:9px;padding:5px 6px}
+}
 .kempty{grid-column:1/-1;background:var(--slab);border:1px dashed var(--line);padding:40px;display:grid;gap:12px;justify-items:start}
 .kempty b{font:800 24px/1.1 var(--display)}
 @media (max-width:1040px){
@@ -1063,13 +1081,17 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
       const act=st.cat.length+st.col.length+(st.min>lo||st.max<hi?1:0);$("kfn").textContent=act?"("+act+")":"";
       $("kgrid").innerHTML=L.map(p=>{const one=p.col.length===1;
         return '<article class="card kc">'+phOf(p,p.name+', '+p.dims)+(isPromo(p)?'<span class="kbadge">Пропозиція тижня</span>':'')+'</div>'+
-        '<div class="kb"><span class="dims">'+p.cat+'</span><h4>'+p.name+'</h4><p class="kmeta">'+(one?'Колір: <b>'+p.dims+'</b>':'<span class="kdots">'+p.col.map(c=>'<i style="background-image:url(../img/'+SW[c]+'.webp)" title="'+c+'"></i>').join("")+'</span>'+p.dims)+'</p>'+
+        '<div class="kb"><span class="dims">'+p.cat+'</span><h4>'+p.name+'</h4><p class="kmeta">'+(one?'Колір: <b>'+p.dims+'</b>':'<span class="kdots">'+p.col.map(c=>'<button type="button" class="kdot" data-img="'+SW[c]+'" aria-pressed="'+(SW[c]+'.webp'===p.img)+'" title="'+c+'" aria-label="Колір '+c+'" style="background-image:url(../img/'+SW[c]+'.webp)"></button>').join("")+'</span>'+p.dims)+'</p>'+
         '<div class="bot"><b class="num">'+(p.from?"від"+NB:"")+p.price+NB+'₴</b><a class="btn btn-or kgo" href="#kontakty">Прорахувати</a></div></div></article>'}).join("")
         ||'<div class="kempty"><b>Нічого не знайшли</b><p>Спробуйте прибрати частину фільтрів — або подзвоніть, підберемо самі.</p><button type="button" class="btn btn-line" data-reset>Скинути фільтри</button></div>';
       tidy($("kgrid"));writeHash();
     }
     const upd=()=>{sync();draw()};
     kcat.addEventListener("change",()=>{st.cat=[...kcat.querySelectorAll("input:checked")].map(i=>i.value);upd()});
+    // колір у картці: міняємо фото плитки цієї картки
+    $("kgrid").addEventListener("click",e=>{const b=e.target.closest(".kdot");if(!b)return;const card=b.closest(".kc"),ph=card.querySelector(".ph.tex");
+      if(ph){ph.style.opacity=.35;setTimeout(()=>{ph.style.backgroundImage="url(../img/dvir/"+b.dataset.img+".webp)";ph.style.opacity=""},160)}
+      card.querySelectorAll(".kdot").forEach(x=>x.setAttribute("aria-pressed",x===b))});
     kcol.addEventListener("click",e=>{const b=e.target.closest(".ksw");if(!b)return;const c=b.dataset.c;st.col=st.col.includes(c)?st.col.filter(x=>x!==c):[...st.col,c];upd()});
     rmin.addEventListener("input",()=>{st.min=Math.min(+rmin.value,st.max);upd()});
     rmax.addEventListener("input",()=>{st.max=Math.max(+rmax.value,st.min);upd()});
