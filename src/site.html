@@ -83,6 +83,13 @@ a{color:inherit}
 @media (min-width:1041px){.hero .lead br.d{display:inline}.hero .lead{max-width:none}}
 /* головні слова по черзі отримують помаранчеву плашку: бетон → бруківка → техніка */
 .hero h1{isolation:isolate}
+.cyc{isolation:isolate}
+.cyc .w{display:inline-block;position:relative;padding:.02em .2em .1em;margin:0 -.06em;transition:color .4s ease}
+.cyc .w::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--signal);transform:skewX(-10deg) scaleX(0);transform-origin:left center;transition:transform .55s cubic-bezier(.7,0,.2,1)}
+.cyc .w::after{content:"";position:absolute;left:18%;right:-6%;bottom:-.12em;height:.1em;z-index:-1;background:var(--teal);transform:skewX(-10deg) scaleX(0);transform-origin:left center;transition:transform .45s cubic-bezier(.7,0,.2,1)}
+.cyc .w.on::before,.cyc .w.on::after{transform:skewX(-10deg) scaleX(1)}
+.cyc .w.on{color:#fff}.cyc .w.on::after{transition-delay:.25s}
+.photo .cyc .w.on::after{background:var(--teal-lt)}
 .hero h1 .w{display:block;position:relative;width:fit-content;padding:.02em .22em .1em;margin-left:-.22em}
 .hero h1 .w::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--signal);transform:skewX(-10deg) scaleX(0);transform-origin:left center;transition:transform .55s cubic-bezier(.7,0,.2,1)}
 .hero h1 .w::after{content:"";position:absolute;left:18%;right:-6%;bottom:-.12em;height:.1em;z-index:-1;background:var(--teal);transform:skewX(-10deg) scaleX(0);transform-origin:left center;transition:transform .45s cubic-bezier(.7,0,.2,1)}
@@ -760,7 +767,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   <div class="in">
     <div>
       <span class="eyebrow">Дилер заводу Ковальська · Київ і область</span>
-      <h1 id="heroWords"><span class="w on">Бетон.</span> <span class="w">Бруківка.</span> <span class="w">Техніка.</span></h1>
+      <h1 id="heroWords" class="cyc"><span class="w on">Бетон.</span> <span class="w">Бруківка.</span> <span class="w">Техніка.</span></h1>
       <p class="lead">Бетон від В7,5 до В35, тротуарна плитка,<br class="d"> кільця й плити перекриття. Привеземо своєю технікою,<br class="d"> подамо насосом і покладемо плитку під ключ.</p>
       <div class="ctas">
         <a class="btn btn-or" href="#calc">Прорахувати замовлення <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -1030,7 +1037,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 <!-- ПЕРЕВАГИ -->
 <section class="band" id="perevagy">
   <div class="in">
-    <div class="partners-head"><span class="eyebrow">Переваги</span><h2>Чому обирають <span class="slant or"><span>ПроБетон</span></span></h2><p class="lead">Шість причин, чому забудовники й&nbsp;приватні замовники працюють з&nbsp;нами.</p></div>
+    <div class="partners-head"><span class="eyebrow">Переваги</span><h2 class="cyc"><span class="w on">Якісно.</span> <span class="w">Вчасно.</span> <span class="w">Під ключ.</span></h2><p class="lead">Шість причин, чому забудовники й&nbsp;приватні замовники обирають ПроБетон.</p></div>
     <div class="adv">
       <article class="advc"><i class="advi"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 13l2 2 4-4"/></svg></i><div><small class="num">01</small><h3>Сертифікати якості</h3><p>На всю продукцію, яку ми доставляємо, є&nbsp;сертифікати якості.</p></div></article>
       <article class="advc"><i class="advi"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg></i><div><small class="num">02</small><h3>Бетон В7,5–В35</h3><p>Сім марок — від стяжки до&nbsp;перекриття. Підкажемо, яку брати під ваш проєкт.</p></div></article>
@@ -1045,7 +1052,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 <!-- ЯК ПРАЦЮЄМО -->
 <section class="band photo" id="flow">
   <div class="in">
-    <div class="band-head"><div><span class="eyebrow">Як ми працюємо</span><h2>Від дзвінка до <span class="slant or"><span>готового двору</span></span></h2></div></div>
+    <div class="band-head"><div><span class="eyebrow">Як ми працюємо</span><h2 class="cyc" id="stpWords"><span class="w on">Заявка.</span> <span class="w">Прорахунок.</span> <span class="w">Доставка.</span> <span class="w">Монтаж.</span></h2></div></div>
     <div class="stp" id="stp">
       <div class="stp-tabs" role="tablist" aria-label="Кроки роботи">
         <button class="stp-tab on" role="tab" aria-selected="true" data-i="0"><i class="stp-ic"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></i><span><small>Крок 01</small><b>Заявка</b></span></button>
@@ -1401,11 +1408,13 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   setTimeout(()=>{let shown=false;try{shown=sessionStorage.getItem("cbShown")}catch(e){}
     if(!shown&&cb.hidden){openCb();try{sessionStorage.setItem("cbShown","1")}catch(e){}}},45000);
 
-  /* ---- перший екран: плашка переходить бетон → бруківка → техніка ---- */
-  const hw=$("heroWords");
-  if(hw&&!matchMedia("(prefers-reduced-motion:reduce)").matches){
-    const ws=[...hw.querySelectorAll(".w")];let wi=0;
-    setInterval(()=>{if(document.hidden)return;ws[wi].classList.remove("on");wi=(wi+1)%ws.length;ws[wi].classList.add("on")},2600);
+  /* ---- плашка переходить між словами заголовка (перший екран, «Переваги», «Як ми працюємо») ---- */
+  if(!matchMedia("(prefers-reduced-motion:reduce)").matches){
+    document.querySelectorAll(".cyc:not(#stpWords)").forEach(h=>{
+      const ws=[...h.querySelectorAll(".w")];let wi=0,vis=h.id==="heroWords";
+      if(h.id!=="heroWords")new IntersectionObserver(es=>es.forEach(e=>vis=e.isIntersecting)).observe(h);
+      setInterval(()=>{if(document.hidden||!vis)return;ws[wi].classList.remove("on");wi=(wi+1)%ws.length;ws[wi].classList.add("on")},2600);
+    });
   }
 
   /* ---- кнопка «нагору» з прогресом прокрутки ---- */
@@ -1442,7 +1451,10 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
       el.style.setProperty("--d",Math.min(sib.indexOf(el),6)*80+"ms");
     });
     const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("seen");io.unobserve(e.target)}}),{threshold:.18,rootMargin:"0px 0px -6% 0px"});
-    document.querySelectorAll(".rv,.mixer-art,.loader,#tekhnika,#beton").forEach(el=>io.observe(el));
+    document.querySelectorAll(".rv,#tekhnika,#beton").forEach(el=>io.observe(el));
+    // техніка ховається, коли блок іде з екрана, і щоразу виїжджає заново
+    const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>=.25)e.target.classList.add("seen");else if(!e.isIntersecting)e.target.classList.remove("seen")}),{threshold:[0,.25]});
+    document.querySelectorAll(".mixer-art,.loader").forEach(el=>io2.observe(el));
     // нові картки каталогу після фільтра — одразу видимі
     document.querySelectorAll("#kgrid .card").forEach(c=>c.classList.add("seen"));
     if($("kgrid"))new MutationObserver(()=>document.querySelectorAll("#kgrid .card:not(.rv)").forEach(c=>c.classList.add("rv","seen"))).observe($("kgrid"),{childList:true});
@@ -1481,6 +1493,8 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   const fill=i=>{const s=S[i];$("stpN").textContent=String(i+1).padStart(2,"0");$("stpIc").innerHTML=tabs[i].querySelector(".stp-ic").innerHTML;$("stpK").textContent=nb(s.k);$("stpT").textContent=s.t;$("stpP").textContent=nb(s.p);$("stpOk").innerHTML=s.ok.map(x=>"<li>"+nb(x)+"</li>").join("")};
   const show=(i,anim)=>{
     cur=i;tabs.forEach((t,j)=>{const on=j===i;t.classList.toggle("on",on);t.setAttribute("aria-selected",on);t.classList.remove("run")});
+    // слово в заголовку підсвічується разом з активним кроком
+    const sw=document.getElementById("stpWords");if(sw)[...sw.querySelectorAll(".w")].forEach((w,j)=>w.classList.toggle("on",j===i));
     if(auto){void tabs[i].offsetWidth;tabs[i].classList.add("run")}
     if(!anim){fill(i);return}
     panel.classList.add("swap");setTimeout(()=>{fill(i);panel.classList.remove("swap")},220);

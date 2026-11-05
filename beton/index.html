@@ -88,6 +88,13 @@ a{color:inherit}
 @media (min-width:1041px){.hero .lead br.d{display:inline}.hero .lead{max-width:none}}
 /* головні слова по черзі отримують помаранчеву плашку: бетон → бруківка → техніка */
 .hero h1{isolation:isolate}
+.cyc{isolation:isolate}
+.cyc .w{display:inline-block;position:relative;padding:.02em .2em .1em;margin:0 -.06em;transition:color .4s ease}
+.cyc .w::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--signal);transform:skewX(-10deg) scaleX(0);transform-origin:left center;transition:transform .55s cubic-bezier(.7,0,.2,1)}
+.cyc .w::after{content:"";position:absolute;left:18%;right:-6%;bottom:-.12em;height:.1em;z-index:-1;background:var(--teal);transform:skewX(-10deg) scaleX(0);transform-origin:left center;transition:transform .45s cubic-bezier(.7,0,.2,1)}
+.cyc .w.on::before,.cyc .w.on::after{transform:skewX(-10deg) scaleX(1)}
+.cyc .w.on{color:#fff}.cyc .w.on::after{transition-delay:.25s}
+.photo .cyc .w.on::after{background:var(--teal-lt)}
 .hero h1 .w{display:block;position:relative;width:fit-content;padding:.02em .22em .1em;margin-left:-.22em}
 .hero h1 .w::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--signal);transform:skewX(-10deg) scaleX(0);transform-origin:left center;transition:transform .55s cubic-bezier(.7,0,.2,1)}
 .hero h1 .w::after{content:"";position:absolute;left:18%;right:-6%;bottom:-.12em;height:.1em;z-index:-1;background:var(--teal);transform:skewX(-10deg) scaleX(0);transform-origin:left center;transition:transform .45s cubic-bezier(.7,0,.2,1)}
@@ -1162,11 +1169,13 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   setTimeout(()=>{let shown=false;try{shown=sessionStorage.getItem("cbShown")}catch(e){}
     if(!shown&&cb.hidden){openCb();try{sessionStorage.setItem("cbShown","1")}catch(e){}}},45000);
 
-  /* ---- перший екран: плашка переходить бетон → бруківка → техніка ---- */
-  const hw=$("heroWords");
-  if(hw&&!matchMedia("(prefers-reduced-motion:reduce)").matches){
-    const ws=[...hw.querySelectorAll(".w")];let wi=0;
-    setInterval(()=>{if(document.hidden)return;ws[wi].classList.remove("on");wi=(wi+1)%ws.length;ws[wi].classList.add("on")},2600);
+  /* ---- плашка переходить між словами заголовка (перший екран, «Переваги», «Як ми працюємо») ---- */
+  if(!matchMedia("(prefers-reduced-motion:reduce)").matches){
+    document.querySelectorAll(".cyc:not(#stpWords)").forEach(h=>{
+      const ws=[...h.querySelectorAll(".w")];let wi=0,vis=h.id==="heroWords";
+      if(h.id!=="heroWords")new IntersectionObserver(es=>es.forEach(e=>vis=e.isIntersecting)).observe(h);
+      setInterval(()=>{if(document.hidden||!vis)return;ws[wi].classList.remove("on");wi=(wi+1)%ws.length;ws[wi].classList.add("on")},2600);
+    });
   }
 
   /* ---- кнопка «нагору» з прогресом прокрутки ---- */
@@ -1203,7 +1212,10 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
       el.style.setProperty("--d",Math.min(sib.indexOf(el),6)*80+"ms");
     });
     const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("seen");io.unobserve(e.target)}}),{threshold:.18,rootMargin:"0px 0px -6% 0px"});
-    document.querySelectorAll(".rv,.mixer-art,.loader,#tekhnika,#beton").forEach(el=>io.observe(el));
+    document.querySelectorAll(".rv,#tekhnika,#beton").forEach(el=>io.observe(el));
+    // техніка ховається, коли блок іде з екрана, і щоразу виїжджає заново
+    const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>=.25)e.target.classList.add("seen");else if(!e.isIntersecting)e.target.classList.remove("seen")}),{threshold:[0,.25]});
+    document.querySelectorAll(".mixer-art,.loader").forEach(el=>io2.observe(el));
     // нові картки каталогу після фільтра — одразу видимі
     document.querySelectorAll("#kgrid .card").forEach(c=>c.classList.add("seen"));
     if($("kgrid"))new MutationObserver(()=>document.querySelectorAll("#kgrid .card:not(.rv)").forEach(c=>c.classList.add("rv","seen"))).observe($("kgrid"),{childList:true});
@@ -1242,6 +1254,8 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   const fill=i=>{const s=S[i];$("stpN").textContent=String(i+1).padStart(2,"0");$("stpIc").innerHTML=tabs[i].querySelector(".stp-ic").innerHTML;$("stpK").textContent=nb(s.k);$("stpT").textContent=s.t;$("stpP").textContent=nb(s.p);$("stpOk").innerHTML=s.ok.map(x=>"<li>"+nb(x)+"</li>").join("")};
   const show=(i,anim)=>{
     cur=i;tabs.forEach((t,j)=>{const on=j===i;t.classList.toggle("on",on);t.setAttribute("aria-selected",on);t.classList.remove("run")});
+    // слово в заголовку підсвічується разом з активним кроком
+    const sw=document.getElementById("stpWords");if(sw)[...sw.querySelectorAll(".w")].forEach((w,j)=>w.classList.toggle("on",j===i));
     if(auto){void tabs[i].offsetWidth;tabs[i].classList.add("run")}
     if(!anim){fill(i);return}
     panel.classList.add("swap");setTimeout(()=>{fill(i);panel.classList.remove("swap")},220);
