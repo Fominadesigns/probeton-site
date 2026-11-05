@@ -36,6 +36,7 @@
 html{scroll-behavior:smooth;scroll-padding-top:84px}
 body{margin:0;background:var(--concrete);color:var(--asphalt);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
 img{max-width:100%}
+[hidden]{display:none!important}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--slab)}
 .in{max-width:1240px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad-r)}
 h1,h2,h3,h4{font-family:var(--display);margin:0;line-height:1.05;text-wrap:balance}
@@ -459,6 +460,52 @@ html.anim #tekhnika::before{clip-path:inset(0 0 0 100%);transition:clip-path 1.1
 html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 .slant{transition:transform .3s}
 
+/* ---------- акції ---------- */
+.promo{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.pcard{background:var(--slab);border:1px solid var(--line);display:flex;flex-direction:column;min-width:0;position:relative;transition:transform .25s,box-shadow .25s}
+.pcard:hover{transform:translateY(-4px);box-shadow:0 20px 40px -24px rgba(0,0,0,.35)}
+.pcard .ph{aspect-ratio:4/3;background:#fff;overflow:hidden}
+.pcard .ph img{width:100%;height:100%;object-fit:cover}
+.pcard .ph.fit img{object-fit:contain;padding:12px}
+.pcard .tag{position:absolute;top:12px;left:12px;background:var(--signal);color:#fff;font:700 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:7px 10px;transform:skewX(-10deg)}
+.pcard .bd{padding:16px 18px 18px;display:grid;gap:6px;flex:1;align-content:start}
+.pcard .bd span{font:500 12px/1.3 var(--mono);color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
+.pcard .bd h4{font:700 18px/1.2 var(--body)}
+.pcard .pr{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:6px}
+.pcard .pr b{font:900 24px/1 var(--display);letter-spacing:-.02em}
+.pcard .pr s{font:500 14px/1 var(--mono);color:var(--mut)}
+.pcard .go{margin:0 18px 18px;justify-content:space-between}
+.pcard.big{background:var(--teal);border-color:var(--teal);color:#fff;justify-content:space-between;padding:24px}
+.pcard.big h4{font:900 clamp(28px,2.6vw,38px)/1 var(--display);letter-spacing:-.03em}
+.pcard.big p{color:#CDEBEE;font-size:15px}
+.pcard.big .btn{align-self:flex-start;background:#fff;color:var(--asphalt)}
+
+/* ---------- калькулятор + питання ---------- */
+.cf{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.calc2{background:var(--asphalt);color:#F2F1EC;padding:clamp(20px,2.4vw,32px);display:grid;gap:16px;min-width:0;position:relative}
+.calc2::before{content:"";position:absolute;left:0;right:0;top:-6px;height:12px;background:repeating-linear-gradient(-45deg,var(--mark) 0 10px,var(--asphalt) 10px 20px)}
+.calc2 .lbl{font:700 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut-d);display:block;margin-bottom:8px}
+.k-pane{display:grid;gap:14px}
+.three{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:8px}
+.calc2 select.field,.cb-in select.field{appearance:none;cursor:pointer;background:#0B0C0D url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23F46322' stroke-width='2'/%3E%3C/svg%3E") right 14px center/12px no-repeat;padding-right:36px}
+.calc2 input.field{font-family:var(--mono)}
+.res{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#34373C;border:1px solid #34373C}
+.res div{background:#1C1E21;padding:14px;min-width:0}
+.res small{display:block;font:700 10px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mut-d);margin-bottom:8px}
+.res b{font:900 clamp(20px,2vw,28px)/1 var(--display);letter-spacing:-.02em}
+.res b em{font-style:normal;font-size:.55em;color:var(--signal);margin-left:3px}
+.res-note{font-size:12.5px;color:var(--mut-d);line-height:1.45}
+.faq{display:grid;gap:0;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:20px 4px;font:700 clamp(17px,1.4vw,20px)/1.3 var(--body)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:28px;height:28px;background-color:var(--asphalt);background-image:linear-gradient(var(--signal),var(--signal)),linear-gradient(var(--signal),var(--signal));background-size:12px 2px,2px 12px;background-position:center;background-repeat:no-repeat;transition:transform .25s,background-color .25s}
+.faq details[open] summary::after{background-color:var(--signal);background-image:linear-gradient(#fff,#fff);background-size:12px 2px;transform:rotate(180deg)}
+.faq summary:hover{color:var(--signal)}
+.faq details p{padding:0 44px 20px 4px;color:var(--mut)}
+@media (max-width:1040px){.promo{grid-template-columns:1fr 1fr}.cf{grid-template-columns:1fr}}
+@media (max-width:680px){.promo{grid-template-columns:1fr 1fr;gap:10px}.pcard .bd{padding:12px}.pcard .go{margin:0 12px 12px}.pcard .pr b{font-size:19px}.pcard.big{grid-column:1/-1}.three{grid-template-columns:1fr 1fr}.three > div:last-child{grid-column:1/-1}.res{grid-template-columns:1fr}}
+
 /* ---------- зворотний дзвінок ---------- */
 .cb-fab{position:fixed;right:calc(24px + env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:58;width:64px;height:64px;border:0;background:var(--signal);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 14px 30px -12px rgba(244,99,34,.8);transition:transform .2s,background .2s}
 .cb-fab svg{width:28px;height:28px}
@@ -575,6 +622,15 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   </div>
 </section>
 
+<!-- АКЦІЇ -->
+<section class="band" id="akcii" style="padding-top:0">
+  <div class="in">
+    <div class="band-head"><div><span class="eyebrow">Акційні пропозиції</span><h2>Вигідно <span class="slant or"><span>цього тижня</span></span></h2></div><a class="btn btn-line" href="#bruk">Увесь каталог</a></div>
+    <div class="promo" id="promo"></div>
+    <p class="foot-note">Ціни — з чинного прайсу ПроБетон. Акційні знижки й терміни внесемо, щойно їх надасть менеджер.</p>
+  </div>
+</section>
+
 <!-- БРУКІВКА -->
 <section class="band" id="bruk" style="padding-top:0">
   <div class="in">
@@ -597,6 +653,53 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
     <div class="filters" id="filters" role="group" aria-label="Категорії"></div>
     <div class="grid" id="grid"></div>
     <p class="foot-note">Від 100 м² — безкоштовна доставка (умови акції уточнюйте в менеджера). Ціни — з чинного прайсу ПроБетон.</p>
+  </div>
+</section>
+
+<!-- КАЛЬКУЛЯТОР + ПИТАННЯ -->
+<section class="band" id="faq" style="padding-top:0">
+  <div class="in">
+    <div class="band-head"><div><span class="eyebrow">Калькулятор і відповіді</span><h2>Порахуйте <span class="slant"><span>свій об'єкт</span></span></h2></div></div>
+    <div class="cf">
+      <form class="calc2" id="calc2" novalidate>
+        <div class="tabs" role="tablist" aria-label="Що рахуємо">
+          <button type="button" class="tab" role="tab" aria-selected="true" data-k="tile" id="k-tile">Плитка</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-k="conc" id="k-conc">Бетон</button>
+        </div>
+        <div class="k-pane" id="p-tile">
+          <label class="lbl" for="t-model">Модель</label>
+          <select class="field" id="t-model"></select>
+          <div class="three">
+            <div><label class="lbl" for="t-l">Довжина, м</label><input class="field num" id="t-l" type="number" min="0" step="0.1" value="8" inputmode="decimal"></div>
+            <div><label class="lbl" for="t-w">Ширина, м</label><input class="field num" id="t-w" type="number" min="0" step="0.1" value="5" inputmode="decimal"></div>
+            <div><label class="lbl" for="t-z">Запас</label><select class="field" id="t-z"><option value="5">5% · проста</option><option value="10">10% · складна</option></select></div>
+          </div>
+          <label class="check"><input type="checkbox" id="t-b" checked><span>Порахувати бордюр по периметру (1 м)</span></label>
+        </div>
+        <div class="k-pane" id="p-conc" hidden>
+          <label class="lbl" for="c-grade">Марка бетону</label>
+          <select class="field" id="c-grade"><option>В7,5</option><option>В10</option><option>В15</option><option>В20</option><option selected>В25</option><option>В30</option><option>В35</option></select>
+          <div class="three">
+            <div><label class="lbl" for="c-l">Довжина, м</label><input class="field num" id="c-l" type="number" min="0" step="0.1" value="10" inputmode="decimal"></div>
+            <div><label class="lbl" for="c-w">Ширина, м</label><input class="field num" id="c-w" type="number" min="0" step="0.1" value="8" inputmode="decimal"></div>
+            <div><label class="lbl" for="c-h">Товщина, см</label><input class="field num" id="c-h" type="number" min="0" step="1" value="20" inputmode="decimal"></div>
+          </div>
+        </div>
+        <div class="res" id="res"></div>
+        <button class="btn btn-or" type="submit">Отримати точний розрахунок</button>
+        <p class="res-note" id="res-note"></p>
+      </form>
+      <div class="faq" id="faqList">
+        <details open><summary>Яку товщину плитки обрати?</summary><p>Для пішохідних доріжок зазвичай беруть 40–60&nbsp;мм, для під'їзду легкового авто&nbsp;— від 60&nbsp;мм, для вантажної техніки&nbsp;— 80&nbsp;мм, як Подвійна «Т» 80 у&nbsp;нашому каталозі.</p></details>
+        <details><summary>Скільки плитки замовляти із запасом?</summary><p>На прямокутну ділянку&nbsp;— близько 5%, на складну форму чи укладання по діагоналі&nbsp;— близько 10%. Калькулятор поруч уже додає запас.</p></details>
+        <details><summary>Яку марку бетону взяти для фундаменту?</summary><p>Для приватного будинку найчастіше беруть В20–В25. Яку саме марку брати під ваш проєкт, підкаже менеджер&nbsp;— просто опишіть, що будуєте.</p></details>
+        <details><summary>Чи можна подати бетон, якщо міксер не під'їде?</summary><p>Так. Подамо бетононасосом за паркан, на поверх чи в&nbsp;котлован.</p></details>
+        <details><summary>Коли доставка безкоштовна?</summary><p>Від 100&nbsp;м² плитки доставка безкоштовна. Умови для вашої адреси уточніть у&nbsp;менеджера.</p></details>
+        <details><summary>Чи є сертифікати якості?</summary><p>Так, на всю продукцію, яку ми доставляємо, є сертифікати якості.</p></details>
+        <details><summary>Ви самі укладаєте плитку?</summary><p>Так, закриваємо все під ключ: від продажу й доставки до готової бруківки на вашому об'єкті.</p></details>
+        <details><summary>Як швидко ви передзвоните?</summary><p>Менеджер зв'яжеться з вами протягом 5&nbsp;хвилин після заявки. Або виберіть зручний час&nbsp;— передзвонимо саме тоді.</p></details>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -844,6 +947,44 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 
   tidy(document.body);
 
+  /* ---- акції: товари з прайсу; old — стара ціна, з'явиться, коли менеджер дасть знижку ---- */
+  const PR=[
+    {name:"Лайнстоун 20 h60",sub:"висота 60 мм · 7 кольорів",price:"від 870",old:null,img:"ls-porto.webp"},
+    {name:"Старе місто 40",sub:"сірий",price:"612",old:null,img:"sm-siryi.webp"},
+    {name:"Бордюр парковий",sub:"500×60×200 · сірий",price:"116,4",old:null,img:"bordyur-siryi.webp",fit:1}
+  ];
+  $("promo").innerHTML=PR.map(p=>'<article class="pcard"><span class="tag">Пропозиція тижня</span><div class="ph'+(p.fit?" fit":"")+'"><img src="img/'+p.img+'" alt="'+p.name+'" loading="lazy"></div><div class="bd"><span>'+p.sub+'</span><h4>'+p.name+'</h4><div class="pr"><b>'+p.price+NB+'₴</b>'+(p.old?'<s>'+p.old+NB+'₴</s>':'')+'</div></div><a class="btn btn-or go" href="#calc2">Прорахувати <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>').join("")
+    +'<article class="pcard big"><h4>Від 100 м² — доставка безкоштовно</h4><p>Привеземо своєю технікою по Києву та області. Умови для вашої адреси уточнить менеджер.</p><a class="btn" href="#calc2">Порахувати площу</a></article>';
+  tidy($("promo"));
+
+  /* ---- калькулятор плитки й бетону: лише арифметика, ціни — з прайсу ---- */
+  const TM=P.filter(p=>p.cat!=="Лотки"&&!/Бордюр|Борт/.test(p.name)).map(p=>({label:p.name+" — "+p.dims,price:parseFloat(String(p.price).replace(",","."))}));
+  $("t-model").innerHTML=TM.map((m,i)=>'<option value="'+i+'">'+m.label+'</option>').join("");
+  const num=v=>Math.max(0,parseFloat(String(v).replace(",","."))||0);
+  const fmt=(n,d=1)=>n.toLocaleString("uk-UA",{maximumFractionDigits:d,minimumFractionDigits:0});
+  let kind="tile",summary="";
+  function calc(){
+    if(kind==="tile"){
+      const l=num($("t-l").value),w=num($("t-w").value),z=+$("t-z").value,m=TM[+$("t-model").value];
+      const area=l*w,need=Math.ceil(area*(1+z/100)*10)/10,per=$("t-b").checked?Math.ceil(2*(l+w)):0,sum=Math.round(need*m.price);
+      $("res").innerHTML='<div><small>Площа + запас '+z+'%</small><b>'+fmt(need)+'<em>м²</em></b></div><div><small>Бордюр по периметру</small><b>'+(per?per+'<em>шт</em>':'—')+'</b></div><div><small>Плитка, орієнтовно</small><b>≈'+NB+fmt(sum,0)+'<em>₴</em></b></div>';
+      $("res-note").textContent="Сума — за ціною з прайсу ("+fmt(m.price,1)+" ₴), якщо вона вказана за м². Точну ціну з доставкою й укладанням назве менеджер."+(need>=100?" Від 100 м² — доставка безкоштовна.":"");
+      summary="Плитка: "+m.label+", "+fmt(l)+"×"+fmt(w)+" м, з запасом "+fmt(need)+" м²"+(per?", бордюр "+per+" шт":"");
+    }else{
+      const l=num($("c-l").value),w=num($("c-w").value),h=num($("c-h").value)/100,g=$("c-grade").value;
+      const v=l*w*h,need=Math.ceil(v*1.03*10)/10;
+      $("res").innerHTML='<div><small>Об\'єм</small><b>'+fmt(v)+'<em>м³</em></b></div><div><small>З запасом 3%</small><b>'+fmt(need)+'<em>м³</em></b></div><div><small>Марка</small><b>'+g+'</b></div>';
+      $("res-note").textContent="Ціну бетону з доставкою, а також чи потрібен бетононасос, назве менеджер.";
+      summary="Бетон "+g+": "+fmt(l)+"×"+fmt(w)+" м, товщина "+fmt(h*100,0)+" см, потрібно ≈"+fmt(need)+" м³";
+    }
+  }
+  document.querySelectorAll("#calc2 .tab").forEach(t=>t.onclick=()=>{kind=t.dataset.k;
+    document.querySelectorAll("#calc2 .tab").forEach(x=>x.setAttribute("aria-selected",x===t));
+    $("p-tile").hidden=kind!=="tile";$("p-conc").hidden=kind!=="conc";calc()});
+  $("calc2").addEventListener("input",calc);$("calc2").addEventListener("change",calc);
+  $("calc2").addEventListener("submit",e=>{e.preventDefault();$("f-msg").value=summary;$("kontakty").scrollIntoView({behavior:"smooth"});setTimeout(()=>$("f-name").focus({preventScroll:true}),700)});
+  calc();
+
   /* ---- зворотний дзвінок: день і час, коли зручно ---- */
   const cb=$("cb"),pad=n=>String(n).padStart(2,"0");
   const kyivNow=()=>{const p=new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Kyiv",hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date()).split(":");return +p[0]*60+ +p[1]};
@@ -882,7 +1023,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if(!reduce&&"IntersectionObserver" in window){
     document.documentElement.classList.add("anim");
-    const groups=[".band-head",".grades",".feat",".show",".card",".zb",".mach",".flow li",".story",".person",".obj",".lines",".form"];
+    const groups=[".pcard",".calc2",".faq",".band-head",".grades",".feat",".show",".card",".zb",".mach",".flow li",".story",".person",".obj",".lines",".form"];
     document.querySelectorAll(groups.join(",")).forEach(el=>{
       el.classList.add("rv");
       const sib=[...el.parentNode.children].filter(x=>x.matches(groups.join(",")));
