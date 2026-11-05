@@ -230,6 +230,7 @@ a{color:inherit}
 .card .ph{background:#fff}
 .card .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.22,.61,.36,1)}
 .card .ph.fit img{object-fit:contain;padding:10px}
+.ph.tex{background-repeat:repeat;background-position:center;transition:background-size .8s cubic-bezier(.22,.61,.36,1)}
 .card:hover .ph img{transform:scale(1.06)}
 .card .dims{font:500 12px/1 var(--mono);color:var(--mut)}
 .card h4{font:700 17px/1.25 var(--body)}
@@ -1062,6 +1063,11 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
     {name:"Бордюр парковий",sub:"500×60×200 · сірий",price:"116,4",old:null,img:"bordyur-siryi.webp",fit:1}
   ];
   const isPromo=p=>PR.some(r=>r.img===p.img);
+  // фото товару в картці: для бруківки — суцільна викладка з img/dvir (без рваних країв), для бордюрів і лотків — фото виробу
+  const TEXW={ls:"100%",pt:"40%",sm:"93%",bruk:"40%"};
+  const phOf=(p,alt)=>{const k=(p.img.match(/^(ls|pt|sm|bruk)-/)||[])[1];
+    return k?'<div class="ph tex" role="img" aria-label="'+alt+'" style="background-image:url(../img/dvir/'+p.img+');background-size:'+TEXW[k]+' auto">'
+            :'<div class="ph'+(p.fit?' fit':'')+'"><img src="../img/'+p.img+'" alt="'+alt+'" loading="lazy">'};
 
   /* ---- головна: лічильники в картках категорій ---- */
   document.querySelectorAll("[data-cnt]").forEach(el=>{const cs=el.dataset.cnt.split("|");const n=P.filter(p=>cs.includes(p.cat)).length;
@@ -1100,7 +1106,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
       const n=L.length;$("kfound").innerHTML="Знайдено <b>"+n+"</b> "+(n%10===1&&n%100!==11?"товар":n%10>=2&&n%10<=4&&(n%100<10||n%100>=20)?"товари":"товарів");
       const act=st.cat.length+st.col.length+(st.min>lo||st.max<hi?1:0);$("kfn").textContent=act?"("+act+")":"";
       $("kgrid").innerHTML=L.map(p=>{const one=p.col.length===1;
-        return '<article class="card kc"><div class="ph'+(p.fit?' fit':'')+'"><img src="../img/'+p.img+'" alt="'+p.name+', '+p.dims+'" loading="lazy">'+(isPromo(p)?'<span class="kbadge">Пропозиція тижня</span>':'')+'</div>'+
+        return '<article class="card kc">'+phOf(p,p.name+', '+p.dims)+(isPromo(p)?'<span class="kbadge">Пропозиція тижня</span>':'')+'</div>'+
         '<div class="kb"><span class="dims">'+p.cat+'</span><h4>'+p.name+'</h4><p class="kmeta">'+(one?'Колір: <b>'+p.dims+'</b>':'<span class="kdots">'+p.col.map(c=>'<i style="background-image:url(../img/'+SW[c]+'.webp)" title="'+c+'"></i>').join("")+'</span>'+p.dims)+'</p>'+
         '<div class="bot"><b class="num">'+(p.from?"від"+NB:"")+p.price+NB+'₴</b><a class="btn btn-or kgo" href="#kontakty">Прорахувати</a></div></div></article>'}).join("")
         ||'<div class="kempty"><b>Нічого не знайшли</b><p>Спробуйте прибрати частину фільтрів — або подзвоніть, підберемо самі.</p><button type="button" class="btn btn-line" data-reset>Скинути фільтри</button></div>';
@@ -1129,7 +1135,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 
   /* ---- акції: товари з прайсу; old — стара ціна, з'явиться, коли менеджер дасть знижку ---- */
   if($("promo")){
-  $("promo").innerHTML=PR.map(p=>'<article class="pcard"><span class="tag">Пропозиція тижня</span><div class="ph'+(p.fit?" fit":"")+'"><img src="../img/'+p.img+'" alt="'+p.name+'" loading="lazy"></div><div class="bd"><span>'+p.sub+'</span><h4>'+p.name+'</h4><div class="pr"><b>'+p.price+NB+'₴</b>'+(p.old?'<s>'+p.old+NB+'₴</s>':'')+'</div></div><a class="btn btn-or go" href="#kontakty">Прорахувати <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>').join("")
+  $("promo").innerHTML=PR.map(p=>'<article class="pcard"><span class="tag">Пропозиція тижня</span>'+phOf(p,p.name)+'</div><div class="bd"><span>'+p.sub+'</span><h4>'+p.name+'</h4><div class="pr"><b>'+p.price+NB+'₴</b>'+(p.old?'<s>'+p.old+NB+'₴</s>':'')+'</div></div><a class="btn btn-or go" href="#kontakty">Прорахувати <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>').join("")
     +'<article class="pcard big"><h4>Від 100 м² — доставка безкоштовно</h4><p>Привеземо своєю технікою по Києву та області. Умови для вашої адреси уточнить менеджер.</p><a class="btn" href="#kontakty">Порахувати площу</a></article>';
   tidy($("promo"));
   }
