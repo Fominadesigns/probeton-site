@@ -19,7 +19,7 @@
   --teal:#067A87;       /* другий акцент — петрольний з логотипу: мітки, інформаційні блоки */
   --teal-lt:#3DB7C2;    /* той самий відтінок для темного тла */
   --teal-deep:#00495A;
-  --mark:#F6C21A;       /* розмітка */
+  --mark:#F46322;       /* розмітка — з 05.11.2026 помаранчева, як дії (жовтий #F6C21A прибрали: було строкато) */
   /* заголовки — широкий Dela Gothic One (один накреслення, уже жирне); Geologica — запасний для знаків, яких у Dela немає */
   --display:"Dela Gothic One","Geologica","Arial Black",system-ui,sans-serif;
   --body:"Onest","Segoe UI",system-ui,sans-serif;
@@ -146,7 +146,7 @@ a{color:inherit}
 .ticker{background:var(--signal);color:#fff;overflow:hidden;white-space:nowrap;border-block:2px solid var(--asphalt)}
 .ticker div{display:inline-flex;gap:40px;padding-block:16px;font:900 clamp(18px,2.4vw,28px)/1 var(--display);letter-spacing:-.01em;animation:run 32s linear infinite}
 .ticker span{display:inline-flex;gap:40px;align-items:center}
-.ticker span::after{content:"";width:14px;height:14px;background:var(--mark);transform:rotate(45deg)}
+.ticker span::after{content:"";width:14px;height:14px;background:var(--asphalt);transform:rotate(45deg)}
 @keyframes run{to{transform:translateX(-50%)}}
 
 /* розділи */
@@ -296,7 +296,7 @@ a{color:inherit}
 .stp-tab b{font:800 19px/1.15 var(--display)}
 .stp-tab.on{background:var(--signal);border-color:var(--signal)}
 .stp-tab.on small{color:#FFE5D6}
-.stp-tab::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--mark)}
+.stp-tab::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--asphalt)}
 .stp-tab.on.run::after{animation:stpbar var(--stp-dur,6s) linear forwards}
 @keyframes stpbar{to{width:100%}}
 .stp-ic{flex:none;width:48px;height:48px;display:grid;place-items:center;background:rgba(255,255,255,.14)}
