@@ -28,8 +28,9 @@
   --display:"Geologica","Arial Black",system-ui,sans-serif;
   --body:"Onest","Segoe UI",system-ui,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
-  --pad:max(16px,env(safe-area-inset-left,0px));
-  --pad-r:max(16px,env(safe-area-inset-right,0px));
+  /* бічні поля: на телефоні 16px, на ширших екранах ростуть разом з вікном */
+  --pad:max(16px,3.6vw,env(safe-area-inset-left,0px));
+  --pad-r:max(16px,3.6vw,env(safe-area-inset-right,0px));
   color-scheme:light;
 }
 *{box-sizing:border-box}
@@ -38,7 +39,7 @@ body{margin:0;background:var(--concrete);color:var(--asphalt);font:400 17px/1.6 
 img{max-width:100%}
 [hidden]{display:none!important}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--slab)}
-.in{max-width:1360px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad-r)}
+.in{max-width:calc(1360px + 2 * var(--pad));margin:0 auto;padding-left:var(--pad);padding-right:var(--pad-r)}
 h1,h2,h3,h4{font-family:var(--display);margin:0;line-height:1.05;text-wrap:balance}
 h2{font-size:clamp(32px,5vw,60px);font-weight:900;letter-spacing:-.03em}
 h3{font-size:20px;font-weight:700;letter-spacing:-.01em}
@@ -78,8 +79,10 @@ a{color:inherit}
 /* фото з probeton.com.ua; затемнена лише ліва частина під текстом. Фото збільшене й зсунуте праворуч,
    щоб будівельник було видно в просвіті між текстом і карткою прорахунку */
 .hero{color:#fff;background:
-  linear-gradient(90deg,rgb(13,14,16) 0%,rgb(13,14,16) 20%,rgba(13,14,16,.86) 28%,rgba(13,14,16,.4) 42%,rgba(13,14,16,0) 54%),
-  url(img/fon-heroi.webp) right 30%/max(80%,calc((100svh - 40px) * 1.78)) auto no-repeat rgb(13,14,16)}
+  linear-gradient(90deg,rgb(13,14,16) 0%,rgb(13,14,16) 18%,rgba(13,14,16,.88) 30%,rgba(13,14,16,.45) 45%,rgba(13,14,16,0) 59%),
+  url(img/fon-heroi.webp) 62% 30%/max(92%,calc((100svh - 40px) * 1.78)) auto no-repeat rgb(13,14,16)}
+.hero .lead br.d{display:none}
+@media (min-width:1041px){.hero .lead br.d{display:inline}.hero .lead{max-width:none}}
 /* головні слова по черзі отримують помаранчеву плашку: бетон → бруківка → техніка */
 .hero h1{isolation:isolate}
 .hero h1 .w{display:block;position:relative;width:fit-content;padding:.02em .22em .1em;margin-left:-.22em}
@@ -95,7 +98,7 @@ a{color:inherit}
 .hero .trust{color:#C3C6CA}
 .hero .calc{box-shadow:0 40px 80px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.1);background:rgba(20,21,23,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 .stats-band .stats{margin-top:0;border-top:0;border-bottom:1px solid var(--line)}
-.stats-band .stat{padding-block:clamp(28px,4vw,48px)}
+.stats-band .stat{padding:clamp(28px,4vw,48px) 12px;text-align:center}
 .hero .in{display:grid;grid-template-columns:1.25fr .9fr;gap:clamp(24px,4vw,64px);align-items:start;position:relative;z-index:1}
 .hero h1{font-size:clamp(44px,8.4vw,118px);font-weight:900;letter-spacing:-.045em;line-height:.92;margin-top:22px}
 .hero h1 .o{color:var(--signal)}
@@ -753,7 +756,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
     <div>
       <span class="eyebrow">Дилер заводу Ковальська · Київ і область</span>
       <h1 id="heroWords"><span class="w on">Бетон.</span> <span class="w">Бруківка.</span> <span class="w">Техніка.</span><span class="s">Все для будмайданчика від одного постачальника</span></h1>
-      <p class="lead">Бетон від В7,5 до В35, тротуарна плитка, кільця й плити перекриття.<br>Привеземо своєю технікою, подамо насосом і покладемо плитку під ключ.</p>
+      <p class="lead">Бетон від В7,5 до В35, тротуарна плитка,<br class="d"> кільця й плити перекриття. Привеземо своєю технікою,<br class="d"> подамо насосом і покладемо плитку під ключ.</p>
       <div class="ctas">
         <a class="btn btn-or" href="#calc">Прорахувати замовлення <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <a class="btn btn-line" href="bruk/">Каталог плитки</a>
