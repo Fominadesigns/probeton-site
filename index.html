@@ -506,6 +506,11 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 @media (max-width:1040px){.promo{grid-template-columns:1fr 1fr}.cf{grid-template-columns:1fr}}
 @media (max-width:680px){.promo{grid-template-columns:1fr 1fr;gap:10px}.pcard .bd{padding:12px}.pcard .go{margin:0 12px 12px}.pcard .pr b{font-size:19px}.pcard.big{grid-column:1/-1}.three{grid-template-columns:1fr 1fr}.three > div:last-child{grid-column:1/-1}.res{grid-template-columns:1fr}}
 
+/* калькулятор і форма заявки «пливуть» за прокруткою в межах своєї секції */
+@media (min-width:1041px){
+  .calc2,#kontakty .form{position:sticky;top:calc(var(--hh,73px) + 28px)}
+}
+
 /* ---------- зворотний дзвінок ---------- */
 .cb-fab{position:fixed;right:calc(24px + env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:58;width:64px;height:64px;border:0;background:var(--signal);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 14px 30px -12px rgba(244,99,34,.8);transition:transform .2s,background .2s}
 .cb-fab svg{width:28px;height:28px}
