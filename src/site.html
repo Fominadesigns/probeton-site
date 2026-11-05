@@ -31,7 +31,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:84px}
-body{margin:0;background:var(--concrete);color:var(--asphalt);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+body{margin:0;overflow-x:clip;background:var(--concrete);color:var(--asphalt);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
 img{max-width:100%}
 [hidden]{display:none!important}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--slab)}
@@ -198,6 +198,13 @@ a{color:inherit}
 .msel button:hover{border-color:var(--signal)}
 .msel button[aria-pressed="true"]{background:var(--signal);border-color:var(--signal);color:#fff}
 .hsel[hidden]{display:none}
+/* телефон: моделі в один ряд, квадратики кольорів — як у картках каталогу */
+@media (max-width:680px){
+  .msel{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+  .msel button{font-size:11px;line-height:1.15;padding:8px 2px;white-space:normal;text-align:center;letter-spacing:-.01em;min-width:0}
+  .sws{gap:6px}
+  .sws .sw{width:30px;height:30px;border-width:2px}
+}
 .pave img.fade{opacity:0}
 .pave .lab{position:absolute;left:20px;bottom:20px;z-index:1;background:rgba(20,21,23,.82);color:#fff;border-radius:999px;padding:10px 16px;font:700 13px/1 var(--mono);backdrop-filter:blur(6px)}
 .show .info{padding:clamp(24px,3vw,44px);display:grid;gap:18px;align-content:start;min-width:0}
@@ -525,6 +532,8 @@ footer .in{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-betwe
 .mgr.big{margin-top:28px;border-radius:24px;padding:14px 24px 14px 14px}
 .mgr.big .mgr-ph{width:84px;height:84px}
 @media (max-width:680px){.mgr{border-radius:22px;padding-right:16px}.mgr em{display:none}}
+@media (max-width:360px){.phead h1{font-size:27px;overflow-wrap:anywhere}.phead .in > *{max-width:100%;min-width:0}.btn{white-space:normal;text-align:center}.cf > *,.calc2 > *,.res > *{min-width:0}.person figcaption *{overflow-wrap:anywhere}h2{font-size:28px}}
+@media (max-width:420px){.contact > *{min-width:0}.mgr b{font-size:15px}.mgr.big .mgr-ph,.mgr-ph{width:56px;height:56px}.mgr{gap:10px}}
 
 /* поки наведено на іншу картку, перша (помаранчева за замовчуванням) стає звичайною */
 .fleet:hover .mach.hl:not(:hover){background:var(--asphalt);color:#F2F1EC}
@@ -630,6 +639,8 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 .cb-fab::before,.cb-fab::after{content:"";position:absolute;inset:0;border:2px solid var(--signal);animation:ring 2.4s ease-out infinite}
 .cb-fab::after{animation-delay:1.2s}
 @keyframes ring{from{opacity:.7;transform:scale(1)}to{opacity:0;transform:scale(1.6)}}
+@keyframes ring-sm{from{opacity:.7;transform:scale(1)}to{opacity:0;transform:scale(1.35)}}
+@media (max-width:680px){.cb-fab::before,.cb-fab::after{animation-name:ring-sm}}
 .cb{position:fixed;inset:0;z-index:70;background:rgba(10,11,12,.62);backdrop-filter:blur(4px);display:grid;place-items:center;padding:16px}
 .cb-box{width:min(100%,440px);background:var(--asphalt);color:#F2F1EC;box-shadow:0 40px 80px -20px rgba(0,0,0,.7);animation:rise .35s cubic-bezier(.2,.7,.2,1) both}
 .cb-band{display:flex;justify-content:space-between;align-items:center;padding:12px 16px 12px 22px;background:repeating-linear-gradient(-45deg,var(--signal) 0 18px,#ff6d2e 18px 36px);font:700 13px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#fff}
