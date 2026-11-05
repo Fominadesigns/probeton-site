@@ -108,7 +108,7 @@ header .sub{font-size:10.5pt;color:#61656A;padding-bottom:1mm}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:4mm}.two img{width:100%;height:auto;border:1px solid #CDCFCA;display:block}
 .r,.sell{font-size:11pt}
 .sell{flex:1;background:#F46322;padding:5mm 6mm;min-height:0;display:flex;flex-direction:column;justify-content:flex-start}
-.sell .sec{border:0;padding:0}.sell .sec.hot h3{color:#fff}.sell .sec p{color:#1A0E06;font-weight:500}
+.sell .sec{border:0;padding:0}.sell .sec.hot h3{color:#fff}.sell .sec p{color:#1A0E06;font-weight:400;line-height:1.45}
 .r{display:flex;flex-direction:column;gap:.9em;min-height:0}
 .sec{display:grid;gap:.45em;padding-top:.9em;border-top:1px solid #CDCFCA}
 .r .sec:first-child{border-top:0;padding-top:0}
@@ -120,7 +120,7 @@ header .sub{font-size:10.5pt;color:#61656A;padding-bottom:1mm}
 /* «Чому саме так» — картка на всю решту висоти колонки */
 .split .r .sec:nth-child(2){background:#fff;border:0;padding:.9em 1.1em;flex:1;align-content:start}
 .dk .split .r .sec:nth-child(2){background:#1F2124}
-.r .sec.hot{background:#F46322;border:0;padding:.9em 1.1em;flex:1;align-content:start}.r .sec.hot h3{color:#fff}.r .sec.hot p{color:#1A0E06;font-weight:500}
+.r .sec.hot{background:#F46322;border:0;padding:.9em 1.1em;flex:1;align-content:start}.r .sec.hot h3{color:#fff}.r .sec.hot p{color:#1A0E06;font-weight:400}
 footer{position:absolute;left:12mm;right:12mm;bottom:3.5mm;display:flex;justify-content:space-between;font:500 7.5pt/1 'JetBrains Mono',monospace;color:#8F949A}
 .pair{gap:5mm;padding-top:9mm}
 .prow{flex:1;display:grid;grid-template-columns:178mm 1fr;gap:7mm;min-height:0}
@@ -187,7 +187,7 @@ fs.writeFileSync(OUT_HTML, html);
     document.querySelectorAll(".split .r,.prow .r").forEach(el => fit(el, 8.5, 14));
     document.querySelectorAll(".mob .r .sec").forEach(el => { el.style.height = "100%"; });
     document.querySelectorAll(".mob .r").forEach(el => fit(el, 8.5, 13));
-    document.querySelectorAll(".sell").forEach(el => fit(el, 9, 18));
+    document.querySelectorAll(".sell").forEach(el => { fit(el, 9, 13.5); el.style.justifyContent = "center"; });
   });
   // знімки сторінок після підбору кегля — для перевірки на око
   if (process.env.PREVIEW) {
