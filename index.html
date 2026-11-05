@@ -459,6 +459,28 @@ html.anim #tekhnika::before{clip-path:inset(0 0 0 100%);transition:clip-path 1.1
 html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 .slant{transition:transform .3s}
 
+/* ---------- зворотний дзвінок ---------- */
+.cb-fab{position:fixed;right:calc(24px + env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:58;width:64px;height:64px;border:0;background:var(--signal);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 14px 30px -12px rgba(244,99,34,.8);transition:transform .2s,background .2s}
+.cb-fab svg{width:28px;height:28px}
+.cb-fab:hover{transform:translateY(-3px);background:#ff7438}
+.cb-fab::before,.cb-fab::after{content:"";position:absolute;inset:0;border:2px solid var(--signal);animation:ring 2.4s ease-out infinite}
+.cb-fab::after{animation-delay:1.2s}
+@keyframes ring{from{opacity:.7;transform:scale(1)}to{opacity:0;transform:scale(1.6)}}
+.cb{position:fixed;inset:0;z-index:70;background:rgba(10,11,12,.62);backdrop-filter:blur(4px);display:grid;place-items:center;padding:16px}
+.cb-box{width:min(100%,440px);background:var(--asphalt);color:#F2F1EC;box-shadow:0 40px 80px -20px rgba(0,0,0,.7);animation:rise .35s cubic-bezier(.2,.7,.2,1) both}
+.cb-band{display:flex;justify-content:space-between;align-items:center;padding:12px 16px 12px 22px;background:repeating-linear-gradient(-45deg,var(--signal) 0 18px,#ff6d2e 18px 36px);font:700 13px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.cb-x{border:0;background:transparent;color:#fff;font-size:18px;cursor:pointer;padding:6px}
+.cb-in{padding:24px 22px 22px;display:grid;gap:12px}
+.cb-in h3{font-size:24px;line-height:1.15;margin-bottom:6px}
+.cb-in select.field{appearance:none;cursor:pointer;background:#0B0C0D url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23F46322' stroke-width='2'/%3E%3C/svg%3E") right 14px center/12px no-repeat;padding-right:36px}
+.cb-in .btn{width:100%}
+.cb-note{font-size:14px;color:var(--mut-d)}
+.cb-note a{color:#fff;font-weight:600}
+@media (max-width:680px){.cb-fab{bottom:calc(84px + env(safe-area-inset-bottom,0px));right:14px;width:56px;height:56px}}
+
+/* прямі кути всюди — як у логотипі, плитці й похилих плашках */
+*,*::before,*::after{border-radius:0!important}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}
   html.anim .rv,html.anim .mixer-art img,html.anim .loader{opacity:1;translate:none}
   html.anim #beton .stripes i{transform:skewX(-22deg)}html.anim #tekhnika::before{clip-path:none}}
@@ -707,6 +729,25 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 
 <footer><div class="in"><span>© ПроБетон, Київ</span><span>Бетон · Бруківка · ЗБВ · Спецтехніка</span><span>Концепт редизайну, 2026</span></div></footer>
 
+<!-- Зворотний дзвінок у зазначений час -->
+<button class="cb-fab" id="cbOpen" type="button" aria-label="Замовити зворотний дзвінок"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></button>
+<div class="cb" id="cb" hidden>
+  <form class="cb-box" id="cbForm" role="dialog" aria-modal="true" aria-labelledby="cbT" novalidate>
+    <div class="cb-band"><span>Зворотний дзвінок</span><button type="button" class="cb-x" id="cbClose" aria-label="Закрити">✕</button></div>
+    <div class="cb-in">
+      <h3 id="cbT">Передзвонимо у зручний для вас час</h3>
+      <input class="field" type="tel" id="cbPhone" placeholder="+380 67 123 45 67" aria-label="Ваш телефон" autocomplete="tel" inputmode="tel">
+      <div class="two">
+        <select class="field" id="cbDay" aria-label="День"></select>
+        <select class="field" id="cbTime" aria-label="Час"></select>
+      </div>
+      <button class="btn btn-or" type="submit">Чекаю на дзвінок</button>
+      <p class="cb-note">Або подзвоніть самі: <a href="tel:+380973151520">097 315 15 20</a></p>
+      <div class="ok" id="cbOk" hidden>Дякуємо! Менеджер передзвонить у вибраний час. <br><small>(Демоверсія: заявка нікуди не надсилається.)</small></div>
+    </div>
+  </form>
+</div>
+
 <nav class="mbar" aria-label="Швидкі дії">
   <a href="#calc">Прорахувати</a>
   <a href="tel:+380973151520">Подзвонити</a>
@@ -802,6 +843,28 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   drawCat();
 
   tidy(document.body);
+
+  /* ---- зворотний дзвінок: день і час, коли зручно ---- */
+  const cb=$("cb"),pad=n=>String(n).padStart(2,"0");
+  const kyivNow=()=>{const p=new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Kyiv",hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date()).split(":");return +p[0]*60+ +p[1]};
+  function fillTimes(){
+    const day=$("cbDay").value,now=kyivNow(),sel=$("cbTime");sel.innerHTML="";
+    for(let m=8*60;m<=20*60;m+=30){if(day==="0"&&m<now+30)continue;const o=document.createElement("option");o.textContent=pad(m/60|0)+":"+pad(m%60);sel.appendChild(o)}
+    if(!sel.options.length){$("cbDay").value="1";fillTimes()}
+  }
+  $("cbDay").innerHTML='<option value="0">Сьогодні</option><option value="1">Завтра</option><option value="2">Післязавтра</option>';
+  $("cbDay").onchange=fillTimes;
+  const openCb=()=>{fillTimes();$("cbOk").hidden=true;cb.hidden=false;setTimeout(()=>$("cbPhone").focus(),50)};
+  const closeCb=()=>{cb.hidden=true};
+  $("cbOpen").onclick=openCb;$("cbClose").onclick=closeCb;
+  cb.addEventListener("click",e=>{if(e.target===cb)closeCb()});
+  addEventListener("keydown",e=>{if(e.key==="Escape"&&!cb.hidden)closeCb()});
+  $("cbForm").addEventListener("submit",e=>{e.preventDefault();const ph=$("cbPhone");
+    if(ph.value.replace(/\D/g,"").length<9){ph.focus();ph.style.borderColor="var(--signal)";return}
+    ph.style.borderColor="";$("cbOk").hidden=false});
+  // один раз за візит пропонуємо дзвінок самі — через 45 секунд на сайті
+  setTimeout(()=>{let shown=false;try{shown=sessionStorage.getItem("cbShown")}catch(e){}
+    if(!shown&&cb.hidden){openCb();try{sessionStorage.setItem("cbShown","1")}catch(e){}}},45000);
 
   /* ---- перший екран = висота вікна мінус шапка ---- */
   const top=document.querySelector(".top");
