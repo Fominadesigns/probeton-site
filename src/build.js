@@ -15,7 +15,7 @@ const S = {
   stats: grab(/<section class="stats-band"[\s\S]*?<\/section>/),
   partners: grab(/<!-- НАМ ДОВІРЯЮТЬ[^\n]*\n<section class="partners"[\s\S]*?<\/section>/),
 };
-["beton", "akcii", "bruk", "faq", "zbv", "tekhnika", "perevagy", "flow", "about", "kontakty", "katalog", "cats", "mapa"].forEach(id => S[id] = sec(id));
+["beton", "akcii", "bruk", "faq", "zbv", "tekhnika", "perevagy", "flow", "about", "kontakty", "katalog", "cats", "mapa", "dostavka"].forEach(id => S[id] = sec(id));
 const tailSrc = s.slice(s.indexOf("<!-- Зворотний дзвінок"));
 
 const NAV = [["beton/", "Бетон"], ["bruk/", "Бруківка"], ["zbv/", "ЗБВ"], ["tekhnika/", "Спецтехніка"], ["pro-nas/", "Про нас"], ["kontakty/", "Контакти"]];
@@ -24,7 +24,8 @@ const PAGE_OF = { beton: "beton/", bruk: "bruk/", katalog: "bruk/", zbv: "zbv/",
 const PAGES = [
   { dir: "", title: "ПроБетон — бетон, бруківка Ковальська, ЗБВ і спецтехніка в Києві",
     desc: "Бетон В7,5–В35, тротуарна плитка Ковальська, ЗБВ і спецтехніка з доставкою по Києву та області.",
-    parts: ["hero", "ticker", "stats", "partners", "beton", "cats", "bruk", "akcii", "perevagy", "flow", "faq", "kontakty"] },
+    // три машини рознесені через два блоки: міксер (beton) → маніпулятор (dostavka) → навантажувач (tekhnika)
+    parts: ["hero", "ticker", "stats", "partners", "beton", "cats", "bruk", "dostavka", "akcii", "perevagy", "tekhnika", "faq", "flow", "kontakty"] },
   { dir: "beton/", crumb: "Бетон", title: "Бетон В7,5–В35 з доставкою по Києву — ПроБетон",
     desc: "Бетон усіх марок від В7,5 до В35: доставка міксером і подача бетононасосом по Києву та Київській області.",
     eyebrow: "Бетон", h1: "Бетон В7,5–В35 з доставкою",
@@ -34,7 +35,7 @@ const PAGES = [
     desc: "Лайнстоун, Подвійна «Т», Старе місто, бордюри й лотки заводу Ковальська. Ціни з прайсу, доставка й укладання під ключ.",
     eyebrow: "Каталог", h1: "Тротуарна плитка та бруківка",
     lead: "Плитка, бордюри й лотки заводу Ковальська з доставкою на об'єкт. Ціни — з чинного прайсу ПроБетон.",
-    parts: ["katalog", "bruk", "faq", "kontakty"] },
+    parts: ["katalog", "bruk", "dostavka", "faq", "kontakty"] },
   { dir: "zbv/", crumb: "ЗБВ", title: "Залізобетонні вироби: кільця, плити, балки — ПроБетон",
     desc: "Бетонні кільця, плити перекриття й балки з доставкою краном-маніпулятором по Києву та області.",
     eyebrow: "ЗБВ", h1: "Залізобетонні вироби",
@@ -108,6 +109,8 @@ for (const p of PAGES) {
   let parts = p.parts.map(k => S[k]);
   // два блоки з фото поспіль виглядають важко: контакти після «Як ми працюємо» — на суцільному тлі
   p.parts.forEach((k, i) => { if (k === "kontakty" && p.parts[i - 1] === "flow") parts[i] = parts[i].replace('class="band dark" id="kontakty"', 'class="band dark plain" id="kontakty"'); });
+  // світлий блок одразу після темного не може «прилипати» до нього: повертаємо верхній відступ
+  p.parts.forEach((k, i) => { if (i && /class="band (dark|photo)/.test(parts[i - 1])) parts[i] = parts[i].replace(' style="padding-top:0"', ""); });
   // перший розділ після шапки сторінки — з повним відступом зверху
   if (p.dir) parts[0] = parts[0].replace(' style="padding-top:0"', "");
   let main = (p.dir ? phead(p, pre) + "\n\n" : "") + parts.join("\n\n");

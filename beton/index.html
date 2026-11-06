@@ -555,6 +555,23 @@ footer .in{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-betwe
 .person .c{position:absolute;inset:0;opacity:0;transition:opacity .45s ease,transform .6s ease}
 .person:hover .c,.person:focus-within .c{opacity:1}
 @media (max-width:1040px){.mixer-art{width:min(80vw,460px);justify-self:start;margin-bottom:0}}
+/* доставка плитки маніпулятором: петрольне тло, машина стоїть на «дорозі» внизу блоку */
+.dost{background:var(--teal-deep);position:relative;overflow:hidden;padding-bottom:0}
+.dost::before{content:"";position:absolute;top:0;left:-6%;width:46%;height:100%;pointer-events:none;
+  background:linear-gradient(112deg,transparent 0 58%,rgba(255,255,255,.05) 58% 70%,transparent 70%)}
+.dost > .in{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(24px,4vw,64px);align-items:end}
+.dost-txt{display:grid;gap:18px;align-content:start;align-self:center;padding-bottom:clamp(40px,5vw,80px)}
+.dost .lead{color:#CFE3E6}
+.dost .slant.or::after{background:var(--teal-lt)}
+.dost-cta{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin-top:6px}
+.dost-note{font:700 11px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--teal-lt)}
+.dost-art{position:relative;margin-bottom:-34px}
+.dost-art img{display:block;width:100%;height:auto;filter:drop-shadow(0 26px 22px rgba(0,0,0,.45))}
+.road{position:relative;z-index:1;height:clamp(64px,7vw,96px);background:var(--asphalt)}
+.road::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:var(--signal)}
+.road::after{content:"";position:absolute;left:0;right:0;top:calc(50% + 6px);height:5px;translate:0 -50%;
+  background:repeating-linear-gradient(90deg,#F2F1EC 0 54px,transparent 54px 108px)}
+@media (max-width:1040px){.dost > .in{grid-template-columns:1fr}.dost-txt{padding-bottom:0}.dost-art{width:min(100%,560px);justify-self:end;margin-bottom:-22px}}
 
 /* ---------- анімації (вмикаються скриптом, без нього все видно одразу) ---------- */
 @keyframes rise{from{opacity:0;translate:0 34px}}
@@ -578,6 +595,10 @@ html.anim .loader{opacity:0}
 html.anim .loader.seen{opacity:1;--from:420px;animation:drive 3.2s cubic-bezier(.25,.8,.3,1) both}
 html.anim #tekhnika::before{clip-path:inset(0 0 0 100%);transition:clip-path 1.1s cubic-bezier(.2,.7,.2,1)}
 html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
+html.anim .dost-art img{opacity:0}
+html.anim .dost-art.seen img{opacity:1;--from:min(70vw,900px);animation:drive 3.4s cubic-bezier(.22,.8,.28,1) both,idle 2.4s ease-in-out 3.5s infinite}
+html.anim .dost .road::after{clip-path:inset(0 0 0 100%);transition:clip-path 0s}
+html.anim .dost:has(.dost-art.seen) .road::after{clip-path:inset(0 0 0 0);transition:clip-path 3.2s cubic-bezier(.22,.8,.28,1)}
 .slant{transition:transform .3s}
 
 /* ---------- акції ---------- */
@@ -793,7 +814,8 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 *,*::before,*::after{border-radius:0!important}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}
-  html.anim .rv,html.anim .mixer-art img,html.anim .loader{opacity:1;translate:none}
+  html.anim .rv,html.anim .mixer-art img,html.anim .loader,html.anim .dost-art img{opacity:1;translate:none}
+  html.anim .dost .road::after{clip-path:none}
   html.anim #beton .stripes i{transform:skewX(-22deg)}html.anim #tekhnika::before{clip-path:none}}
 </style>
 </head>
@@ -1270,7 +1292,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
     document.querySelectorAll(".rv,#tekhnika,#beton").forEach(el=>io.observe(el));
     // техніка ховається, коли блок іде з екрана, і щоразу виїжджає заново
     const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>=.25)e.target.classList.add("seen");else if(!e.isIntersecting)e.target.classList.remove("seen")}),{threshold:[0,.25]});
-    document.querySelectorAll(".mixer-art,.loader").forEach(el=>io2.observe(el));
+    document.querySelectorAll(".mixer-art,.loader,.dost-art").forEach(el=>io2.observe(el));
     // нові картки каталогу після фільтра — одразу видимі
     document.querySelectorAll("#kgrid .card").forEach(c=>c.classList.add("seen"));
     if($("kgrid"))new MutationObserver(()=>document.querySelectorAll("#kgrid .card:not(.rv)").forEach(c=>c.classList.add("rv","seen"))).observe($("kgrid"),{childList:true});

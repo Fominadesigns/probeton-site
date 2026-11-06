@@ -555,6 +555,23 @@ footer .in{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-betwe
 .person .c{position:absolute;inset:0;opacity:0;transition:opacity .45s ease,transform .6s ease}
 .person:hover .c,.person:focus-within .c{opacity:1}
 @media (max-width:1040px){.mixer-art{width:min(80vw,460px);justify-self:start;margin-bottom:0}}
+/* доставка плитки маніпулятором: петрольне тло, машина стоїть на «дорозі» внизу блоку */
+.dost{background:var(--teal-deep);position:relative;overflow:hidden;padding-bottom:0}
+.dost::before{content:"";position:absolute;top:0;left:-6%;width:46%;height:100%;pointer-events:none;
+  background:linear-gradient(112deg,transparent 0 58%,rgba(255,255,255,.05) 58% 70%,transparent 70%)}
+.dost > .in{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(24px,4vw,64px);align-items:end}
+.dost-txt{display:grid;gap:18px;align-content:start;align-self:center;padding-bottom:clamp(40px,5vw,80px)}
+.dost .lead{color:#CFE3E6}
+.dost .slant.or::after{background:var(--teal-lt)}
+.dost-cta{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin-top:6px}
+.dost-note{font:700 11px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--teal-lt)}
+.dost-art{position:relative;margin-bottom:-34px}
+.dost-art img{display:block;width:100%;height:auto;filter:drop-shadow(0 26px 22px rgba(0,0,0,.45))}
+.road{position:relative;z-index:1;height:clamp(64px,7vw,96px);background:var(--asphalt)}
+.road::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:var(--signal)}
+.road::after{content:"";position:absolute;left:0;right:0;top:calc(50% + 6px);height:5px;translate:0 -50%;
+  background:repeating-linear-gradient(90deg,#F2F1EC 0 54px,transparent 54px 108px)}
+@media (max-width:1040px){.dost > .in{grid-template-columns:1fr}.dost-txt{padding-bottom:0}.dost-art{width:min(100%,560px);justify-self:end;margin-bottom:-22px}}
 
 /* ---------- анімації (вмикаються скриптом, без нього все видно одразу) ---------- */
 @keyframes rise{from{opacity:0;translate:0 34px}}
@@ -578,6 +595,10 @@ html.anim .loader{opacity:0}
 html.anim .loader.seen{opacity:1;--from:420px;animation:drive 3.2s cubic-bezier(.25,.8,.3,1) both}
 html.anim #tekhnika::before{clip-path:inset(0 0 0 100%);transition:clip-path 1.1s cubic-bezier(.2,.7,.2,1)}
 html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
+html.anim .dost-art img{opacity:0}
+html.anim .dost-art.seen img{opacity:1;--from:min(70vw,900px);animation:drive 3.4s cubic-bezier(.22,.8,.28,1) both,idle 2.4s ease-in-out 3.5s infinite}
+html.anim .dost .road::after{clip-path:inset(0 0 0 100%);transition:clip-path 0s}
+html.anim .dost:has(.dost-art.seen) .road::after{clip-path:inset(0 0 0 0);transition:clip-path 3.2s cubic-bezier(.22,.8,.28,1)}
 .slant{transition:transform .3s}
 
 /* ---------- акції ---------- */
@@ -793,7 +814,8 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
 *,*::before,*::after{border-radius:0!important}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}
-  html.anim .rv,html.anim .mixer-art img,html.anim .loader{opacity:1;translate:none}
+  html.anim .rv,html.anim .mixer-art img,html.anim .loader,html.anim .dost-art img{opacity:1;translate:none}
+  html.anim .dost .road::after{clip-path:none}
   html.anim #beton .stripes i{transform:skewX(-22deg)}html.anim #tekhnika::before{clip-path:none}}
 </style>
 </head>
@@ -936,8 +958,20 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   </div>
 </section>
 
+<!-- ДОСТАВКА МАНІПУЛЯТОРОМ (головна, бруківка): машина заїжджає справа, за нею малюється розмітка -->
+<section class="band dark dost" id="dostavka">
+  <div class="in">
+    <div class="dost-txt"><span class="eyebrow">Своя доставка</span>
+      <h2>Привеземо <span class="slant or"><span>й&nbsp;вивантажимо</span></span></h2>
+      <p class="lead">Своїм краном-маніпулятором по&nbsp;Києву та&nbsp;області: піддони плитки, кільця й&nbsp;плити — точно на&nbsp;місце. Від&nbsp;100&nbsp;м² плитки доставка безкоштовна.</p>
+      <div class="dost-cta"><a class="btn btn-or" href="#calc">Прорахувати доставку</a><span class="dost-note">Умови для вашої адреси уточнить менеджер</span></div></div>
+    <div class="dost-art" aria-hidden="true"><img src="img/manipulyator.webp" alt="" width="1200" height="708" loading="lazy"></div>
+  </div>
+  <div class="road" aria-hidden="true"></div>
+</section>
+
 <!-- АКЦІЇ -->
-<section class="band" id="akcii" style="padding-top:0">
+<section class="band" id="akcii">
   <div class="in">
     <div class="band-head"><div><span class="eyebrow">Акційні пропозиції</span><h2>Вигідно <span class="slant or"><span>цього тижня</span></span></h2></div><a class="mgr" href="tel:+380932504041"><i class="mgr-ph" aria-hidden="true"></i><span><small>Відділ продажу · Павло Яковенко</small><b>+380 93 250 40 41</b><em>Дзвоніть, щоб дізнатись умови для вашого об'єкта</em></span></a></div>
     <div class="promo" id="promo"></div>
@@ -960,28 +994,44 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   </div>
 </section>
 
-<!-- ЯК ПРАЦЮЄМО -->
-<section class="band photo" id="flow">
+<!-- ТЕХНІКА -->
+<section class="band dark" id="tekhnika">
   <div class="in">
-    <div class="band-head"><div><span class="eyebrow">Як ми працюємо</span><h2 class="cyc" id="stpWords"><span class="w on">Заявка.</span> <span class="w">Прорахунок.</span> <span class="w">Доставка.</span> <span class="w">Монтаж.</span></h2></div></div>
-    <div class="stp" id="stp">
-      <div class="stp-tabs" role="tablist" aria-label="Кроки роботи">
-        <button class="stp-tab on" role="tab" aria-selected="true" data-i="0"><i class="stp-ic"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></i><span><small>Крок 01</small><b>Заявка</b></span></button>
-        <button class="stp-tab" role="tab" aria-selected="false" data-i="1"><i class="stp-ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg></i><span><small>Крок 02</small><b>Прорахунок</b></span></button>
-        <button class="stp-tab" role="tab" aria-selected="false" data-i="2"><i class="stp-ic"><svg viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 9h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></i><span><small>Крок 03</small><b>Доставка</b></span></button>
-        <button class="stp-tab" role="tab" aria-selected="false" data-i="3"><i class="stp-ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></i><span><small>Крок 04</small><b>Монтаж</b></span></button>
+    <img class="loader" src="img/navantazhuvach.png" alt="" aria-hidden="true" width="691" height="418">
+    <div class="band-head tech-head"><div><span class="eyebrow">Свій автопарк</span><h2>Спецтехніка <span class="slant"><span>на ваш об'єкт</span></span></h2><p class="lead">Оренда й подача техніки в будь-яку точку Києва та Київської області.</p>
+      <div class="tech-cta"><a class="btn btn-line" href="#kontakty">Замовити на дату</a>
+        <a class="mgr" href="tel:+380932504041"><i class="mgr-ph" aria-hidden="true"></i><span><small>Відділ продажу · Павло Яковенко</small><b>+380 93 250 40 41</b><em>Дзвоніть, щоб дізнатись умови для вашого об'єкта</em></span></a></div></div></div>
+    <div class="fleet">
+      <div class="mach hl">
+        <svg viewBox="0 0 84 52" fill="none" stroke="#F46322" stroke-width="2.4" stroke-linejoin="round"><rect x="3" y="26" width="44" height="14" rx="2"/><path d="M47 40V28h16l14 10v2z"/><circle cx="16" cy="43" r="6" fill="currentColor"/><circle cx="64" cy="43" r="6" fill="currentColor"/><path d="M12 26 30 6h24l10 10"/><path d="M64 16v10"/></svg>
+        <h3>Бетононасос</h3><p>Подача бетону в найменш доступні місця, висока продуктивність.</p><a href="#calc">Прорахувати →</a>
       </div>
-      <div class="stp-nav"><button type="button" class="stp-arr" data-d="-1" aria-label="Попередній крок"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="stp-cap"><b class="num" id="stpCount">01 / 04</b><span>Гортайте стрілками всі кроки</span></div><button type="button" class="stp-arr" data-d="1" aria-label="Наступний крок"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button></div>
-      <div class="stp-panel" role="tabpanel" aria-live="polite">
-        <div class="stp-side"><b class="stp-n num" id="stpN">01</b><i class="stp-ic big" id="stpIc"></i><small>Головне</small><span id="stpK">5 хвилин на дзвінок</span></div>
-        <div class="stp-body"><h3 id="stpT">Заявка</h3><p id="stpP"></p><ul class="stp-ok" id="stpOk"></ul></div>
+      <div class="mach">
+        <svg viewBox="0 0 84 52" fill="none" stroke="#F46322" stroke-width="2.4" stroke-linejoin="round"><rect x="3" y="28" width="42" height="12" rx="2"/><path d="M45 40V28h16l14 10v2z"/><circle cx="16" cy="43" r="6"/><circle cx="62" cy="43" r="6"/><path d="M22 28 40 6h18M58 6v12"/><path d="M54 18h8v5h-8z"/></svg>
+        <h3>Кран-маніпулятор</h3><p>Швидка доставка й точне вивантаження: кільця, плити, піддони плитки.</p><a href="#kontakty">Замовити →</a>
+      </div>
+      <div class="mach">
+        <svg viewBox="0 0 84 52" fill="none" stroke="#F46322" stroke-width="2.4" stroke-linejoin="round"><path d="M3 36 10 14h34l4 22z"/><path d="M48 40V22h13l14 12v6z"/><circle cx="16" cy="43" r="6"/><circle cx="62" cy="43" r="6"/></svg>
+        <h3>Самоскид</h3><p>Велика вантажопідйомність для будівництва й перевезень.</p><a href="#kontakty">Замовити →</a>
+      </div>
+      <div class="mach">
+        <svg viewBox="0 0 84 52" fill="none" stroke="#F46322" stroke-width="2.4" stroke-linejoin="round"><rect x="6" y="34" width="38" height="10" rx="5"/><path d="M14 34V22h20v12"/><path d="M34 22 56 8l14 18"/><path d="M70 26v14l-4 4"/></svg>
+        <h3>Екскаватор і гідромолот</h3><p>Земляні роботи й демонтаж: швидко та з точністю.</p><a href="#kontakty">Замовити →</a>
+      </div>
+      <div class="mach">
+        <svg viewBox="0 0 84 52" fill="none" stroke="#F46322" stroke-width="2.4" stroke-linejoin="round"><path d="M6 40h72"/><path d="M10 40V28h18v12M32 40V22h18v18M54 40V30h18v10"/></svg>
+        <h3>Доставка ЗБВ</h3><p>Кільця, балки, плити перекриття — пунктуально й з гарантією якості.</p><a href="zbv/">Що возимо →</a>
+      </div>
+      <div class="mach">
+        <svg viewBox="0 0 84 52" fill="none" stroke="#F46322" stroke-width="2.4" stroke-linejoin="round"><path d="M4 44h76"/><path d="M8 36h16v8H8zM26 36h22v8H26zM50 36h12v8H50zM64 36h16v8H64zM8 28h24v8H8zM34 28h14v8H34zM50 28h22v8H50z"/></svg>
+        <h3>Укладання плитки</h3><p>Від продажу й доставки до готової бруківки на вашому об'єкті.</p><a href="bruk/">Обрати плитку →</a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- КАЛЬКУЛЯТОР + ПИТАННЯ -->
-<section class="band" id="faq" style="padding-top:0">
+<section class="band" id="faq">
   <div class="in">
     <div class="band-head"><div><span class="eyebrow">Калькулятор і відповіді</span><h2>Порахуйте <span class="slant"><span>свій об'єкт</span></span></h2></div></div>
     <div class="cf">
@@ -1027,8 +1077,28 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
   </div>
 </section>
 
+<!-- ЯК ПРАЦЮЄМО -->
+<section class="band photo" id="flow">
+  <div class="in">
+    <div class="band-head"><div><span class="eyebrow">Як ми працюємо</span><h2 class="cyc" id="stpWords"><span class="w on">Заявка.</span> <span class="w">Прорахунок.</span> <span class="w">Доставка.</span> <span class="w">Монтаж.</span></h2></div></div>
+    <div class="stp" id="stp">
+      <div class="stp-tabs" role="tablist" aria-label="Кроки роботи">
+        <button class="stp-tab on" role="tab" aria-selected="true" data-i="0"><i class="stp-ic"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></i><span><small>Крок 01</small><b>Заявка</b></span></button>
+        <button class="stp-tab" role="tab" aria-selected="false" data-i="1"><i class="stp-ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg></i><span><small>Крок 02</small><b>Прорахунок</b></span></button>
+        <button class="stp-tab" role="tab" aria-selected="false" data-i="2"><i class="stp-ic"><svg viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 9h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></i><span><small>Крок 03</small><b>Доставка</b></span></button>
+        <button class="stp-tab" role="tab" aria-selected="false" data-i="3"><i class="stp-ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></i><span><small>Крок 04</small><b>Монтаж</b></span></button>
+      </div>
+      <div class="stp-nav"><button type="button" class="stp-arr" data-d="-1" aria-label="Попередній крок"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="stp-cap"><b class="num" id="stpCount">01 / 04</b><span>Гортайте стрілками всі кроки</span></div><button type="button" class="stp-arr" data-d="1" aria-label="Наступний крок"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button></div>
+      <div class="stp-panel" role="tabpanel" aria-live="polite">
+        <div class="stp-side"><b class="stp-n num" id="stpN">01</b><i class="stp-ic big" id="stpIc"></i><small>Головне</small><span id="stpK">5 хвилин на дзвінок</span></div>
+        <div class="stp-body"><h3 id="stpT">Заявка</h3><p id="stpP"></p><ul class="stp-ok" id="stpOk"></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- КОНТАКТИ -->
-<section class="band dark" id="kontakty">
+<section class="band dark plain" id="kontakty">
   <div class="in contact">
     <div>
       <span class="eyebrow">Контакти</span>
@@ -1400,7 +1470,7 @@ html.anim #tekhnika.seen::before{clip-path:inset(0 0 0 0)}
     document.querySelectorAll(".rv,#tekhnika,#beton").forEach(el=>io.observe(el));
     // техніка ховається, коли блок іде з екрана, і щоразу виїжджає заново
     const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>=.25)e.target.classList.add("seen");else if(!e.isIntersecting)e.target.classList.remove("seen")}),{threshold:[0,.25]});
-    document.querySelectorAll(".mixer-art,.loader").forEach(el=>io2.observe(el));
+    document.querySelectorAll(".mixer-art,.loader,.dost-art").forEach(el=>io2.observe(el));
     // нові картки каталогу після фільтра — одразу видимі
     document.querySelectorAll("#kgrid .card").forEach(c=>c.classList.add("seen"));
     if($("kgrid"))new MutationObserver(()=>document.querySelectorAll("#kgrid .card:not(.rv)").forEach(c=>c.classList.add("rv","seen"))).observe($("kgrid"),{childList:true});
