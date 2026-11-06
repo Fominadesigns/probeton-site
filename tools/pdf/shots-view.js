@@ -26,7 +26,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await open("");
   await view("hero", null);
   await view("stats", ".ticker");
-  for (const id of ["beton", "cats", "bruk", "akcii", "perevagy", "flow", "faq", "kontakty"]) await view(id, "#" + id);
+  for (const id of ["beton", "cats", "bruk", "dostavka", "akcii", "perevagy", "tekhnika", "faq", "flow", "kontakty"]) await view(id, "#" + id);
   // віконце дзвінка
   await view("callback", "#perevagy", -40);
   await page.addStyleTag({ content: ".cb-fab{display:grid!important}" });

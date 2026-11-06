@@ -4,10 +4,10 @@
 const puppeteer = require("puppeteer-core");
 const fs = require("fs"), path = require("path");
 const B = require("./blocks.js");
-const OUT_PDF = process.env.OUT_PDF || path.join(__dirname, "../../probeton-sait-prezentatsiya.pdf");
+const OUT_PDF = process.env.OUT_PDF || "C:/Users/Acer/Desktop/projects/probeton-site/probeton-sait-prezentatsiya.pdf";
 const OUT_HTML = path.join(__dirname, "prezentatsiya-h.html");
 const SITE = "fominadesigns.github.io/probeton-site";
-const LOGO = path.join(__dirname, "../../img/logo.png").split(path.sep).join("/");
+const LOGO = "C:/Users/Acer/Desktop/projects/probeton-site/img/logo.png";
 
 const jpgSize = f => { const b = fs.readFileSync(f); let i = 2; while (i < b.length) { if (b[i] !== 0xFF) { i++; continue; } const m = b[i + 1], L = b.readUInt16BE(i + 2); if (m >= 0xC0 && m <= 0xC3) return [b.readUInt16BE(i + 7), b.readUInt16BE(i + 5)]; i += 2 + L; } return [16, 9]; };
 const ratio = id => { const [w, h] = jpgSize(path.join(__dirname, "shots", id + ".jpg")); return h / w; };
@@ -43,6 +43,23 @@ slides.push(`<section class="pg cover">
     <div class="cm"><p class="meta">${SITE}</p><p class="meta mut">${B.length} БЛОКІВ · ЩО ЦЕ · ЧОМУ ТАК · ЯК ПРОДАЄ</p></div>
   </div>
   <div class="cr"></div>
+</section>`);
+// слайд з відео: у PDF — кадр і посилання, у веб-версії — плеєр і розділи, що перемотують відео
+const WEB_URL = "fominadesigns.github.io/probeton-site/prezentatsiya/";
+const MARKS = fs.existsSync(path.join(__dirname, "rec", "marks.json")) ? JSON.parse(fs.readFileSync(path.join(__dirname, "rec", "marks.json"))) : [];
+const mmss = s => Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+n++;
+slides.push(`<section class="pg" id="video">
+  <div class="bar"></div>
+  ${head("Відео · запис екрана", "Сайт у русі", "Анімації, кнопки, віконце дзвінка й усі сторінки — так сайт бачить відвідувач")}
+  <div class="vsplit">
+    <div class="vl">
+      <div class="laptop"><div class="lid"><!--VIDEO--><img class="vp" src="rec/poster.jpg" alt=""><!--/VIDEO--></div><div class="base"></div></div>
+      <div class="vnote"><!--VNOTE-->${esc("Відео відтворюється у веб-версії презентації:")} <b>${WEB_URL}</b><!--/VNOTE--></div>
+    </div>
+    <div class="chap"><p class="lbl">Розділи відео</p>${MARKS.map(([t, s]) => `<button type="button" data-t="${s}"><span class="t">${mmss(s)}</span><span>${esc(t)}</span></button>`).join("")}</div>
+  </div>
+  ${foot(n)}
 </section>`);
 n++;
 slides.push(`<section class="pg">
@@ -140,7 +157,7 @@ footer{position:absolute;left:12mm;right:12mm;bottom:3.5mm;display:flex;justify-
 .cp{font-size:12pt;line-height:1.5;color:#B9BDC2}
 .cm{display:grid;gap:2mm}
 .meta{font:700 8.5pt/1.5 'JetBrains Mono',monospace;letter-spacing:.08em;color:#3DB7C2}.meta.mut{color:#8F949A}
-.cr{background:url(file:///${LOGO.replace("logo.png", "fon-heroi-3.webp")}) 42% center/cover;border-left:2.6mm solid #F46322}
+.cr{background:url(file:///C:/Users/Acer/Desktop/projects/probeton-site/img/fon-heroi-3.webp) 42% center/cover;border-left:2.6mm solid #F46322}
 .logic{flex:1;display:grid;grid-template-rows:auto 1fr auto 1fr;gap:5mm;min-height:0}
 .lead2{font-size:12.5pt;line-height:1.55;color:#33363A;max-width:250mm}
 .flow5{display:grid;grid-template-columns:repeat(5,1fr);gap:2.5mm}
@@ -166,6 +183,16 @@ footer{position:absolute;left:12mm;right:12mm;bottom:3.5mm;display:flex;justify-
 .steps4 i{font:700 9pt/1 'JetBrains Mono',monospace;font-style:normal;color:#F46322}.steps4 b{font:400 12pt/1.2 'Dela Gothic One',sans-serif}.steps4 span{font-size:10pt;line-height:1.4;color:#B9BDC2}
 .need{display:grid;gap:2mm;font-size:10.5pt;line-height:1.4;color:#C9CCD0;background:#1F2124;padding:5mm 6mm;flex:1;align-content:center}
 .need span::before{content:"— ";color:#F46322}
+.dk .sell .sec p{color:#1A0E06}
+.vsplit{display:grid;grid-template-columns:200mm 1fr;gap:7mm;height:${BODY_H}mm;min-height:0}
+.vl{display:flex;flex-direction:column;gap:5mm;justify-content:center}
+.vl .laptop{width:100%}
+.lid video,.lid img.vp{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;background:#000}
+.vnote{background:#F46322;padding:4mm 6mm;font-size:11pt;line-height:1.45;color:#1A0E06}.vnote b{font-weight:700;color:#141517}
+.chap{display:flex;flex-direction:column;min-height:0}
+.chap .lbl{margin-bottom:2.5mm}
+.chap button{display:grid;grid-template-columns:12mm 1fr;gap:2mm;align-items:baseline;padding:1.45mm 0;border:0;border-top:1px solid #CDCFCA;background:none;font:500 10pt/1.25 Onest,sans-serif;color:#141517;text-align:left;cursor:pointer}
+.chap .t{font:700 8.5pt/1 'JetBrains Mono',monospace;color:#F46322}
 `;
 
 const CSS_ALL = css + MK.css;
@@ -202,8 +229,11 @@ fs.writeFileSync(OUT_HTML, html);
     const l = p.querySelector(".split .l"); if (l) { const kids = [...l.children]; const gap = (l.getBoundingClientRect().bottom - kids[kids.length - 1].getBoundingClientRect().bottom) / 3.78; if (gap > 8) out.push("ліворуч порожньо " + Math.round(gap) + "мм"); }
     return out.length ? (i + 1) + ": " + out.join("; ") : null; }).filter(Boolean));
   console.log("slides", await page.evaluate(() => document.querySelectorAll(".pg").length));
+  // веб-версія: ті самі слайди після підбору кегля + плеєр замість кадру
+  if (process.env.WEB_DIR) await require("./web.js")(browser, await page.evaluate(() => [...document.querySelectorAll(".pg")].map(p => p.outerHTML).join("\n")), CSS_ALL, process.env.WEB_DIR);
   console.log(rep.join("\n"));
   await page.pdf({ path: OUT_PDF, width: "297mm", height: "210mm", printBackground: true, preferCSSPageSize: true });
   await browser.close();
+  if (process.env.WEB_DIR) fs.copyFileSync(OUT_PDF, path.join(process.env.WEB_DIR, "probeton-prezentatsiya.pdf"));
   console.log(OUT_PDF, (fs.statSync(OUT_PDF).size / 1048576).toFixed(1) + " MB");
 })();
