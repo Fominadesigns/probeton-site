@@ -220,6 +220,7 @@ footer{position:absolute;left:12mm;right:12mm;bottom:3.5mm;display:flex;justify-
 .spd b{font:400 30pt/1 'Dela Gothic One',sans-serif;color:#F46322;font-weight:400}
 .spd b::before{content:"→ ";font-size:17pt;color:#9EA2A7}
 .spd span{font-size:10.5pt;line-height:1.4;color:#B9BDC2}
+.spd s:empty{display:none}.spd s:empty + b::before{content:none}
 .pr2{grid-template-columns:1fr 1fr;grid-auto-rows:1fr}
 .pr2 div{justify-content:center}
 `;
