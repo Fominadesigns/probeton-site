@@ -351,6 +351,8 @@ a{color:inherit}
 
 /* фото-розділи: оригінальні фони з probeton.com.ua без розмиття */
 .photo{color:#fff;background:linear-gradient(180deg,rgba(14,15,17,.35) 0%,rgba(14,15,17,.55) 45%,rgba(14,15,17,.92) 100%),url(img/fon-komanda.webp) center 30%/cover no-repeat var(--asphalt);padding-top:clamp(120px,18vw,260px)}
+/* ліниві фони: поки блок далеко від екрана, фото не вантажиться (клас lzb ставить скрипт у <head>, bgok — скрипт прокрутки) */
+html.lzb .lzbg:not(.bgok){background-image:none!important}
 .photo .eyebrow::before{background:repeating-linear-gradient(-45deg,var(--mark) 0 4px,transparent 4px 8px)}
 .photo h2{text-shadow:0 4px 30px rgba(0,0,0,.4)}
 .photo .flow li{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.18);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#fff}
@@ -842,7 +844,7 @@ html.anim .dost:has(.dost-art.seen) .road::after{clip-path:inset(0 0 0 0);transi
   <div class="in">
     <div>
       <span class="eyebrow">Дилер заводу Ковальська · Київ і область</span>
-      <h1 id="heroWords" class="cyc"><span class="w on">Бетон.</span> <span class="w">Бруківка.</span> <span class="w">Техніка.</span></h1>
+      <h1 id="heroWords" class="cyc"><span class="w on">Бетон.</span> <span class="w">Бруківка.</span> <span class="w">Техніка.</span><span class="sr"> ПроБетон: бетон, тротуарна плитка Ковальська, ЗБВ і спецтехніка з доставкою по Києву та області</span></h1>
       <p class="lead">Бетон від В7,5 до В35, тротуарна плитка,<br class="d"> кільця й плити перекриття. Привеземо своєю технікою,<br class="d"> подамо насосом і покладемо плитку під ключ.</p>
       <div class="ctas">
         <a class="btn btn-or" href="#calc">Прорахувати замовлення <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -899,7 +901,7 @@ html.anim .dost:has(.dost-art.seen) .road::after{clip-path:inset(0 0 0 0);transi
 <!-- БЕТОН -->
 <section class="band" id="beton">  <div class="in">
     <div class="band-head"><div><span class="eyebrow">Бетон</span><h2>Який бетон? <span class="slant"><span>Якісний</span></span></h2><p class="lead">Сім марок — від стяжки до перекриття. Привеземо міксером і подамо насосом.</p></div>
-      <div class="mixer-art" aria-hidden="true"><img src="img/betonozmishuvach.webp" alt="" width="1200" height="740"></div></div>
+      <div class="mixer-art" aria-hidden="true"><img src="img/betonozmishuvach.webp" alt="" width="1200" height="740" loading="lazy" decoding="async"></div></div>
     <div class="beton">
       <div class="grades">
         <span class="lbl" style="font:700 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)">Оберіть марку</span>
@@ -939,7 +941,7 @@ html.anim .dost:has(.dost-art.seen) .road::after{clip-path:inset(0 0 0 0);transi
     <div class="band-head"><div><span class="eyebrow">Бруківка Ковальська</span><h2>Оберіть колір — <span class="slant"><span>побачите двір</span></span></h2></div><a class="btn btn-line" href="#calc">Укладання під ключ</a></div>
 
     <div class="show">
-      <div class="pave" id="pave" role="img" aria-label="Візуалізація укладеної плитки Лайнстоун"><div class="tex" id="pimg" style="background-image:url(img/dvir/ls-terra.webp)"></div><span class="lab" id="plab">Лайнстоун · терра</span></div>
+      <div class="pave" id="pave" role="img" aria-label="Візуалізація укладеної плитки Лайнстоун"><div class="tex lzbg" id="pimg" style="background-image:url(img/dvir/ls-terra.webp)"></div><span class="lab" id="plab">Лайнстоун · терра</span></div>
       <div class="info">
         <div class="msel" id="msel" role="group" aria-label="Модель бруківки"></div>
         <span class="lbl" id="mlbl" style="font:700 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)">Хіт продажів</span>
@@ -1088,7 +1090,7 @@ html.anim .dost:has(.dost-art.seen) .road::after{clip-path:inset(0 0 0 0);transi
 <!-- ТЕХНІКА -->
 <section class="band dark" id="tekhnika">
   <div class="in">
-    <img class="loader" src="img/navantazhuvach.png" alt="" aria-hidden="true" width="691" height="418">
+    <img class="loader" src="img/navantazhuvach.webp" alt="" aria-hidden="true" width="691" height="418" loading="lazy" decoding="async">
     <div class="band-head tech-head"><div><span class="eyebrow">Свій автопарк</span><h2>Спецтехніка <span class="slant"><span>на ваш об'єкт</span></span></h2><p class="lead">Оренда й подача техніки в будь-яку точку Києва та Київської області.</p>
       <div class="tech-cta"><a class="btn btn-line" href="#kontakty">Замовити на дату</a>
         <a class="mgr" href="tel:+380932504041"><i class="mgr-ph" aria-hidden="true"></i><span><small>Відділ продажу · Павло Яковенко</small><b>+380 93 250 40 41</b><em>Дзвоніть, щоб дізнатись умови для вашого об'єкта</em></span></a></div></div></div>
@@ -1137,7 +1139,7 @@ html.anim .dost:has(.dost-art.seen) .road::after{clip-path:inset(0 0 0 0);transi
 </section>
 
 <!-- ЯК ПРАЦЮЄМО -->
-<section class="band photo" id="flow">
+<section class="band photo lzbg" id="flow">
   <div class="in">
     <div class="band-head"><div><span class="eyebrow">Як ми працюємо</span><h2 class="cyc" id="stpWords"><span class="w on">Заявка.</span> <span class="w">Прорахунок.</span> <span class="w">Доставка.</span> <span class="w">Монтаж.</span></h2></div></div>
     <div class="stp" id="stp">
@@ -1182,7 +1184,7 @@ html.anim .dost:has(.dost-art.seen) .road::after{clip-path:inset(0 0 0 0);transi
 </section>
 
 <!-- КОНТАКТИ -->
-<section class="band dark" id="kontakty">
+<section class="band dark lzbg" id="kontakty">
   <div class="in contact">
     <div>
       <span class="eyebrow">Контакти</span>
@@ -1312,7 +1314,9 @@ html.anim .dost:has(.dost-art.seen) .road::after{clip-path:inset(0 0 0 0);transi
   ];
   if($("pave")){
   const pimg=$("pimg"),pave=$("pave");let mi=0,ci=0;
-  M.forEach(m=>m.c.forEach(c=>{const i=new Image();i.src="img/dvir/"+c[1]+".webp"}));
+  // кольори моделі підтягуємо заздалегідь, але лише коли блок близько до екрана — інакше головна вантажить 2 МБ одразу
+  const warmed={},warm=k=>{if(warmed[k])return;warmed[k]=1;M[k].c.forEach(c=>{const i=new Image();i.src="img/dvir/"+c[1]+".webp"})};
+  new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){warm(0);o.disconnect()}},{rootMargin:"400px"}).observe(pave);
   const hPrice=()=>document.querySelector("#hsel [aria-pressed='true']").dataset.p;
   function setColor(i,anim){
     const m=M[mi],c=m.c[i];ci=i;
@@ -1329,10 +1333,10 @@ html.anim .dost:has(.dost-art.seen) .road::after{clip-path:inset(0 0 0 0);transi
     $("mlbl").textContent=m.lb;$("mname").textContent=m.n;$("mtext").innerHTML=m.d.split("|").join("<br>");tidy($("mtext").parentNode);
     $("hsel").hidden=!m.h;
     $("sws").innerHTML="";
-    m.c.forEach((c,i)=>{const b=document.createElement("button");b.type="button";b.className="sw";b.style.backgroundImage="url(img/"+c[1]+".webp)";b.title=c[0];b.setAttribute("aria-label",c[0]);b.onclick=()=>setColor(i,true);$("sws").appendChild(b)});
+    m.c.forEach((c,i)=>{const b=document.createElement("button");b.type="button";b.className="sw";b.style.background="url(img/sw/"+c[1]+".webp) center/cover";b.title=c[0];b.setAttribute("aria-label",c[0]);b.onclick=()=>setColor(i,true);$("sws").appendChild(b)});
     setColor(0,anim);
   }
-  M.forEach((m,k)=>{const b=document.createElement("button");b.type="button";b.textContent=m.lb==="Хіт продажів"?"Лайнстоун":m.lb;b.onclick=()=>setModel(k,true);$("msel").appendChild(b)});
+  M.forEach((m,k)=>{const b=document.createElement("button");b.type="button";b.textContent=m.lb==="Хіт продажів"?"Лайнстоун":m.lb;b.onclick=()=>{warm(k);setModel(k,true)};$("msel").appendChild(b)});
   document.querySelectorAll("#hsel button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#hsel button").forEach(x=>x.setAttribute("aria-pressed",x===b));$("pprice").textContent=b.dataset.p+NB+"₴"});
   setModel(0,false);
   // висота картки не стрибає: міряємо всі моделі й ставимо найбільшу (і заново при зміні ширини)
@@ -1376,7 +1380,7 @@ html.anim .dost:has(.dost-art.seen) .road::after{clip-path:inset(0 0 0 0);transi
   // фото товару в картці: для бруківки — суцільна викладка з img/dvir (без рваних країв), для бордюрів і лотків — фото виробу
   const TEXW={ls:"100%",pt:"40%",sm:"93%",bruk:"40%"};
   const phOf=(p,alt)=>{const k=(p.img.match(/^(ls|pt|sm|bruk)-/)||[])[1];
-    return k?'<div class="ph tex" role="img" aria-label="'+alt+'" style="background-image:url(img/dvir/'+p.img+');background-size:'+TEXW[k]+' auto">'
+    return k?'<div class="ph tex lzbg" role="img" aria-label="'+alt+'" style="background-image:url(img/dvir/'+p.img+');background-size:'+TEXW[k]+' auto">'
             :'<div class="ph'+(p.fit?' fit':'')+'"><img src="img/'+p.img+'" alt="'+alt+'" loading="lazy">'};
 
   /* ---- головна: лічильники в картках категорій ---- */
@@ -1527,6 +1531,13 @@ html.anim .dost:has(.dost-art.seen) .road::after{clip-path:inset(0 0 0 0);transi
     bg.onclick=()=>setM(!tp.classList.contains("open"));
     document.querySelectorAll(".top nav a").forEach(a=>a.addEventListener("click",()=>setM(false)));
     addEventListener("keydown",e=>{if(e.key==="Escape"&&tp.classList.contains("open"))setM(false)})}
+
+  /* ---- фонові фото нижніх блоків вантажимо, коли до них лишається ~1,5 екрана ---- */
+  if(document.documentElement.classList.contains("lzb")){
+    const lz=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("bgok");lz.unobserve(e.target)}}),{rootMargin:"1200px 0px"});
+    const scan=()=>document.querySelectorAll(".lzbg:not(.bgok)").forEach(el=>lz.observe(el));
+    scan();new MutationObserver(scan).observe(document.body,{childList:true,subtree:true});
+  }
 
   /* ---- перший екран = висота вікна мінус шапка ---- */
   const top=document.querySelector(".top");
