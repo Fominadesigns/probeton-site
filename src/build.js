@@ -22,7 +22,8 @@ const NAV = [["beton/", "Бетон"], ["bruk/", "Бруківка"], ["zbv/", "
 const PAGE_OF = { beton: "beton/", bruk: "bruk/", katalog: "bruk/", zbv: "zbv/", tekhnika: "tekhnika/", about: "pro-nas/" };
 
 // Адреса сайту для canonical, sitemap і розмітки. Під час переїзду на probeton.com.ua — змінити тут один рядок.
-const SITE = "https://fominadesigns.github.io/probeton-site/";
+// З 09.11.2026 основна адреса — Vercel (там robots.txt, sitemap і llms.txt у корені домену). GitHub Pages лишається дзеркалом.
+const SITE = "https://probeton-site-beta.vercel.app/";
 
 // Заголовки (title) — до ~60 знаків, ключові слова спереду; описи — 140–160 знаків, з причиною подзвонити.
 // Факти — лише ті, що вже є на сайті (марки, Ковальська, своя техніка, 5 хвилин, від 100 м² доставка безкоштовна).

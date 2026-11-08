@@ -1,0 +1,11 @@
+# Не публікувати: пропозиція з аудитом, бриф, оригінали фото, робочі файли
+proposal.html
+brief.md
+probeton-brend-i-bryf.html
+shryfty.html
+probeton-sait-prezentatsiya.pdf
+originals
+src
+tools
+.git
+.nojekyll
