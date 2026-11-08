@@ -438,7 +438,13 @@ footer .in{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-betwe
   .stat:nth-child(2){border-right:0}
   .stat:nth-child(3){padding-left:0}
   .stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
-  .hero{background:linear-gradient(180deg,rgba(13,14,16,.55) 0%,rgba(13,14,16,.86) 34%,rgba(13,14,16,.96) 60%),url(../img/fon-heroi-3.webp) 34% 0/auto 520px no-repeat var(--asphalt)}
+  /* телефон: фото на верхні 640px, людина праворуч від тексту; затемнення зліва під текстом, справа — світліше */
+  .hero{background:linear-gradient(90deg,rgba(13,14,16,.78) 0%,rgba(13,14,16,.5) 55%,rgba(13,14,16,.2) 100%),linear-gradient(180deg,rgba(13,14,16,.15) 0%,rgba(13,14,16,0) 30%,rgba(13,14,16,.85) 560px,var(--asphalt) 640px),url(../img/fon-heroi-3.webp) 27% 0/auto 640px no-repeat var(--asphalt)}
+  /* «Як ми працюємо»: у кадрі двоє людей у центрі */
+  #flow.photo{background:linear-gradient(180deg,rgba(14,15,17,.35) 0%,rgba(14,15,17,.5) 300px,rgba(14,15,17,.92) 620px,rgba(14,15,17,.96) 100%),url(../img/fon-komanda.webp) 61% 0/auto 640px no-repeat var(--asphalt)}
+  /* контакти: інженер по центру екрана */
+  #kontakty{background:linear-gradient(180deg,rgba(20,21,23,.5) 0%,rgba(20,21,23,.62) 300px,rgba(20,21,23,.93) 640px,var(--asphalt) 760px),url(../img/fon-krany-2.webp) 31% 0/auto 760px no-repeat var(--asphalt)}
+  #kontakty.plain{background:var(--asphalt)}
   .band-head{grid-template-columns:1fr}
   .gscale{grid-template-columns:repeat(4,1fr)}
   .gout{grid-template-columns:1fr}
