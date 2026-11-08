@@ -778,7 +778,7 @@ html.anim .dost:has(.dost-art.seen) .road::after{clip-path:inset(0 0 0 0);transi
 .krange input::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:var(--asphalt);border:3px solid var(--signal);cursor:pointer;pointer-events:auto}
 .krange input::-moz-range-thumb{width:16px;height:16px;background:var(--asphalt);border:3px solid var(--signal);cursor:pointer;pointer-events:auto}
 .kcol{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
-.ksw{aspect-ratio:1;border:0;background-size:280%;background-position:center;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15);transition:transform .15s,box-shadow .15s}
+.ksw{aspect-ratio:1;border:0;background-size:cover;background-position:center;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15);transition:transform .15s,box-shadow .15s}
 .ksw:hover{transform:scale(1.08)}
 .ksw[aria-pressed="true"]{box-shadow:0 0 0 2px var(--concrete),0 0 0 4px var(--signal)}
 .kf-done,.kf-open{display:none}
@@ -798,7 +798,7 @@ html.anim .dost:has(.dost-art.seen) .road::after{clip-path:inset(0 0 0 0);transi
 .kmeta b{color:var(--asphalt);text-transform:capitalize}
 .kdots{display:flex;flex-wrap:wrap;gap:6px;width:100%}
 /* квадратики кольорів у картці: натиск — фото плитки в картці міняє колір */
-.kdot{width:26px;height:26px;padding:0;border:0;cursor:pointer;background-size:300%;background-position:center;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15);transition:transform .25s ease,box-shadow .25s ease}
+.kdot{width:26px;height:26px;padding:0;border:0;cursor:pointer;background-size:cover;background-position:center;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15);transition:transform .25s ease,box-shadow .25s ease}
 .kdot:hover{transform:scale(1.1)}
 .kdot[aria-pressed="true"]{box-shadow:0 0 0 2px var(--slab),0 0 0 4px var(--signal)}
 .kgo{padding:11px 16px;font-size:14px}
@@ -1347,7 +1347,7 @@ html.anim .dost:has(.dost-art.seen) .road::after{clip-path:inset(0 0 0 0);transi
       const s=h.toString();history.replaceState(null,"",s?"#"+s:location.pathname+location.search)};
     const kcat=$("kcat"),kcol=$("kcol"),pmin=$("pmin"),pmax=$("pmax"),rmin=$("rmin"),rmax=$("rmax");
     kcat.innerHTML=CATS.map(c=>'<label class="kchk"><input type="checkbox" value="'+c+'"><span>'+c+'</span><em class="num">'+P.filter(p=>p.cat===c).length+'</em></label>').join("");
-    kcol.innerHTML=COLS.map(c=>'<button type="button" class="ksw" data-c="'+c+'" title="'+c+'" aria-label="'+c+'" aria-pressed="false" style="background-image:url(img/'+SW[c]+'.webp)"></button>').join("");
+    kcol.innerHTML=COLS.map(c=>'<button type="button" class="ksw" data-c="'+c+'" title="'+c+'" aria-label="'+c+'" aria-pressed="false" style="background-image:url(img/sw/'+SW[c]+'.webp)"></button>').join("");
     [rmin,rmax].forEach(r=>{r.min=lo;r.max=hi;r.step=1});pmin.placeholder="від "+lo;pmax.placeholder="до "+hi;
     function sync(){
       kcat.querySelectorAll("input").forEach(i=>i.checked=st.cat.includes(i.value));
@@ -1363,7 +1363,7 @@ html.anim .dost:has(.dost-art.seen) .road::after{clip-path:inset(0 0 0 0);transi
       const act=st.cat.length+st.col.length+(st.min>lo||st.max<hi?1:0);$("kfn").textContent=act?"("+act+")":"";
       $("kgrid").innerHTML=L.map(p=>{const one=p.col.length===1;
         return '<article class="card kc">'+phOf(p,p.name+', '+p.dims)+(isPromo(p)?'<span class="kbadge">Пропозиція тижня</span>':'')+'</div>'+
-        '<div class="kb"><span class="dims">'+p.cat+'</span><h4>'+p.name+'</h4><p class="kmeta">'+(one?'Колір: <b>'+p.dims+'</b>':'<span class="kdots">'+p.col.map(c=>'<button type="button" class="kdot" data-img="'+SW[c]+'" aria-pressed="'+(SW[c]+'.webp'===p.img)+'" title="'+c+'" aria-label="Колір '+c+'" style="background-image:url(img/'+SW[c]+'.webp)"></button>').join("")+'</span>'+p.dims)+'</p>'+
+        '<div class="kb"><span class="dims">'+p.cat+'</span><h4>'+p.name+'</h4><p class="kmeta">'+(one?'Колір: <b>'+p.dims+'</b>':'<span class="kdots">'+p.col.map(c=>'<button type="button" class="kdot" data-img="'+SW[c]+'" aria-pressed="'+(SW[c]+'.webp'===p.img)+'" title="'+c+'" aria-label="Колір '+c+'" style="background-image:url(img/sw/'+SW[c]+'.webp)"></button>').join("")+'</span>'+p.dims)+'</p>'+
         '<div class="bot"><b class="num">'+(p.from?"від"+NB:"")+p.price+NB+'₴</b><a class="btn btn-or kgo" href="#calc2">Прорахувати</a></div></div></article>'}).join("")
         ||'<div class="kempty"><b>Нічого не знайшли</b><p>Спробуйте прибрати частину фільтрів — або подзвоніть, підберемо самі.</p><button type="button" class="btn btn-line" data-reset>Скинути фільтри</button></div>';
       tidy($("kgrid"));writeHash();
