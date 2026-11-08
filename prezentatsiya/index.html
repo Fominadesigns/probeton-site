@@ -99,6 +99,17 @@ footer{position:absolute;left:12mm;right:12mm;bottom:3.5mm;display:flex;justify-
 .chap .lbl{margin-bottom:2.5mm}
 .chap button{display:grid;grid-template-columns:12mm 1fr;gap:2mm;align-items:baseline;padding:1.45mm 0;border:0;border-top:1px solid #CDCFCA;background:none;font:500 10pt/1.25 Onest,sans-serif;color:#141517;text-align:left;cursor:pointer}
 .chap .t{font:700 8.5pt/1 'JetBrains Mono',monospace;color:#F46322}
+.seo{flex:1;display:grid;grid-template-columns:118mm 1fr;gap:7mm;min-height:0}
+.spd{display:grid;grid-auto-rows:1fr;gap:3mm}
+.spd > div{background:#141517;color:#F4F4F1;padding:4.5mm 6mm;display:flex;flex-direction:column;justify-content:center;gap:2mm}
+.spd .lbl{color:#3DB7C2}
+.spd .ba{display:flex;align-items:baseline;gap:5mm;flex-wrap:wrap}
+.spd s{font:400 17pt/1 'Dela Gothic One',sans-serif;color:#6E7378;text-decoration-thickness:.6mm}
+.spd b{font:400 30pt/1 'Dela Gothic One',sans-serif;color:#F46322;font-weight:400}
+.spd b::before{content:"→ ";font-size:17pt;color:#9EA2A7}
+.spd span{font-size:10.5pt;line-height:1.4;color:#B9BDC2}
+.pr2{grid-template-columns:1fr 1fr;grid-auto-rows:1fr}
+.pr2 div{justify-content:center}
 
 .laptop{width:91%;margin:0 auto;flex:none}
 .lid{background:#141517;border-radius:3.2mm 3.2mm 0 0;padding:2.6mm 2.6mm 3.2mm;position:relative}
@@ -141,7 +152,7 @@ body{margin:0;min-height:100vh}
   header h2{font-size:30px;line-height:1.05}
   header .sub{font-size:16px;line-height:1.4}
   .lbl{font-size:11px}
-  .split,.prow,.mob,.vsplit,.price,.logic{display:flex!important;flex-direction:column;height:auto!important;gap:16px!important}
+  .split,.prow,.mob,.vsplit,.price,.logic,.seo{display:flex!important;flex-direction:column;height:auto!important;gap:16px!important}
   .l,.vl{gap:14px}
   .r,.sell,.split .r,.prow .r,.mob .r,.vnote{font-size:16px!important}
   .sec h3{font-size:19px}
@@ -160,6 +171,7 @@ body{margin:0;min-height:100vh}
   .cp{font-size:16px}.meta{font-size:12px}
   .lead2{font-size:17px}
   .flow5,.pr4{grid-template-columns:1fr}
+  .spd > div{padding:16px}.spd s{font-size:20px}.spd b{font-size:32px}.spd b::before{font-size:20px}.spd span{font-size:15px}
   .flow5 div,.pr4 div{padding:18px}
   .flow5 b{font-size:20px}.flow5 span,.pr4 p{font-size:16px}.pr4 b{font-size:19px}
   .price3 > div{padding:18px}
@@ -347,6 +359,15 @@ body{margin:0;min-height:100vh}
   </div>
   <footer><span>ПроБетон · новий сайт</span><span>19</span></footer>
 </section>
+<section class="pg">
+  <div class="bar"></div>
+  <header><p class="lbl">Швидкість і пошук</p><h2>Відкривається швидко, знаходиться легко</h2><p class="sub">Перевірено на&nbsp;повільному мобільному інтернеті й&nbsp;слабкому телефоні&nbsp;— як&nbsp;у&nbsp;клієнта на&nbsp;об'єкті</p></header>
+  <div class="seo">
+    <div class="spd"><div><p class="lbl">Головна: перший екран на&nbsp;мобільному інтернеті</p><div class="ba"><s>13 с</s><b>2,7 с</b></div><span>Головне фото з'являється в&nbsp;5&nbsp;разів швидше</span></div><div><p class="lbl">Головна: скільки вантажиться до&nbsp;прокрутки</p><div class="ba"><s>3 МБ</s><b>0,5 МБ</b></div><span>Фото нижніх блоків підтягуються, коли людина до&nbsp;них догортає</span></div><div><p class="lbl">Каталог плитки: повне завантаження</p><div class="ba"><s>12,7 с</s><b>5,1 с</b></div><span>Кольори плитки&nbsp;— легкі мініатюри замість повних фото</span></div></div>
+    <div class="pr4 pr2"><div><b>Заголовки під&nbsp;пошук</b><p>Кожна сторінка названа так, як&nbsp;люди шукають: «купити бетон у&nbsp;Києві з&nbsp;доставкою», «тротуарна плитка Ковальська», «оренда бетононасоса».</p></div><div><b>Розмітка для&nbsp;Google</b><p>Google бачить компанію, адресу, телефони, послуги й&nbsp;відповіді на&nbsp;питання&nbsp;— і&nbsp;може показати їх прямо у&nbsp;видачі.</p></div><div><b>Готовий до&nbsp;нейромереж</b><p>Окремий файл-довідка llms.txt: ChatGPT, Gemini, Perplexity і&nbsp;Claude беруть з&nbsp;нього факти, коли радять, де купити бетон.</p></div><div><b>Гарні посилання</b><p>У&nbsp;Telegram, Viber і&nbsp;Facebook посилання на&nbsp;сайт приходить з&nbsp;картинкою, назвою й&nbsp;описом, а&nbsp;не&nbsp;голою адресою.</p></div></div>
+  </div>
+  <footer><span>ПроБетон · новий сайт</span><span>20</span></footer>
+</section>
 <section class="pg dk">
   <div class="bar"></div>
   <header><p class="lbl">Пропозиція</p><h2>Вартість і&nbsp;запуск</h2><p class="sub">Сайт уже зібраний і&nbsp;працює як&nbsp;демо&nbsp;— після брифу наповнюємо його вашими даними</p></header>
@@ -368,7 +389,7 @@ body{margin:0;min-height:100vh}
       <div class="need"><span>Ціни з&nbsp;одиницями виміру (м², шт, м³)</span><span>Оптові умови й&nbsp;знижки від&nbsp;обсягу</span><span>Назви й&nbsp;логотипи партнерів</span><span>Фото 10–20&nbsp;ваших об'єктів</span><span>Графік роботи відділу продажу</span><span>Розміри й&nbsp;ціни кілець, плит, балок</span></div>
     </div>
   </div>
-  <footer><span>ПроБетон · новий сайт</span><span>20</span></footer>
+  <footer><span>ПроБетон · новий сайт</span><span>21</span></footer>
 </section>
 </main>
 <script>

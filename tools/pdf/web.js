@@ -51,7 +51,7 @@ body{margin:0;min-height:100vh}
   header h2{font-size:30px;line-height:1.05}
   header .sub{font-size:16px;line-height:1.4}
   .lbl{font-size:11px}
-  .split,.prow,.mob,.vsplit,.price,.logic{display:flex!important;flex-direction:column;height:auto!important;gap:16px!important}
+  .split,.prow,.mob,.vsplit,.price,.logic,.seo{display:flex!important;flex-direction:column;height:auto!important;gap:16px!important}
   .l,.vl{gap:14px}
   .r,.sell,.split .r,.prow .r,.mob .r,.vnote{font-size:16px!important}
   .sec h3{font-size:19px}
@@ -70,6 +70,7 @@ body{margin:0;min-height:100vh}
   .cp{font-size:16px}.meta{font-size:12px}
   .lead2{font-size:17px}
   .flow5,.pr4{grid-template-columns:1fr}
+  .spd > div{padding:16px}.spd s{font-size:20px}.spd b{font-size:32px}.spd b::before{font-size:20px}.spd span{font-size:15px}
   .flow5 div,.pr4 div{padding:18px}
   .flow5 b{font-size:20px}.flow5 span,.pr4 p{font-size:16px}.pr4 b{font-size:19px}
   .price3 > div{padding:18px}

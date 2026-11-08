@@ -79,6 +79,24 @@ for (let i = 0; i < B.length; i++) {
   n++; num++;
   slides.push(b.id === "mobile" ? mobileSlide(b, n, num) : blockSlide(b, n, num));
 }
+// швидкість і пошук: цифри — з замірів scratchpad/psi/measure.js (повільний 4G + слабкий телефон), до і після
+const SPD = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "psi", "speed.json"), "utf8"));
+const seo = [
+  ["Заголовки під пошук", "Кожна сторінка названа так, як люди шукають: «купити бетон у Києві з доставкою», «тротуарна плитка Ковальська», «оренда бетононасоса»."],
+  ["Розмітка для Google", "Google бачить компанію, адресу, телефони, послуги й відповіді на питання — і може показати їх прямо у видачі."],
+  ["Готовий до нейромереж", "Окремий файл-довідка llms.txt: ChatGPT, Gemini, Perplexity і Claude беруть з нього факти, коли радять, де купити бетон."],
+  ["Гарні посилання", "У Telegram, Viber і Facebook посилання на сайт приходить з картинкою, назвою й описом, а не голою адресою."],
+];
+n++;
+slides.push(`<section class="pg">
+  <div class="bar"></div>
+  ${head("Швидкість і пошук", "Відкривається швидко, знаходиться легко", "Перевірено на повільному мобільному інтернеті й слабкому телефоні — як у клієнта на об'єкті")}
+  <div class="seo">
+    <div class="spd">${SPD.map(s => `<div><p class="lbl">${esc(s[0])}</p><div class="ba"><s>${s[1]}</s><b>${s[2]}</b></div><span>${esc(s[3])}</span></div>`).join("")}</div>
+    <div class="pr4 pr2">${seo.map(p => `<div><b>${esc(p[0])}</b><p>${esc(p[1])}</p></div>`).join("")}</div>
+  </div>
+  ${foot(n)}
+</section>`);
 n++;
 slides.push(`<section class="pg dk">
   <div class="bar"></div>
@@ -193,6 +211,17 @@ footer{position:absolute;left:12mm;right:12mm;bottom:3.5mm;display:flex;justify-
 .chap .lbl{margin-bottom:2.5mm}
 .chap button{display:grid;grid-template-columns:12mm 1fr;gap:2mm;align-items:baseline;padding:1.45mm 0;border:0;border-top:1px solid #CDCFCA;background:none;font:500 10pt/1.25 Onest,sans-serif;color:#141517;text-align:left;cursor:pointer}
 .chap .t{font:700 8.5pt/1 'JetBrains Mono',monospace;color:#F46322}
+.seo{flex:1;display:grid;grid-template-columns:118mm 1fr;gap:7mm;min-height:0}
+.spd{display:grid;grid-auto-rows:1fr;gap:3mm}
+.spd > div{background:#141517;color:#F4F4F1;padding:4.5mm 6mm;display:flex;flex-direction:column;justify-content:center;gap:2mm}
+.spd .lbl{color:#3DB7C2}
+.spd .ba{display:flex;align-items:baseline;gap:5mm;flex-wrap:wrap}
+.spd s{font:400 17pt/1 'Dela Gothic One',sans-serif;color:#6E7378;text-decoration-thickness:.6mm}
+.spd b{font:400 30pt/1 'Dela Gothic One',sans-serif;color:#F46322;font-weight:400}
+.spd b::before{content:"→ ";font-size:17pt;color:#9EA2A7}
+.spd span{font-size:10.5pt;line-height:1.4;color:#B9BDC2}
+.pr2{grid-template-columns:1fr 1fr;grid-auto-rows:1fr}
+.pr2 div{justify-content:center}
 `;
 
 const CSS_ALL = css + MK.css;
