@@ -8,7 +8,8 @@ const s = fs.readFileSync(SRC, "utf8");
 const grab = re => { const m = s.match(re); if (!m) throw new Error("немає розділу: " + re); return m[0]; };
 const sec = id => grab(new RegExp('<!--[^\\n]*-->\\n<section[^>]*id="' + id + '"[\\s\\S]*?</section>|<section[^>]*id="' + id + '"[\\s\\S]*?</section>'));
 
-const headSrc = s.slice(0, s.indexOf("</style>") + 8);
+const headSrc = s.slice(0, s.indexOf("</style>") + 8).replace(/<link rel="(preconnect|stylesheet)" href="https:\/\/fonts\.g[^>]*>\n?/g, "");
+const FONTS = fs.readFileSync(path.join(__dirname, "fonts.css"), "utf8");
 const S = {
   hero: grab(/<section class="hero">[\s\S]*?<\/section>/),
   ticker: grab(/<div class="ticker"[\s\S]*?<\/div><\/div>/),
@@ -166,8 +167,10 @@ for (const p of PAGES) {
   // перший розділ після шапки сторінки — з повним відступом зверху
   if (p.dir) parts[0] = parts[0].replace(' style="padding-top:0"', "");
   let main = (p.dir ? phead(p, pre) + "\n\n" : "") + parts.join("\n\n");
-  const preload = p.dir ? "" : `<link rel="preload" as="image" href="img/fon-heroi-3.webp" fetchpriority="high">\n`;
-  let head = preload + seoHead(p, main) + `<script>if("IntersectionObserver"in window)document.documentElement.classList.add("lzb")</script>\n` + headSrc
+  const preload = p.dir ? "" : `<link rel="preload" as="image" href="img/fon-heroi-3.webp" fetchpriority="high" media="(min-width:681px)">\n<link rel="preload" as="image" href="img/fon-heroi-m.webp" fetchpriority="high" media="(max-width:680px)">\n`;
+  // шрифти — з самого сайту (src/fonts.css, зібрано з Google Fonts): без очікування сторонніх серверів перед показом тексту
+  const fonts = `<link rel="preload" as="font" type="font/woff2" href="${pre}fonts/dela-gothic-one-cyrillic-0.woff2" crossorigin>\n<link rel="preload" as="font" type="font/woff2" href="${pre}fonts/onest-cyrillic-12.woff2" crossorigin>\n<style>${FONTS.split("url(fonts/").join("url(" + pre + "fonts/")}</style>\n`;
+  let head = preload + fonts + seoHead(p, main) + `<script>if("IntersectionObserver"in window)document.documentElement.classList.add("lzb")</script>\n` + headSrc
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${p.title}</title>`)
     .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${esc(p.desc)}">`);
   let html = `<!doctype html>
