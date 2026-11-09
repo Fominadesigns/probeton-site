@@ -6,7 +6,7 @@ const fs = require("fs"), path = require("path");
 const B = require("./blocks.js");
 const OUT_PDF = process.env.OUT_PDF || "C:/Users/Acer/Desktop/projects/probeton-site/probeton-sait-prezentatsiya.pdf";
 const OUT_HTML = path.join(__dirname, "prezentatsiya-h.html");
-const SITE = "fominadesigns.github.io/probeton-site";
+const SITE = "probeton-site-beta.vercel.app";
 const LOGO = "C:/Users/Acer/Desktop/projects/probeton-site/img/logo.png";
 
 const jpgSize = f => { const b = fs.readFileSync(f); let i = 2; while (i < b.length) { if (b[i] !== 0xFF) { i++; continue; } const m = b[i + 1], L = b.readUInt16BE(i + 2); if (m >= 0xC0 && m <= 0xC3) return [b.readUInt16BE(i + 7), b.readUInt16BE(i + 5)]; i += 2 + L; } return [16, 9]; };
@@ -45,7 +45,7 @@ slides.push(`<section class="pg cover">
   <div class="cr"></div>
 </section>`);
 // слайд з відео: у PDF — кадр і посилання, у веб-версії — плеєр і розділи, що перемотують відео
-const WEB_URL = "fominadesigns.github.io/probeton-site/prezentatsiya/";
+const WEB_URL = "probeton-site-beta.vercel.app/prezentatsiya/";
 const MARKS = fs.existsSync(path.join(__dirname, "rec", "marks.json")) ? JSON.parse(fs.readFileSync(path.join(__dirname, "rec", "marks.json"))) : [];
 const mmss = s => Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
 n++;

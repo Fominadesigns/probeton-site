@@ -85,8 +85,8 @@ body{margin:0;min-height:100vh}
 <meta name="robots" content="noindex">
 <meta property="og:title" content="ПроБетон — презентація нового сайту">
 <meta property="og:description" content="Відео сайту в русі й розбір кожного блоку: що це, чому так і як продає.">
-<meta property="og:image" content="https://fominadesigns.github.io/probeton-site/prezentatsiya/media/poster.jpg">
-<meta property="og:url" content="https://fominadesigns.github.io/probeton-site/prezentatsiya/">
+<meta property="og:image" content="https://probeton-site-beta.vercel.app/prezentatsiya/media/poster.jpg">
+<meta property="og:url" content="https://probeton-site-beta.vercel.app/prezentatsiya/">
 <link rel="icon" href="../img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
